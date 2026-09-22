@@ -1,0 +1,115 @@
+{
+  "id": "lesson-01",
+  "title": "Lesson 1 — Introduction to Securities & Financial Markets",
+  "summary": "What a security is, the main asset classes, and how primary and secondary markets work.",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Define what a security is and why securities exist.",
+        "Distinguish the main asset classes: equities, fixed income, money market, derivatives and funds.",
+        "Explain the difference between the primary and the secondary market.",
+        "Break down an investment's return into income and capital gain, and compute a holding period return."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. What is a security?",
+      "content": "A **security** is a tradable financial instrument that represents some kind of monetary value. It packages a financial claim into a standardised, transferable form so that it can be bought and sold in a market.\n\nSecurities generally fall into three families:\n\n- **Equity securities** → ownership in a company (e.g. shares/stocks).\n- **Debt securities** → a loan made by the investor to an issuer (e.g. bonds, bills).\n- **Derivative securities** → contracts whose value *derives* from an underlying asset (e.g. options, futures).\n\nSecurities exist because they let **issuers raise capital** (companies, governments) and let **investors deploy savings** to earn a return, while a market makes those claims **liquid** — i.e. convertible back into cash."
+    },
+    {
+      "type": "markdown",
+      "title": "2. The main asset classes",
+      "content": "| Asset class | What it is | Investor's claim | Typical risk |\n|---|---|---|---|\n| **Equities** | Shares in a company | Ownership + residual claim on profits (dividends, capital gains), usually voting rights | Higher |\n| **Fixed income (bonds)** | Debt issued by companies/governments | Fixed coupons + repayment of principal at maturity; ranks *ahead* of equity | Medium |\n| **Money market** | Very short-term debt (< 1 year): T-bills, commercial paper, CDs | Interest, high liquidity | Low |\n| **Derivatives** | Contracts on an underlying: options, futures, swaps | Rights/obligations tied to the underlying's price | Varies (can be very high) |\n| **Funds / ETFs** | Pooled vehicles investing in the above | A share of a diversified portfolio | Depends on holdings |\n\n**Key idea — the risk–return trade-off:** investors expect higher returns only in exchange for taking on higher risk. Equities sit above bonds, which sit above money-market instruments."
+    },
+    {
+      "type": "markdown",
+      "title": "3. Primary vs secondary market",
+      "content": "- **Primary market** — where securities are *created and sold for the first time*. The issuer receives the money. Example: a company's **IPO** (Initial Public Offering), or a government auctioning new bonds.\n- **Secondary market** — where *already-issued* securities are traded between investors (e.g. a stock exchange). The issuer gets **no new money**; investors trade with each other.\n\nWhy the secondary market matters:\n\n1. **Liquidity** — investors can exit a position by selling to someone else.\n2. **Price discovery** — continuous trading reveals a fair market price.\n3. It makes the *primary* market work: people buy new issues partly because they know they can sell later."
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {"term": "Security", "definition": "A tradable financial instrument representing monetary value — equity, debt, or a derivative claim."},
+        {"term": "Equity / Share", "definition": "A unit of ownership in a company, giving a residual claim on profits and assets (dividends + capital gains)."},
+        {"term": "Bond", "definition": "A debt security: the investor lends to an issuer, who pays periodic coupons and repays the face (par) value at maturity."},
+        {"term": "Coupon", "definition": "The periodic interest payment a bond pays, usually expressed as an annual % of the face value."},
+        {"term": "Yield", "definition": "The return an investor earns on a security relative to its price; for bonds, the yield to maturity (YTM) is the key measure."},
+        {"term": "Liquidity", "definition": "How quickly and cheaply an asset can be converted into cash without moving its price."},
+        {"term": "Primary market", "definition": "Where new securities are issued and sold for the first time; proceeds go to the issuer."},
+        {"term": "Secondary market", "definition": "Where existing securities are traded among investors; provides liquidity and price discovery."}
+      ]
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards — test your recall",
+      "cards": [
+        {"front": "What are the three families of securities?", "back": "Equity (ownership), Debt (a loan to an issuer), and Derivatives (value derived from an underlying)."},
+        {"front": "Who receives the money in the PRIMARY market?", "back": "The issuer (the company or government selling the new security)."},
+        {"front": "Who receives the money in the SECONDARY market?", "back": "The selling investor — the issuer gets nothing; investors trade with each other."},
+        {"front": "Rank equities, bonds and money-market instruments by risk.", "back": "Money market (low) < Bonds (medium) < Equities (high) — matching the risk–return trade-off."},
+        {"front": "Name the two components of an investment's total return.", "back": "Income (dividends or coupons) + Capital gain (change in price)."}
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz — check your understanding",
+      "questions": [
+        {
+          "q": "A company raises money by selling brand-new shares to the public for the first time. This happens in the…",
+          "options": ["Secondary market", "Primary market", "Money market", "Derivatives market"],
+          "answer": 1,
+          "explanation": "New issues (like an IPO) happen in the primary market, and the issuer receives the proceeds."
+        },
+        {
+          "q": "Which statement about a bondholder is correct?",
+          "options": [
+            "A bondholder owns part of the company and votes at meetings.",
+            "A bondholder is a lender and ranks ahead of shareholders if the issuer defaults.",
+            "A bondholder only earns money if the share price rises.",
+            "A bondholder never receives the principal back."
+          ],
+          "answer": 1,
+          "explanation": "Bonds are debt: the holder is a creditor, receives coupons, is repaid the principal at maturity, and ranks ahead of equity holders."
+        },
+        {
+          "q": "Which asset class is generally the MOST liquid and LOWEST risk?",
+          "options": ["Equities", "Long-dated bonds", "Money-market instruments", "Derivatives"],
+          "answer": 2,
+          "explanation": "Money-market instruments are short-term (< 1 year) and highly liquid, so they carry the lowest risk."
+        },
+        {
+          "q": "The total return on a share comes from…",
+          "options": [
+            "Coupons only",
+            "Dividends (income) plus the capital gain/loss on the price",
+            "Voting rights",
+            "The face value repaid at maturity"
+          ],
+          "answer": 1,
+          "explanation": "Equity total return = dividend income + capital gain. Coupons and face value belong to bonds; shares have no maturity."
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "4. Interactive exercise — measuring return",
+      "content": "The **Holding Period Return (HPR)** captures both parts of an investment's return in one number:\n\n$$HPR = \\frac{P_1 - P_0 + D}{P_0}$$\n\nwhere $P_0$ is the buying price, $P_1$ the selling price and $D$ the income (dividend or coupon) received. Try it below, then use the bond calculator to see how price moves relative to the par value."
+    },
+    {
+      "type": "calculator",
+      "kind": "holding_period_return"
+    },
+    {
+      "type": "calculator",
+      "kind": "bond_price"
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "A security is a tradable claim on value — equity, debt or a derivative. The main asset classes trade off risk against return: money market < bonds < equities. New securities are created in the primary market (money goes to the issuer); they are then traded in the secondary market, which provides liquidity and price discovery. An investment's return combines income and capital gain, summarised by the holding period return."
+    }
+  ]
+}
