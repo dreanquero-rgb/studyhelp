@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from app import auth, db
+from app import auth, config, db
 from app.ai import DEFAULT_MODEL, MODELS
 from app.ui_admin import admin_page
 from app.ui_auth import login_register_screen, pending_screen
@@ -73,6 +73,11 @@ def sidebar_nav(user: dict) -> None:
 
     st.sidebar.divider()
     sidebar_ai_settings()
+
+    if auth.is_admin(user):
+        backend = "🟢 Supabase (Postgres)" if config.using_postgres() else "🟡 SQLite (locale)"
+        st.sidebar.caption(f"Database: {backend}")
+
     st.sidebar.divider()
     if st.sidebar.button("Esci", use_container_width=True):
         st.session_state["user"] = None
