@@ -73,12 +73,46 @@ def _bond_price(key: str) -> None:
         st.info("The bond trades **at par**: coupon and YTM are equal.")
 
 
-# Registro: kind -> (etichetta, funzione)
+def _arithmetic_vs_log_return(key: str) -> None:
+    import math
+
+    st.caption(
+        "Convert two consecutive prices into a return, two ways: arithmetic "
+        "(simple) and geometric (continuously compounded / log)."
+    )
+    col1, col2, col3 = st.columns(3)
+    p0 = col1.number_input("Beginning price P₀", value=245.0, step=1.0, key=f"{key}_p0")
+    p1 = col2.number_input("Ending price P₁", value=256.0, step=1.0, key=f"{key}_p1")
+    div = col3.number_input("Dividend D (over period)", value=0.833, step=0.1, key=f"{key}_d")
+
+    if p0 <= 0 or (p1 + div) <= 0:
+        st.error("Prices must be positive.")
+        return
+
+    arithmetic = (p1 + div - p0) / p0
+    log_return = math.log((p1 + div) / p0)
+
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Arithmetic (simple) Rₜ", f"{arithmetic * 100:.2f}%")
+    c2.metric("Geometric (log) rₜ", f"{log_return * 100:.2f}%")
+    c3.metric("Difference", f"{abs(arithmetic - log_return) * 100:.2f} pp")
+
+    if abs(arithmetic) < 0.05:
+        st.info("The change is small, so the two measures are almost identical.")
+    else:
+        st.info(
+            "The larger the price change, the bigger the gap between the two measures. "
+            "Key link: r = ln(1 + R) and R = eʳ − 1."
+        )
+
+
+# Registry: kind -> (label, function)
 CALCULATORS = {
     "present_value": ("Calculator — Present value", _present_value),
     "compound_interest": ("Calculator — Compound interest", _compound_interest),
     "holding_period_return": ("Calculator — Holding Period Return (HPR)", _holding_period_return),
     "bond_price": ("Calculator — Bond price", _bond_price),
+    "arithmetic_vs_log_return": ("Calculator — Arithmetic vs Log return", _arithmetic_vs_log_return),
 }
 
 

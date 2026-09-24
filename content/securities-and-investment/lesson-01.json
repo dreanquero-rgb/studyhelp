@@ -1,121 +1,181 @@
 {
   "id": "lesson-01",
-  "title": "Lesson 1 — Introduction to Securities & Financial Markets",
-  "summary": "What a security is, the main asset classes, and how primary and secondary markets work.",
+  "title": "Lesson 1 — Introduction to Investments, Asset Classes, Risk & Return",
+  "summary": "SMM148 Securities & Investments — what an investment is, the main asset classes, how to turn prices into returns, and how risk is measured.",
   "blocks": [
     {
       "type": "objectives",
       "title": "🎯 Learning objectives",
       "items": [
-        "Define what a security is and why securities exist.",
-        "Distinguish the main asset classes: equities, fixed income, money market, derivatives and funds.",
-        "Explain the difference between the primary and the secondary market.",
-        "Break down an investment's return into income and capital gain, and compute a holding period return."
+        "Define an investment and distinguish real assets from financial assets and marketable securities.",
+        "Map the traditional and alternative asset classes and the priority of investors' income claims.",
+        "State the rationale and the main risks for each asset class.",
+        "Convert prices into returns using the arithmetic (simple) and geometric (continuously compounded) methods.",
+        "Explain how risk is quantified: variance, standard deviation, skewness, kurtosis, tail risk and the risk premium."
       ]
     },
     {
       "type": "markdown",
-      "title": "1. What is a security?",
-      "content": "A **security** is a tradable financial instrument that represents some kind of monetary value. It packages a financial claim into a standardised, transferable form so that it can be bought and sold in a market.\n\nSecurities generally fall into three families:\n\n- **Equity securities** → ownership in a company (e.g. shares/stocks).\n- **Debt securities** → a loan made by the investor to an issuer (e.g. bonds, bills).\n- **Derivative securities** → contracts whose value *derives* from an underlying asset (e.g. options, futures).\n\nSecurities exist because they let **issuers raise capital** (companies, governments) and let **investors deploy savings** to earn a return, while a market makes those claims **liquid** — i.e. convertible back into cash."
+      "title": "1. What is an investment?",
+      "content": "An **investment** is the *commitment of funds to assets held over a future time period*.\n\n- **Real assets** — physical, tangible assets (e.g. gold, real estate).\n- **Financial assets** — paper (electronic) claims on an issuer such as a corporation or a government.\n- **Marketable securities** — financial assets that are easily traded on organised exchanges through **impersonal trading** (you don't need to know your counterparty).\n\nIn this course *investment* refers in general to financial assets and in particular to **marketable securities**."
     },
     {
       "type": "markdown",
-      "title": "2. The main asset classes",
-      "content": "| Asset class | What it is | Investor's claim | Typical risk |\n|---|---|---|---|\n| **Equities** | Shares in a company | Ownership + residual claim on profits (dividends, capital gains), usually voting rights | Higher |\n| **Fixed income (bonds)** | Debt issued by companies/governments | Fixed coupons + repayment of principal at maturity; ranks *ahead* of equity | Medium |\n| **Money market** | Very short-term debt (< 1 year): T-bills, commercial paper, CDs | Interest, high liquidity | Low |\n| **Derivatives** | Contracts on an underlying: options, futures, swaps | Rights/obligations tied to the underlying's price | Varies (can be very high) |\n| **Funds / ETFs** | Pooled vehicles investing in the above | A share of a diversified portfolio | Depends on holdings |\n\n**Key idea — the risk–return trade-off:** investors expect higher returns only in exchange for taking on higher risk. Equities sit above bonds, which sit above money-market instruments."
+      "title": "2. Why do we invest?",
+      "content": "The purpose of investing is to **increase one's wealth**.\n\n$$\\text{Wealth} = \\text{current income/funds} + \\text{PV of all future income}$$\n\nWe care about **monetary wealth**, so we seek a **return** on money rather than holding cash, because of:\n\n- **Opportunity cost** — idle cash forgoes the return it could have earned.\n- **Inflation** — it erodes the **purchasing power** of money over time.\n\n> Goal: protect against inflation and taxes **and** make returns."
     },
     {
       "type": "markdown",
-      "title": "3. Primary vs secondary market",
-      "content": "- **Primary market** — where securities are *created and sold for the first time*. The issuer receives the money. Example: a company's **IPO** (Initial Public Offering), or a government auctioning new bonds.\n- **Secondary market** — where *already-issued* securities are traded between investors (e.g. a stock exchange). The issuer gets **no new money**; investors trade with each other.\n\nWhy the secondary market matters:\n\n1. **Liquidity** — investors can exit a position by selling to someone else.\n2. **Price discovery** — continuous trading reveals a fair market price.\n3. It makes the *primary* market work: people buy new issues partly because they know they can sell later."
+      "title": "3. The investment process",
+      "content": "Investing is a chain of decisions, driven by the **client's** utility function, risk tolerance and investment horizon:\n\n1. **Asset allocation** — how to split capital across asset classes (stocks, bonds, money market, alternatives) and countries.\n2. **Security selection** — which specific stocks/bonds/real assets to hold (based on cash flows, ratios, charts, market efficiency).\n3. **Execution** — trading systems, trading costs (commissions, bid–ask spread, price impact), speed and frequency.\n4. **Performance evaluation & risk management** — how much risk was taken, what return was achieved, did the manager out/under-perform (CAPM, APT, diversification)."
+    },
+    {
+      "type": "markdown",
+      "title": "4. Asset classes: traditional vs alternative",
+      "content": "| Traditional | Alternative |\n|---|---|\n| **Equities** (domestic & international) — holders are **shareholders** | Real estate |\n| **Fixed income** — bonds & money-market instruments (cash) — holders are **debt holders** | Commodities |\n| | Private equity & credit |\n| | Hedge funds |\n| | Infrastructure |\n\nAlternatives are combined with traditional assets mainly for **diversification** (lower overall portfolio risk and/or higher return), despite issues such as scarce historical data, opacity, illiquidity, high fees and demanding due diligence. Investors accept illiquidity in exchange for an **illiquidity premium**."
+    },
+    {
+      "type": "markdown",
+      "title": "5. Priority of income claims (the waterfall)",
+      "content": "Company cash available for investors is distributed in a **strict order** — paid first = lower risk / limited upside; paid last = higher risk / greater upside:\n\n| Order | Investor | Claim |\n|---|---|---|\n| 1 | **Senior debt (fixed income) holders** | Interest is a *contractual* claim; a missed payment can trigger default |\n| 2 | **Subordinated debt holders** | Contractual but *junior* — paid after senior lenders, before shareholders |\n| 3 | **Preference shareholders** | *Fixed* dividend, priority over ordinary dividends; can be omitted; limited/no voting rights |\n| 4 | **Ordinary shareholders** | *Residual* claim; dividends are discretionary; they keep the upside and have voting rights |\n\n> If income is insufficient, lower-priority investors may receive **nothing**."
+    },
+    {
+      "type": "markdown",
+      "title": "6. Rationale vs risks by asset class",
+      "content": "**Domestic equity** — *Rationale:* ownership claim, higher returns than fixed income, sector/style potential. *Risks:* residual claim, higher standard deviation than fixed income, long cycles.\n\n**Domestic fixed income** — *Rationale:* senior claim to equity, lower risk than equity, higher return than cash, diversifier (low correlation). *Risks:* lower return than equity, interest-rate, inflation, credit, reinvestment and prepayment (callable) risk.\n\n**International equity & fixed income** — *Rationale:* bigger opportunity set, higher return potential, diversification, chance to exploit mispricing. *Risks:* higher volatility, rising/unstable correlations, higher costs, currency, political and liquidity risk.\n\n**High-yield fixed income** — *Rationale:* higher return than other fixed income, senior to equity, possible mispricing. *Risks:* credit and liquidity risk (fallen angels / LBO financing).\n\n**Convertible bonds** — *Rationale:* equity–debt hybrid, senior to equity, diversifier. *Risks:* prepayment (callable), junior to bonds, complex valuation.\n\n**Cash equivalents** — *Rationale:* safe haven, low standard deviation, high liquidity, diversifier. *Risks:* low return, reinvestment, inflation and credit exposure.\n\n**Alternatives (gold/commodities, hedge funds, private equity, real estate, infrastructure)** — *Rationale:* diversification (low correlation), inflation hedge, higher return / alpha potential. *Risks:* geopolitical/volatility, illiquidity, ambiguous return measurement, high fees, valuation difficulty."
     },
     {
       "type": "key_terms",
       "title": "📚 Key terms",
       "items": [
-        {"term": "Security", "definition": "A tradable financial instrument representing monetary value — equity, debt, or a derivative claim."},
-        {"term": "Equity / Share", "definition": "A unit of ownership in a company, giving a residual claim on profits and assets (dividends + capital gains)."},
-        {"term": "Bond", "definition": "A debt security: the investor lends to an issuer, who pays periodic coupons and repays the face (par) value at maturity."},
-        {"term": "Coupon", "definition": "The periodic interest payment a bond pays, usually expressed as an annual % of the face value."},
-        {"term": "Yield", "definition": "The return an investor earns on a security relative to its price; for bonds, the yield to maturity (YTM) is the key measure."},
-        {"term": "Liquidity", "definition": "How quickly and cheaply an asset can be converted into cash without moving its price."},
-        {"term": "Primary market", "definition": "Where new securities are issued and sold for the first time; proceeds go to the issuer."},
-        {"term": "Secondary market", "definition": "Where existing securities are traded among investors; provides liquidity and price discovery."}
-      ]
-    },
-    {
-      "type": "flashcards",
-      "title": "🃏 Flashcards — test your recall",
-      "cards": [
-        {"front": "What are the three families of securities?", "back": "Equity (ownership), Debt (a loan to an issuer), and Derivatives (value derived from an underlying)."},
-        {"front": "Who receives the money in the PRIMARY market?", "back": "The issuer (the company or government selling the new security)."},
-        {"front": "Who receives the money in the SECONDARY market?", "back": "The selling investor — the issuer gets nothing; investors trade with each other."},
-        {"front": "Rank equities, bonds and money-market instruments by risk.", "back": "Money market (low) < Bonds (medium) < Equities (high) — matching the risk–return trade-off."},
-        {"front": "Name the two components of an investment's total return.", "back": "Income (dividends or coupons) + Capital gain (change in price)."}
-      ]
-    },
-    {
-      "type": "quiz",
-      "title": "✅ Quiz — check your understanding",
-      "questions": [
-        {
-          "q": "A company raises money by selling brand-new shares to the public for the first time. This happens in the…",
-          "options": ["Secondary market", "Primary market", "Money market", "Derivatives market"],
-          "answer": 1,
-          "explanation": "New issues (like an IPO) happen in the primary market, and the issuer receives the proceeds."
-        },
-        {
-          "q": "Which statement about a bondholder is correct?",
-          "options": [
-            "A bondholder owns part of the company and votes at meetings.",
-            "A bondholder is a lender and ranks ahead of shareholders if the issuer defaults.",
-            "A bondholder only earns money if the share price rises.",
-            "A bondholder never receives the principal back."
-          ],
-          "answer": 1,
-          "explanation": "Bonds are debt: the holder is a creditor, receives coupons, is repaid the principal at maturity, and ranks ahead of equity holders."
-        },
-        {
-          "q": "Which asset class is generally the MOST liquid and LOWEST risk?",
-          "options": ["Equities", "Long-dated bonds", "Money-market instruments", "Derivatives"],
-          "answer": 2,
-          "explanation": "Money-market instruments are short-term (< 1 year) and highly liquid, so they carry the lowest risk."
-        },
-        {
-          "q": "The total return on a share comes from…",
-          "options": [
-            "Coupons only",
-            "Dividends (income) plus the capital gain/loss on the price",
-            "Voting rights",
-            "The face value repaid at maturity"
-          ],
-          "answer": 1,
-          "explanation": "Equity total return = dividend income + capital gain. Coupons and face value belong to bonds; shares have no maturity."
-        }
+        {"term": "Real asset vs financial asset", "definition": "Real assets are physical/tangible (gold, real estate); financial assets are electronic claims on an issuer (equities, bonds)."},
+        {"term": "Marketable security", "definition": "A financial asset easily traded on organised exchanges via impersonal trading."},
+        {"term": "Traditional asset classes", "definition": "Equities (domestic & international) and fixed income (bonds + money-market/cash)."},
+        {"term": "Alternative asset classes", "definition": "Real estate, commodities, private equity/credit, hedge funds, infrastructure."},
+        {"term": "Priority of claims", "definition": "Senior debt → subordinated debt → preference shares → ordinary shares. Earlier = safer, lower upside."},
+        {"term": "Illiquidity premium", "definition": "Extra expected return demanded for holding assets that cannot be sold quickly."},
+        {"term": "Arithmetic (simple) return", "definition": "Rₜ = (Pₜ + Dₜ − Pₜ₋₁) / Pₜ₋₁ — the percentage change including income."},
+        {"term": "Geometric (continuously compounded / log) return", "definition": "rₜ = ln((Pₜ + Dₜ)/Pₜ₋₁) — additive across time to give cumulative return."},
+        {"term": "Risk-free rate", "definition": "Return earned with certainty; proxied by a short-term government bill (e.g. UK 1-month T-bill). Assumed zero variance in theory."},
+        {"term": "Risk premium", "definition": "Expected return in excess of the risk-free rate."},
+        {"term": "Risk aversion", "definition": "Reluctance to accept risk; rational investors require extra return for each extra unit of risk."},
+        {"term": "Standard deviation & variance", "definition": "Measures of dispersion of actual returns around the expected return; used as the measure of total risk (systematic + unsystematic)."}
       ]
     },
     {
       "type": "markdown",
-      "title": "4. Interactive exercise — measuring return",
-      "content": "The **Holding Period Return (HPR)** captures both parts of an investment's return in one number:\n\n$$HPR = \\frac{P_1 - P_0 + D}{P_0}$$\n\nwhere $P_0$ is the buying price, $P_1$ the selling price and $D$ the income (dividend or coupon) received. Try it below, then use the bond calculator to see how price moves relative to the par value."
+      "title": "7. Risk and return: the basics",
+      "content": "- Risk and return are defined from the **investor's** perspective, not the issuer's.\n- Assessing risk and return is the **central issue** of investment management.\n- Investors are **risk averse**: they like returns and dislike risk, so higher risk must be rewarded with higher expected return."
+    },
+    {
+      "type": "markdown",
+      "title": "8. Converting prices into returns",
+      "content": "Prices (from Bloomberg, Eikon, …) are hard to compare directly because they are in different 'units' (e.g. ABC = £1.10 vs XYZ = £4.35). We convert prices into **returns**:\n\n**Arithmetic (simple):**\n$$R_t = \\frac{P_t + D_t - P_{t-1}}{P_{t-1}}$$\n\n**Geometric (continuously compounded / log):**\n$$r_t = \\ln\\!\\left(\\frac{P_t + D_t}{P_{t-1}}\\right)$$\n\n**Worked example** — stock ABC: 245p (31 Aug) → 256p (30 Sep); annual dividend 10p ⇒ monthly 10/12 = 0.833p.\n\n- Arithmetic: (256 + 0.833 − 245) / 245 = **4.8%**\n- Geometric: ln((256 + 0.833) / 245) = **4.7%**\n\n**Which to use?** Differences are small for daily/weekly/monthly data. Geometric returns are **additive** (sum them to get the cumulative return). However, the efficient-frontier/optimal-portfolio methods used later are based on **simple** returns. Key link: $r = \\ln(1+R)$ and $R = e^{r} - 1$."
     },
     {
       "type": "calculator",
-      "kind": "holding_period_return"
-    },
-    {
-      "type": "calculator",
-      "kind": "bond_price"
+      "kind": "arithmetic_vs_log_return"
     },
     {
       "type": "code_exercise",
-      "title": "🧪 Try it yourself — compute a Holding Period Return",
-      "prompt": "Edit the numbers and run the code. It computes the HPR for a share bought at 100, sold at 112, paying a 3 dividend.",
-      "starter": "p0 = 100   # buying price\np1 = 112   # selling price\ndiv = 3    # dividend received\n\nhpr = (p1 - p0 + div) / p0\nprint(f\"Holding Period Return: {hpr*100:.2f}%\")"
+      "title": "🧪 Try it yourself — reproduce the ABC example",
+      "prompt": "Run the code to reproduce the lecture's worked example, then change the prices/dividend and see how arithmetic and log returns diverge as the move gets bigger.",
+      "starter": "import math\n\nP0 = 245.0       # price at t-1 (pence)\nP1 = 256.0       # price at t (pence)\nD  = 10/12       # monthly dividend = annual 10p / 12\n\narithmetic = (P1 + D - P0) / P0\ngeometric  = math.log((P1 + D) / P0)\n\nprint(f\"Arithmetic (simple) return: {arithmetic*100:.2f}%\")\nprint(f\"Geometric (log) return:    {geometric*100:.2f}%\")\nprint(f\"Difference:                {abs(arithmetic-geometric)*100:.2f} pp\")"
+    },
+    {
+      "type": "markdown",
+      "title": "9. Quantifying risk",
+      "content": "Every investment is uncertain (future price, dividends, cash flows, reinvestment rate, inflation). Risk is the gap between the **actual** and **expected** return:\n\n$$\\text{Uncertainty} = \\text{Actual return} - \\text{Expected return}$$\n\n- **Scenario analysis & probability distribution** — list possible outcomes (HPR) and assign probabilities.\n- **Variance (σ²) & standard deviation (σ)** — average squared deviations from the mean, and its square root; used as the measure of **total risk = systematic (market) + unsystematic (company-specific)**. Mean & σ are used because returns are assumed to be roughly **normally distributed**.\n- **Skewness** — asymmetry of the distribution; risk-averse investors dislike **negative skew**. Normal distribution skewness = **0**.\n- **Kurtosis** — degree of 'fat tails'; investors prefer **low** kurtosis. Normal distribution kurtosis = **3**.\n- **Tail risk** — a move of more than **three standard deviations**; 'fat-tailed' distributions make extreme ('black swan') events more likely than the normal curve implies.\n- **Semi-variance / semi-deviation** — dispersion of outcomes **below** the mean (or a target such as the T-bill return), for investors who only care about the **downside**."
+    },
+    {
+      "type": "markdown",
+      "title": "10. Risk-free rate, risk premium & risk aversion",
+      "content": "- **Risk-free rate** — the return earned with certainty; a default-free short-term government instrument (e.g. UK 1-month Treasury Bill): liquid, one cash flow at maturity, assumed zero variance in theory (not truly zero in reality).\n- **Risk premium** — expected return **in excess** of the risk-free rate.\n- **Risk aversion** — reluctance to accept risk. Finance theory assumes rational investors are risk-averse: every extra unit of risk demands extra expected return."
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {"front": "Real asset vs financial asset?", "back": "Real = physical/tangible (gold, real estate). Financial = electronic claim on an issuer (equities, bonds)."},
+        {"front": "List the priority of income claims (first → last).", "back": "1) Senior debt, 2) Subordinated debt, 3) Preference shares, 4) Ordinary shares."},
+        {"front": "Arithmetic vs geometric return formula?", "back": "R = (P₁+D−P₀)/P₀  ;  r = ln((P₁+D)/P₀). Link: r = ln(1+R)."},
+        {"front": "Why prefer geometric (log) returns?", "back": "They are additive across time, so summing them gives the cumulative return."},
+        {"front": "Skewness and kurtosis of a normal distribution?", "back": "Skewness = 0, kurtosis = 3. Investors dislike negative skew and high kurtosis (fat tails)."},
+        {"front": "Total risk = ?", "back": "Systematic (market) risk + unsystematic (company-specific) risk, measured by standard deviation."},
+        {"front": "Risk premium?", "back": "Expected return in excess of the risk-free rate."}
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "Which best describes a marketable security?",
+          "options": [
+            "A physical asset like gold held for the long term",
+            "A financial asset easily traded on organised exchanges via impersonal trading",
+            "A private loan negotiated directly between two parties",
+            "Any asset that pays a fixed coupon"
+          ],
+          "answer": 1,
+          "explanation": "Marketable securities are financial assets that trade easily on organised exchanges, without needing to know the counterparty (impersonal trading)."
+        },
+        {
+          "q": "If a company's income is insufficient, who is paid FIRST?",
+          "options": ["Ordinary shareholders", "Preference shareholders", "Senior debt holders", "Subordinated debt holders"],
+          "answer": 2,
+          "explanation": "The waterfall is: senior debt → subordinated debt → preference shares → ordinary shares. Senior debt interest is a contractual claim paid first."
+        },
+        {
+          "q": "A stock goes from 100 to 120 (no dividend). Which is true?",
+          "options": [
+            "Arithmetic return equals the log return",
+            "Arithmetic return (20%) exceeds the log return (~18.2%)",
+            "Log return exceeds the arithmetic return",
+            "Both returns are negative"
+          ],
+          "answer": 1,
+          "explanation": "R = 20%; r = ln(1.20) ≈ 18.23%. For positive moves the arithmetic return is larger, and the gap widens as the move grows."
+        },
+        {
+          "q": "Why are geometric (log) returns convenient?",
+          "options": [
+            "They are always larger than simple returns",
+            "They are additive across time, giving the cumulative return",
+            "They ignore dividends",
+            "They are required to build the efficient frontier"
+          ],
+          "answer": 1,
+          "explanation": "Log returns sum across periods to the cumulative return. Note the efficient frontier is actually built with SIMPLE returns."
+        },
+        {
+          "q": "For a normal distribution, skewness and kurtosis are:",
+          "options": ["0 and 0", "0 and 3", "1 and 3", "3 and 0"],
+          "answer": 1,
+          "explanation": "Normal distribution has skewness 0 and kurtosis 3. Risk-averse investors dislike negative skew and high (fat-tailed) kurtosis."
+        },
+        {
+          "q": "The risk premium is:",
+          "options": [
+            "The total expected return of a risky asset",
+            "The expected return in excess of the risk-free rate",
+            "The standard deviation of returns",
+            "The return on a Treasury bill"
+          ],
+          "answer": 1,
+          "explanation": "Risk premium = expected return minus the risk-free rate — the compensation for bearing risk."
+        }
+      ]
     },
     {
       "type": "summary",
       "title": "📝 Recap",
-      "content": "A security is a tradable claim on value — equity, debt or a derivative. The main asset classes trade off risk against return: money market < bonds < equities. New securities are created in the primary market (money goes to the issuer); they are then traded in the secondary market, which provides liquidity and price discovery. An investment's return combines income and capital gain, summarised by the holding period return."
+      "content": "An investment commits funds to real or financial assets; in this course we focus on marketable securities. Asset classes split into traditional (equities, fixed income) and alternative (real estate, commodities, private equity, hedge funds, infrastructure), each with its own rationale and risks, and investors are paid in a strict priority order (debt before equity). Prices are turned into returns via the arithmetic or geometric (log) method — close for short horizons, with log returns being additive. Risk is the deviation of actual from expected return, measured by variance/standard deviation and refined with skewness, kurtosis, tail risk and semi-deviation. Rational, risk-averse investors demand a risk premium over the risk-free rate for taking on risk."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "Bodie, Kane & Marcus (BKM), *Investments*, **Chapter 2 — 'Asset Classes and Financial Instruments'**. Additional reports (e.g. UBS Global Investment Returns Yearbook) are on Moodle.\n\n*Lecturer: Dr. Natasha Todorovic — SMM148 Securities & Investments, Bayes Business School.*"
     }
   ]
 }
