@@ -69,7 +69,7 @@ def _adapt(sql: str) -> str:
 
 
 _SCHEMA_SQLITE = """
-CREATE TABLE IF NOT EXISTS notes (
+CREATE TABLE IF NOT EXISTS lesson_notes (
     lesson_key  TEXT PRIMARY KEY,
     blocks_json TEXT NOT NULL DEFAULT '[]',
     updated_at  REAL NOT NULL
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS notes (
 """
 
 _SCHEMA_PG = """
-CREATE TABLE IF NOT EXISTS notes (
+CREATE TABLE IF NOT EXISTS lesson_notes (
     lesson_key  TEXT PRIMARY KEY,
     blocks_json TEXT NOT NULL DEFAULT '[]',
     updated_at  DOUBLE PRECISION NOT NULL
@@ -100,7 +100,7 @@ def init_db() -> None:
 def get_note(lesson_key: str) -> list:
     with _conn() as conn:
         row = conn.execute(
-            _adapt("SELECT blocks_json FROM notes WHERE lesson_key = ?"), (lesson_key,)
+            _adapt("SELECT blocks_json FROM lesson_notes WHERE lesson_key = ?"), (lesson_key,)
         ).fetchone()
         if row is None:
             return []
@@ -112,7 +112,7 @@ def save_note(lesson_key: str, blocks: list) -> None:
     with _conn() as conn:
         conn.execute(
             _adapt(
-                "INSERT INTO notes (lesson_key, blocks_json, updated_at) VALUES (?, ?, ?) "
+                "INSERT INTO lesson_notes (lesson_key, blocks_json, updated_at) VALUES (?, ?, ?) "
                 "ON CONFLICT(lesson_key) DO UPDATE SET "
                 "blocks_json = excluded.blocks_json, updated_at = excluded.updated_at"
             ),
