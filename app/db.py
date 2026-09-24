@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS users (
     role TEXT NOT NULL DEFAULT 'student',
     status TEXT NOT NULL DEFAULT 'pending',
     anthropic_key TEXT NOT NULL DEFAULT '',
+    anthropic_workspace TEXT NOT NULL DEFAULT '',
     ai_model TEXT NOT NULL DEFAULT '',
     created_at REAL NOT NULL
 );
@@ -158,6 +159,7 @@ CREATE TABLE IF NOT EXISTS users (
     role TEXT NOT NULL DEFAULT 'student',
     status TEXT NOT NULL DEFAULT 'pending',
     anthropic_key TEXT NOT NULL DEFAULT '',
+    anthropic_workspace TEXT NOT NULL DEFAULT '',
     ai_model TEXT NOT NULL DEFAULT '',
     created_at DOUBLE PRECISION NOT NULL
 );
@@ -210,7 +212,7 @@ def init_db() -> None:
 
 def _migrate() -> None:
     """Aggiunge colonne mancanti a tabelle già esistenti (idempotente)."""
-    for col in ("anthropic_key", "ai_model"):
+    for col in ("anthropic_key", "anthropic_workspace", "ai_model"):
         if config.using_postgres():
             execute(f"ALTER TABLE users ADD COLUMN IF NOT EXISTS {col} TEXT NOT NULL DEFAULT ''")
         else:
@@ -285,11 +287,11 @@ def set_user_role(user_id: int, role: str) -> None:
     execute("UPDATE users SET role = ? WHERE id = ?", (role, user_id))
 
 
-def set_user_ai(user_id: int, anthropic_key: str, ai_model: str) -> None:
-    """Salva (persistente) la chiave AI e il modello scelto per l'utente."""
+def set_user_ai(user_id: int, anthropic_key: str, ai_model: str, anthropic_workspace: str = "") -> None:
+    """Salva (persistente) chiave AI, workspace e modello scelto per l'utente."""
     execute(
-        "UPDATE users SET anthropic_key = ?, ai_model = ? WHERE id = ?",
-        (anthropic_key, ai_model, user_id),
+        "UPDATE users SET anthropic_key = ?, anthropic_workspace = ?, ai_model = ? WHERE id = ?",
+        (anthropic_key, anthropic_workspace, ai_model, user_id),
     )
 
 

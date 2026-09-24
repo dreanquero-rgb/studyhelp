@@ -48,6 +48,7 @@ _init_db_or_explain()
 def init_state() -> None:
     st.session_state.setdefault("user", None)
     st.session_state.setdefault("ai_key", "")
+    st.session_state.setdefault("ai_workspace", "")
     st.session_state.setdefault("ai_model", DEFAULT_MODEL)
     st.session_state.setdefault("ai_loaded", False)
     st.session_state.setdefault("progress", {"visited": set(), "quiz_scores": {}})
@@ -58,6 +59,7 @@ def load_ai_settings_once(user: dict) -> None:
     """After login, load the saved API key/model from the user's account once."""
     if not st.session_state["ai_loaded"]:
         st.session_state["ai_key"] = user.get("anthropic_key", "") or ""
+        st.session_state["ai_workspace"] = user.get("anthropic_workspace", "") or ""
         st.session_state["ai_model"] = user.get("ai_model") or DEFAULT_MODEL
         st.session_state["ai_loaded"] = True
 
@@ -74,6 +76,13 @@ def sidebar_ai_settings(user: dict) -> None:
             type="password",
             placeholder="sk-ant-...",
         )
+        ws_val = st.text_input(
+            "Workspace ID (optional)",
+            value=st.session_state.get("ai_workspace", ""),
+            placeholder="only if your key requires it",
+            help="Needed only if the API says the key is not scoped to a workspace. "
+            "Find it in the Anthropic Console under the workspace settings.",
+        )
         model_val = st.selectbox(
             "Model",
             options=list(MODELS.keys()),
@@ -81,12 +90,19 @@ def sidebar_ai_settings(user: dict) -> None:
             index=list(MODELS.keys()).index(st.session_state.get("ai_model", DEFAULT_MODEL)),
         )
         st.session_state["ai_key"] = key_val
+        st.session_state["ai_workspace"] = ws_val
         st.session_state["ai_model"] = model_val
 
         # Persist to the user's account when something changed.
-        if key_val != (user.get("anthropic_key") or "") or model_val != (user.get("ai_model") or DEFAULT_MODEL):
-            db.set_user_ai(user["id"], key_val, model_val)
+        changed = (
+            key_val != (user.get("anthropic_key") or "")
+            or ws_val != (user.get("anthropic_workspace") or "")
+            or model_val != (user.get("ai_model") or DEFAULT_MODEL)
+        )
+        if changed:
+            db.set_user_ai(user["id"], key_val, model_val, ws_val)
             user["anthropic_key"] = key_val
+            user["anthropic_workspace"] = ws_val
             user["ai_model"] = model_val
             st.caption("✅ Saved to your account.")
 
@@ -122,6 +138,7 @@ def sidebar_nav(user: dict) -> None:
         st.session_state["user"] = None
         st.session_state["ai_loaded"] = False
         st.session_state["ai_key"] = ""
+        st.session_state["ai_workspace"] = ""
         st.rerun()
 
 

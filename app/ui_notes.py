@@ -162,6 +162,7 @@ def _render_ai(user: dict, lesson_id: int, blocks: list[dict], block: dict) -> N
     )
     api_key = st.session_state.get("ai_key", "")
     model = st.session_state.get("ai_model", ai.DEFAULT_MODEL)
+    workspace_id = st.session_state.get("ai_workspace", "")
 
     if st.button("✨ Generate answer", key=f"gen_{block['id']}", type="primary"):
         prompt = st.session_state.get(f"ntext_{block['id']}", "")
@@ -181,7 +182,7 @@ def _render_ai(user: dict, lesson_id: int, blocks: list[dict], block: dict) -> N
             # Context: the text blocks of the note, for more relevant answers.
             context = "\n\n".join(b.get("content", "") for b in blocks if b["type"] == "text")
             with st.spinner("The AI is thinking..."):
-                answer, err = ai.ask(api_key, prompt, model=model, context=context)
+                answer, err = ai.ask(api_key, prompt, model=model, context=context, workspace_id=workspace_id)
             st.session_state[f"aiout_{block['id']}"] = {"answer": answer, "err": err}
 
     out = st.session_state.get(f"aiout_{block['id']}")

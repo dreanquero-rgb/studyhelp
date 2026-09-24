@@ -25,7 +25,13 @@ SYSTEM_PROMPT = (
 )
 
 
-def ask(api_key: str, prompt: str, model: str = DEFAULT_MODEL, context: str = "") -> tuple[str | None, str | None]:
+def ask(
+    api_key: str,
+    prompt: str,
+    model: str = DEFAULT_MODEL,
+    context: str = "",
+    workspace_id: str = "",
+) -> tuple[str | None, str | None]:
     """Ask Claude. Returns (answer, error); exactly one is None."""
     if not api_key:
         return None, "Add your Anthropic API key in the AI settings first."
@@ -34,6 +40,9 @@ def ask(api_key: str, prompt: str, model: str = DEFAULT_MODEL, context: str = ""
     if context.strip():
         user_content = f"Context from my notes:\n{context}\n\n---\n\nRequest:\n{prompt}"
 
+    # Some org-level keys require the workspace to be named explicitly.
+    extra_headers = {"anthropic-workspace-id": workspace_id.strip()} if workspace_id.strip() else None
+
     try:
         client = anthropic.Anthropic(api_key=api_key)
         response = client.messages.create(
@@ -41,6 +50,7 @@ def ask(api_key: str, prompt: str, model: str = DEFAULT_MODEL, context: str = ""
             max_tokens=2048,
             system=SYSTEM_PROMPT,
             messages=[{"role": "user", "content": user_content}],
+            extra_headers=extra_headers,
         )
         text = "".join(b.text for b in response.content if b.type == "text")
         return text.strip() or "(no answer)", None
