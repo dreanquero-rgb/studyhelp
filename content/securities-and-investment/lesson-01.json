@@ -107,6 +107,12 @@
       "kind": "bond_price"
     },
     {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — compute a Holding Period Return",
+      "prompt": "Edit the numbers and run the code. It computes the HPR for a share bought at 100, sold at 112, paying a 3 dividend.",
+      "starter": "p0 = 100   # buying price\np1 = 112   # selling price\ndiv = 3    # dividend received\n\nhpr = (p1 - p0 + div) / p0\nprint(f\"Holding Period Return: {hpr*100:.2f}%\")"
+    },
+    {
       "type": "summary",
       "title": "📝 Recap",
       "content": "A security is a tradable claim on value — equity, debt or a derivative. The main asset classes trade off risk against return: money market < bonds < equities. New securities are created in the primary market (money goes to the issuer); they are then traded in the secondary market, which provides liquidity and price discovery. An investment's return combines income and capital gain, summarised by the holding period return."

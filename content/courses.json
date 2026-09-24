@@ -4,6 +4,12 @@
     "title": "Securities and Investment",
     "icon": "📈",
     "description": "Fundamentals of financial instruments, markets and investment decisions. Each lesson combines theory, key concepts, flashcards, quizzes and interactive exercises.",
-    "lessons": ["lesson-01"]
+    "sections": [
+      {
+        "id": "module-1",
+        "title": "Module 1 — Fundamentals",
+        "lessons": ["lesson-01"]
+      }
+    ]
   }
 ]

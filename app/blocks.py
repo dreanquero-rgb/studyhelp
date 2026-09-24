@@ -19,6 +19,7 @@ from __future__ import annotations
 import streamlit as st
 
 from .calculators import render_calculator
+from .exec_sandbox import run_code
 
 
 def _markdown(block: dict, key: str) -> None:
@@ -141,6 +142,33 @@ def _summary(block: dict, key: str) -> None:
     st.info(block.get("content", ""))
 
 
+def _code_exercise(block: dict, key: str) -> None:
+    """Interactive, runnable Python exercise defined inside a lesson."""
+    st.subheader(block.get("title", "🧪 Try it yourself"))
+    if block.get("prompt"):
+        st.markdown(block["prompt"])
+
+    text = st.text_area(
+        "Code",
+        value=block.get("starter", ""),
+        key=f"{key}_code",
+        height=180,
+        label_visibility="collapsed",
+    )
+    if st.button("▶ Run", key=f"{key}_run", type="primary"):
+        with st.spinner("Running..."):
+            st.session_state[f"{key}_out"] = run_code(text)
+
+    result = st.session_state.get(f"{key}_out")
+    if result:
+        if result["stdout"]:
+            st.code(result["stdout"], language="text")
+        for img in result["images"]:
+            st.image(img)
+        if result["stderr"]:
+            st.error(result["stderr"])
+
+
 RENDERERS = {
     "markdown": _markdown,
     "objectives": _objectives,
@@ -148,6 +176,7 @@ RENDERERS = {
     "flashcards": _flashcards,
     "quiz": _quiz,
     "summary": _summary,
+    "code_exercise": _code_exercise,
 }
 
 

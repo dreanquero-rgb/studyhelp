@@ -1,101 +1,94 @@
 # 🎓 StudyHelp
 
-Piattaforma di studio interattiva **multi-utente** costruita con **Streamlit**.
+A personal, interactive study site built with **Streamlit**. Free, no login, no AI keys.
 
-Ogni utente accede con un account personale, studia i corsi (teoria + concetti
-chiave + flashcard + quiz + calcolatori) e tiene i **propri appunti** per ogni
-lezione, con blocchi di **testo**, **codice Python eseguibile** (grafici e
-statistica) e **AI** (usando la propria chiave API).
-
----
-
-## 👤 Account, ruoli e accesso
-
-- Il **primo utente** che si registra diventa automaticamente **owner**
-  (amministratore) ed è già approvato.
-- Ogni account successivo parte **"in attesa"**: può accedere ai contenuti solo
-  dopo che l'owner lo **approva** (menu **Utenti**). Sei tu a decidere chi entra.
-- Ruoli: `owner` / `admin` (gestiscono contenuti e utenti) e `student`.
-
-> Le password sono salvate con hash PBKDF2 + salt. Il login persiste nella
-> sessione del browser (un refresh completo richiede di riaccedere — è un limite
-> noto dell'MVP, migliorabile con i cookie in seguito).
+- **Single user, no login** — just open it and study.
+- **Course content lives in files** under `content/` (managed via Claude Code).
+- **Personal notes** (text + runnable Python code) are saved to a database so
+  your work is never lost.
+- **Interactive lessons**: theory, key concepts, flashcards, quizzes, finance
+  calculators and runnable code exercises.
 
 ---
 
-## ✨ Cosa si può fare
-
-| Funzione | Chi |
-|---|---|
-| Creare / rinominare / eliminare **corsi, sezioni, lezioni** | owner/admin |
-| Modificare il **materiale** di una lezione (blocchi JSON) | owner/admin |
-| Scrivere **appunti personali** per lezione | tutti gli approvati |
-| Blocchi appunti: **testo**, **codice Python** (con grafici/statistica), **AI** | tutti gli approvati |
-| Approvare / bloccare utenti, assegnare ruoli | owner/admin |
-
-### 🐍 Esecuzione del codice
-Il codice Python degli appunti gira in un **sottoprocesso isolato**: ambiente
-ripulito (nessun accesso ai segreti dell'app), timeout, limiti di CPU/memoria e
-cattura di stampe e grafici `matplotlib`. Sono disponibili `numpy`, `pandas`,
-`scipy`, `matplotlib`. L'accesso è riservato agli account approvati dall'owner.
-
-### 🤖 AI nelle note
-Ogni utente inserisce la **propria** chiave API di Anthropic (menu laterale
-*Impostazioni AI*); resta solo in sessione e non viene salvata. I costi sono a
-carico di chi usa la chiave.
-
----
-
-## ▶️ Avvio in locale
+## ▶️ Run locally
 
 ```bash
 pip install -r requirements.txt
 streamlit run streamlit_app.py
 ```
 
-Apri `http://localhost:8501` e registra il primo account (diventerai owner).
+Locally, with no database configured, notes are stored in a local SQLite file
+(`data/studyhelp.db`).
+
+## ☁️ Online (Streamlit Community Cloud + Supabase)
+
+The app is deployed on Streamlit Community Cloud. Notes are saved to **Supabase**
+(Postgres) so they survive restarts. The connection string is set in the app
+**Secrets** (never committed):
+
+```toml
+[supabase]
+db_url = "postgresql://postgres.<ref>:<PASSWORD>@aws-0-<region>.pooler.supabase.com:6543/postgres"
+```
+
+The admin/sidebar shows whether notes are being saved to Supabase or local SQLite.
 
 ---
 
-## ☁️ Metterla online
+## ➕ Adding content (via files)
 
-### Ora (subito): Streamlit Community Cloud
-1. Su **https://share.streamlit.io** accedi con GitHub.
-2. **Create app** → repository `dreanquero-rgb/studyhelp`, main file `streamlit_app.py`.
-3. **Deploy** → ottieni l'URL pubblico.
+Content is plain JSON in `content/`, edited and committed via Claude Code.
 
-> ⚠️ Su Streamlit Community Cloud il disco è **effimero**: il database SQLite
-> locale può azzerarsi ai riavvii. Va benissimo per provare tutto; per l'uso
-> reale multi-utente con dati permanenti serve **Supabase** (passo successivo).
+**`content/courses.json`** — the list of courses, each with sections and lessons:
 
-### Passo successivo: Supabase (Postgres, gratis)
-Il livello dati (`app/db.py`) è già strutturato per Postgres. Quando avrai un
-progetto Supabase, colleghiamo il database così gli account e gli appunti
-restano salvati in modo permanente e condiviso tra i dispositivi.
+```json
+[
+  {
+    "id": "securities-and-investment",
+    "title": "Securities and Investment",
+    "icon": "📈",
+    "description": "…",
+    "sections": [
+      { "id": "module-1", "title": "Module 1", "lessons": ["lesson-01"] }
+    ]
+  }
+]
+```
+
+**`content/<course_id>/<lesson_id>.json`** — a lesson is a list of blocks:
+
+| `type`          | Purpose |
+|-----------------|---------|
+| `objectives`    | Learning objectives (list) |
+| `markdown`      | Theory in Markdown (tables and formulas) |
+| `key_terms`     | Glossary term → definition |
+| `flashcards`    | Flip-through flashcards |
+| `quiz`          | Multiple-choice quiz with scoring |
+| `calculator`    | Finance calculator (`present_value`, `compound_interest`, `holding_period_return`, `bond_price`) |
+| `code_exercise` | A runnable Python exercise (fields: `title`, `prompt`, `starter`) |
+| `summary`       | Final recap |
+
+> Notes are keyed by `course_id/lesson_id`. Keep lesson ids stable so notes stay
+> attached to the right lesson.
 
 ---
 
-## 🗂️ Struttura del progetto
+## 🗂️ Project structure
 
 ```
 studyhelp/
-├── streamlit_app.py         # entry point: login + routing per ruolo
+├── streamlit_app.py        # entry point (no login)
 ├── app/
-│   ├── db.py                # livello dati (SQLite ora, pronto per Postgres/Supabase)
-│   ├── auth.py              # registrazione, login, ruoli, approvazione
-│   ├── exec_sandbox.py      # esecuzione isolata del codice Python
-│   ├── ai.py                # integrazione Claude (chiave per-utente)
-│   ├── blocks.py            # rendering materiale lezione
-│   ├── calculators.py       # calcolatori finanziari
-│   ├── ui_auth.py           # schermate login / attesa
-│   ├── ui_study.py          # studio: materiale + appunti
-│   ├── ui_notes.py          # editor appunti (testo/codice/AI)
-│   ├── ui_manage.py         # gestione corsi/sezioni/lezioni
-│   └── ui_admin.py          # gestione utenti
-├── content/                 # materiale iniziale (importato nel DB al primo avvio)
+│   ├── content.py          # loads courses/lessons from files
+│   ├── db.py               # notes persistence (Supabase/Postgres or local SQLite)
+│   ├── config.py           # reads the DB connection from secrets/env
+│   ├── exec_sandbox.py     # isolated Python execution (charts + stats)
+│   ├── blocks.py           # lesson block renderers
+│   ├── calculators.py      # finance calculators
+│   ├── ui_study.py         # study page (material + notes)
+│   └── ui_notes.py         # notes editor (text + runnable code, auto-saved)
+├── content/                # course content (JSON, managed via Claude Code)
 ├── requirements.txt
 └── .streamlit/config.toml
 ```
-
-Il primo avvio importa i corsi da `content/` nel database; da lì tutto è
-modificabile dall'app.
