@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import time
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -27,27 +28,51 @@ from . import config
 
 DB_PATH = Path(__file__).resolve().parent.parent / "data" / "studyhelp.db"
 
+# Il pool di connessioni Postgres è un singleton di modulo: i moduli vengono
+# importati una sola volta, quindi il pool SOPRAVVIVE ai rerun di Streamlit e
+# le connessioni vengono riusate (niente handshake TLS a ogni query -> veloce).
+_pool = None
+_initialized = False
 
-# --------------------------------------------------------------------------- #
-# Connessione e helper di query (indipendenti dal backend)                     #
-# --------------------------------------------------------------------------- #
-def _connect():
-    url = config.get_db_url()
-    if url:
-        import psycopg
+
+def _get_pool():
+    global _pool
+    if _pool is None:
         from psycopg.rows import dict_row
+        from psycopg_pool import ConnectionPool
 
-        conn = psycopg.connect(url, row_factory=dict_row)
-        # Disabilita i prepared statement: compatibile con il pooler Supabase
-        # in modalità "transaction".
-        conn.prepare_threshold = None
-        return conn
+        def _configure(conn) -> None:
+            # Compatibile con il pooler Supabase in modalità "transaction".
+            conn.prepare_threshold = None
 
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys = ON")
-    return conn
+        _pool = ConnectionPool(
+            config.get_db_url(),
+            min_size=1,
+            max_size=5,
+            max_idle=300,
+            kwargs={"autocommit": True, "row_factory": dict_row},
+            configure=_configure,
+            open=True,
+        )
+    return _pool
+
+
+@contextmanager
+def _conn():
+    """Fornisce una connessione: dal pool (Postgres) o nuova (SQLite)."""
+    if config.using_postgres():
+        with _get_pool().connection() as conn:
+            yield conn
+    else:
+        DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys = ON")
+        try:
+            yield conn
+            conn.commit()
+        finally:
+            conn.close()
 
 
 def _adapt(sql: str) -> str:
@@ -55,45 +80,29 @@ def _adapt(sql: str) -> str:
 
 
 def fetchone(sql: str, params: tuple = ()) -> dict | None:
-    conn = _connect()
-    try:
+    with _conn() as conn:
         row = conn.execute(_adapt(sql), params).fetchone()
         return dict(row) if row is not None else None
-    finally:
-        conn.close()
 
 
 def fetchall(sql: str, params: tuple = ()) -> list[dict]:
-    conn = _connect()
-    try:
+    with _conn() as conn:
         rows = conn.execute(_adapt(sql), params).fetchall()
         return [dict(r) for r in rows]
-    finally:
-        conn.close()
 
 
 def execute(sql: str, params: tuple = ()) -> None:
-    conn = _connect()
-    try:
+    with _conn() as conn:
         conn.execute(_adapt(sql), params)
-        conn.commit()
-    finally:
-        conn.close()
 
 
 def insert(sql: str, params: tuple = ()) -> int:
     """Esegue un INSERT e ritorna l'id della riga creata."""
-    conn = _connect()
-    try:
+    with _conn() as conn:
         if config.using_postgres():
             row = conn.execute(_adapt(sql) + " RETURNING id", params).fetchone()
-            new_id = row["id"]
-        else:
-            new_id = conn.execute(sql, params).lastrowid
-        conn.commit()
-        return int(new_id)
-    finally:
-        conn.close()
+            return int(row["id"])
+        return int(conn.execute(sql, params).lastrowid)
 
 
 # --------------------------------------------------------------------------- #
@@ -185,27 +194,30 @@ CREATE TABLE IF NOT EXISTS notes (
 
 
 def init_db() -> None:
+    # Esegue lo schema/migrazione/seed UNA VOLTA per processo (non a ogni rerun).
+    global _initialized
+    if _initialized:
+        return
     schema = _SCHEMA_PG if config.using_postgres() else _SCHEMA_SQLITE
-    conn = _connect()
-    try:
+    with _conn() as conn:
         for statement in schema.split(";"):
             if statement.strip():
                 conn.execute(statement)
-        conn.commit()
-    finally:
-        conn.close()
     _migrate()
     _seed_from_json_if_empty()
+    _initialized = True
 
 
 def _migrate() -> None:
     """Aggiunge colonne mancanti a tabelle già esistenti (idempotente)."""
     for col in ("anthropic_key", "ai_model"):
-        try:
-            execute(f"ALTER TABLE users ADD COLUMN {col} TEXT NOT NULL DEFAULT ''")
-        except Exception:
-            # La colonna esiste già: nessun problema.
-            pass
+        if config.using_postgres():
+            execute(f"ALTER TABLE users ADD COLUMN IF NOT EXISTS {col} TEXT NOT NULL DEFAULT ''")
+        else:
+            try:
+                execute(f"ALTER TABLE users ADD COLUMN {col} TEXT NOT NULL DEFAULT ''")
+            except Exception:
+                pass  # La colonna esiste già.
 
 
 # --------------------------------------------------------------------------- #
