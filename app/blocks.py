@@ -17,8 +17,10 @@ Tipi supportati:
 from __future__ import annotations
 
 import streamlit as st
+import streamlit.components.v1 as components
 
 from .calculators import render_calculator
+from .content import CONTENT_DIR
 from .exec_sandbox import run_code
 
 
@@ -142,6 +144,31 @@ def _summary(block: dict, key: str) -> None:
     st.info(block.get("content", ""))
 
 
+def _html(block: dict, key: str) -> None:
+    """Embed a raw HTML file exactly as provided, in an iframe.
+
+    Fields (use one):
+        url    -> path to a file served from the /static folder,
+                  e.g. "app/static/<course>/<file>.html" (preferred)
+        src    -> path to an .html file under content/ (embedded inline)
+        html   -> inline HTML
+        height -> iframe height in pixels (default 800)
+    """
+    if block.get("title"):
+        st.subheader(block["title"])
+    height = block.get("height", 800)
+
+    if block.get("url"):
+        st.iframe(block["url"], height=height)
+        return
+
+    html = block.get("html", "")
+    if block.get("src"):
+        path = CONTENT_DIR / block["src"]
+        html = path.read_text(encoding="utf-8") if path.exists() else f"<p>File not found: {block['src']}</p>"
+    components.html(html, height=height, scrolling=True)
+
+
 def _code_exercise(block: dict, key: str) -> None:
     """Interactive, runnable Python exercise defined inside a lesson."""
     st.subheader(block.get("title", "🧪 Try it yourself"))
@@ -177,6 +204,7 @@ RENDERERS = {
     "quiz": _quiz,
     "summary": _summary,
     "code_exercise": _code_exercise,
+    "html": _html,
 }
 
 

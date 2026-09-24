@@ -73,8 +73,10 @@
       "content": "Prices (from Bloomberg, Eikon, …) are hard to compare directly because they are in different 'units' (e.g. ABC = £1.10 vs XYZ = £4.35). We convert prices into **returns**:\n\n**Arithmetic (simple):**\n$$R_t = \\frac{P_t + D_t - P_{t-1}}{P_{t-1}}$$\n\n**Geometric (continuously compounded / log):**\n$$r_t = \\ln\\!\\left(\\frac{P_t + D_t}{P_{t-1}}\\right)$$\n\n**Worked example** — stock ABC: 245p (31 Aug) → 256p (30 Sep); annual dividend 10p ⇒ monthly 10/12 = 0.833p.\n\n- Arithmetic: (256 + 0.833 − 245) / 245 = **4.8%**\n- Geometric: ln((256 + 0.833) / 245) = **4.7%**\n\n**Which to use?** Differences are small for daily/weekly/monthly data. Geometric returns are **additive** (sum them to get the cumulative return). However, the efficient-frontier/optimal-portfolio methods used later are based on **simple** returns. Key link: $r = \\ln(1+R)$ and $R = e^{r} - 1$."
     },
     {
-      "type": "calculator",
-      "kind": "arithmetic_vs_log_return"
+      "type": "html",
+      "title": "🧮 Interactive tool — Arithmetic vs Continuously Compounded Returns",
+      "url": "app/static/securities-and-investment/arithmetic-vs-continuously-compounded-returns.html",
+      "height": 1050
     },
     {
       "type": "code_exercise",
