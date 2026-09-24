@@ -1,1 +1,6 @@
 streamlit>=1.36
+anthropic>=0.40
+numpy
+pandas
+matplotlib
+scipy

@@ -9,6 +9,10 @@ env/
 # Streamlit
 .streamlit/secrets.toml
 
+# Local dev database (SQLite)
+data/
+*.db
+
 # OS / editor
 .DS_Store
 .idea/

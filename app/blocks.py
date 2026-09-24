@@ -131,7 +131,8 @@ def _quiz(block: dict, key: str) -> None:
         pct = score / total * 100 if total else 0
         st.markdown(f"### Punteggio: {score}/{total} ({pct:.0f}%)")
         # Salva il miglior punteggio del quiz per la barra dei progressi.
-        best = st.session_state["progress"]["quiz_scores"]
+        progress = st.session_state.setdefault("progress", {"visited": set(), "quiz_scores": {}})
+        best = progress.setdefault("quiz_scores", {})
         best[key] = max(best.get(key, 0), pct)
 
 

@@ -1,12 +1,48 @@
 # 🎓 StudyHelp
 
-Piattaforma di studio interattiva costruita con **Streamlit**.
+Piattaforma di studio interattiva **multi-utente** costruita con **Streamlit**.
 
-Ogni **corso** è una sezione; ogni corso contiene **lezioni**; ogni lezione è
-una pagina di studio interattiva con teoria, concetti chiave, **flashcard**,
-**quiz** ed **esercizi/calcolatori** interattivi.
+Ogni utente accede con un account personale, studia i corsi (teoria + concetti
+chiave + flashcard + quiz + calcolatori) e tiene i **propri appunti** per ogni
+lezione, con blocchi di **testo**, **codice Python eseguibile** (grafici e
+statistica) e **AI** (usando la propria chiave API).
 
-Il primo corso incluso è **Securities and Investment**.
+---
+
+## 👤 Account, ruoli e accesso
+
+- Il **primo utente** che si registra diventa automaticamente **owner**
+  (amministratore) ed è già approvato.
+- Ogni account successivo parte **"in attesa"**: può accedere ai contenuti solo
+  dopo che l'owner lo **approva** (menu **Utenti**). Sei tu a decidere chi entra.
+- Ruoli: `owner` / `admin` (gestiscono contenuti e utenti) e `student`.
+
+> Le password sono salvate con hash PBKDF2 + salt. Il login persiste nella
+> sessione del browser (un refresh completo richiede di riaccedere — è un limite
+> noto dell'MVP, migliorabile con i cookie in seguito).
+
+---
+
+## ✨ Cosa si può fare
+
+| Funzione | Chi |
+|---|---|
+| Creare / rinominare / eliminare **corsi, sezioni, lezioni** | owner/admin |
+| Modificare il **materiale** di una lezione (blocchi JSON) | owner/admin |
+| Scrivere **appunti personali** per lezione | tutti gli approvati |
+| Blocchi appunti: **testo**, **codice Python** (con grafici/statistica), **AI** | tutti gli approvati |
+| Approvare / bloccare utenti, assegnare ruoli | owner/admin |
+
+### 🐍 Esecuzione del codice
+Il codice Python degli appunti gira in un **sottoprocesso isolato**: ambiente
+ripulito (nessun accesso ai segreti dell'app), timeout, limiti di CPU/memoria e
+cattura di stampe e grafici `matplotlib`. Sono disponibili `numpy`, `pandas`,
+`scipy`, `matplotlib`. L'accesso è riservato agli account approvati dall'owner.
+
+### 🤖 AI nelle note
+Ogni utente inserisce la **propria** chiave API di Anthropic (menu laterale
+*Impostazioni AI*); resta solo in sessione e non viene salvata. I costi sono a
+carico di chi usa la chiave.
 
 ---
 
@@ -17,85 +53,25 @@ pip install -r requirements.txt
 streamlit run streamlit_app.py
 ```
 
-Poi apri il link che compare nel terminale (di solito `http://localhost:8501`).
+Apri `http://localhost:8501` e registra il primo account (diventerai owner).
 
 ---
 
-## ☁️ Metterla online (gratis) — Streamlit Community Cloud
+## ☁️ Metterla online
 
-1. Assicurati che questo repo sia su GitHub (lo è: `dreanquero-rgb/studyhelp`).
-2. Vai su **https://share.streamlit.io** e accedi con il tuo account GitHub.
-3. Clicca **"Create app" → "Deploy a public app from GitHub"**.
-4. Seleziona:
-   - **Repository:** `dreanquero-rgb/studyhelp`
-   - **Branch:** il branch su cui vive il codice
-   - **Main file path:** `streamlit_app.py`
-5. **Deploy**. In un paio di minuti avrai un URL pubblico da condividere.
+### Ora (subito): Streamlit Community Cloud
+1. Su **https://share.streamlit.io** accedi con GitHub.
+2. **Create app** → repository `dreanquero-rgb/studyhelp`, main file `streamlit_app.py`.
+3. **Deploy** → ottieni l'URL pubblico.
 
-Ogni volta che aggiorniamo il repo, l'app online si aggiorna da sola.
+> ⚠️ Su Streamlit Community Cloud il disco è **effimero**: il database SQLite
+> locale può azzerarsi ai riavvii. Va benissimo per provare tutto; per l'uso
+> reale multi-utente con dati permanenti serve **Supabase** (passo successivo).
 
----
-
-## ➕ Aggiungere contenuti (senza toccare il codice)
-
-Tutti i contenuti sono file JSON in `content/`.
-
-### Aggiungere un corso
-
-Modifica `content/courses.json`:
-
-```json
-{
-  "id": "corporate-finance",
-  "title": "Corporate Finance",
-  "icon": "💰",
-  "description": "Descrizione del corso.",
-  "lessons": ["lesson-01"]
-}
-```
-
-### Aggiungere una lezione
-
-Crea `content/<id-corso>/<id-lezione>.json`. Una lezione è una lista di
-**blocchi**; questi i tipi disponibili:
-
-| `type`        | A cosa serve                                   |
-|---------------|------------------------------------------------|
-| `objectives`  | Obiettivi di apprendimento (elenco)            |
-| `markdown`    | Teoria in Markdown (tabelle e formule incluse) |
-| `key_terms`   | Glossario termine → definizione                |
-| `flashcards`  | Flashcard interattive (si girano)              |
-| `quiz`        | Quiz a risposta multipla con punteggio         |
-| `calculator`  | Calcolatore finanziario interattivo            |
-| `summary`     | Riepilogo finale                               |
-
-Esempio minimo:
-
-```json
-{
-  "id": "lesson-02",
-  "title": "Titolo della lezione",
-  "summary": "Sottotitolo breve.",
-  "blocks": [
-    {"type": "markdown", "title": "Sezione", "content": "Testo in **Markdown**."},
-    {"type": "flashcards", "cards": [{"front": "Domanda?", "back": "Risposta."}]},
-    {"type": "quiz", "questions": [
-      {"q": "Domanda?", "options": ["A", "B"], "answer": 1, "explanation": "Perché B."}
-    ]}
-  ]
-}
-```
-
-Ricordati di aggiungere l'`id` della nuova lezione nell'array `lessons` del corso.
-
-### Calcolatori disponibili (`type: "calculator"`)
-
-- `present_value` — valore attuale
-- `compound_interest` — interesse composto
-- `holding_period_return` — rendimento di periodo
-- `bond_price` — prezzo di un bond
-
-Nuovi calcolatori si aggiungono in `app/calculators.py`.
+### Passo successivo: Supabase (Postgres, gratis)
+Il livello dati (`app/db.py`) è già strutturato per Postgres. Quando avrai un
+progetto Supabase, colleghiamo il database così gli account e gli appunti
+restano salvati in modo permanente e condiviso tra i dispositivi.
 
 ---
 
@@ -103,15 +79,23 @@ Nuovi calcolatori si aggiungono in `app/calculators.py`.
 
 ```
 studyhelp/
-├── streamlit_app.py          # app principale (entry point)
+├── streamlit_app.py         # entry point: login + routing per ruolo
 ├── app/
-│   ├── loader.py             # caricamento corsi/lezioni
-│   ├── blocks.py             # rendering dei blocchi
-│   └── calculators.py        # calcolatori finanziari
-├── content/
-│   ├── courses.json          # elenco dei corsi
-│   └── securities-and-investment/
-│       └── lesson-01.json
+│   ├── db.py                # livello dati (SQLite ora, pronto per Postgres/Supabase)
+│   ├── auth.py              # registrazione, login, ruoli, approvazione
+│   ├── exec_sandbox.py      # esecuzione isolata del codice Python
+│   ├── ai.py                # integrazione Claude (chiave per-utente)
+│   ├── blocks.py            # rendering materiale lezione
+│   ├── calculators.py       # calcolatori finanziari
+│   ├── ui_auth.py           # schermate login / attesa
+│   ├── ui_study.py          # studio: materiale + appunti
+│   ├── ui_notes.py          # editor appunti (testo/codice/AI)
+│   ├── ui_manage.py         # gestione corsi/sezioni/lezioni
+│   └── ui_admin.py          # gestione utenti
+├── content/                 # materiale iniziale (importato nel DB al primo avvio)
 ├── requirements.txt
-└── .streamlit/config.toml    # tema
+└── .streamlit/config.toml
 ```
+
+Il primo avvio importa i corsi da `content/` nel database; da lì tutto è
+modificabile dall'app.
