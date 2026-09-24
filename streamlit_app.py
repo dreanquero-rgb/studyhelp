@@ -22,7 +22,27 @@ from app.ui_study import study_page
 
 st.set_page_config(page_title="StudyHelp", page_icon="🎓", layout="wide")
 
-db.init_db()
+
+def _init_db_or_explain() -> None:
+    """Inizializza il database mostrando l'errore reale in caso di problemi."""
+    try:
+        db.init_db()
+    except Exception as exc:  # noqa: BLE001
+        st.error("❌ Impossibile connettersi al database Supabase.")
+        st.code(f"{type(exc).__name__}: {exc}", language="text")
+        st.markdown(
+            "**Cause più comuni:**\n"
+            "- Password errata o con le parentesi `[ ]` lasciate per sbaglio "
+            "(deve essere solo la password, es. `Ludopatia03`).\n"
+            "- Password con caratteri speciali non codificati (`@ : / # ? %`).\n"
+            "- Uso della URI *Direct connection* invece del **pooler** "
+            "(`...pooler.supabase.com:6543`).\n\n"
+            "Correggi il valore `db_url` nei **Secrets** dell'app e riavvia."
+        )
+        st.stop()
+
+
+_init_db_or_explain()
 
 
 def init_state() -> None:
