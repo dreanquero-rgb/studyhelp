@@ -1,8 +1,11 @@
-"""Livello dati di StudyHelp.
+"""Livello dati di StudyHelp — funziona su due backend, scelto automaticamente:
 
-Fase 1: backend SQLite (funziona subito, in locale).
-Lo schema e le query sono pensati per essere portati su Postgres/Supabase
-con modifiche minime (stesse tabelle, stesse colonne).
+- SQLite  : se non è configurata alcuna connessione (sviluppo locale).
+- Postgres: se è presente una connessione Supabase (vedi app/config.py).
+
+Le query sono scritte una sola volta con il segnaposto `?`; per Postgres
+vengono adattate a `%s`. Le uniche differenze restano nello schema (tipi e
+auto-incremento) e nel recupero dell'id appena inserito (RETURNING vs lastrowid).
 
 Modello:
     users     -> account con ruolo e stato di approvazione
@@ -10,9 +13,6 @@ Modello:
     sections  -> sezioni dentro un corso
     lessons   -> lezioni dentro una sezione; content_json = materiale didattico
     notes     -> appunti personali di un utente su una lezione (blocks_json)
-
-Tutti i contenuti "a blocchi" (materiale lezione e appunti) sono liste JSON,
-così si modificano facilmente senza cambiare lo schema del database.
 """
 
 from __future__ import annotations
@@ -23,10 +23,26 @@ import time
 from pathlib import Path
 from typing import Any
 
+from . import config
+
 DB_PATH = Path(__file__).resolve().parent.parent / "data" / "studyhelp.db"
 
 
-def _connect() -> sqlite3.Connection:
+# --------------------------------------------------------------------------- #
+# Connessione e helper di query (indipendenti dal backend)                     #
+# --------------------------------------------------------------------------- #
+def _connect():
+    url = config.get_db_url()
+    if url:
+        import psycopg
+        from psycopg.rows import dict_row
+
+        conn = psycopg.connect(url, row_factory=dict_row)
+        # Disabilita i prepared statement: compatibile con il pooler Supabase
+        # in modalità "transaction".
+        conn.prepare_threshold = None
+        return conn
+
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -34,55 +50,143 @@ def _connect() -> sqlite3.Connection:
     return conn
 
 
-SCHEMA = """
+def _adapt(sql: str) -> str:
+    return sql.replace("?", "%s") if config.using_postgres() else sql
+
+
+def fetchone(sql: str, params: tuple = ()) -> dict | None:
+    conn = _connect()
+    try:
+        row = conn.execute(_adapt(sql), params).fetchone()
+        return dict(row) if row is not None else None
+    finally:
+        conn.close()
+
+
+def fetchall(sql: str, params: tuple = ()) -> list[dict]:
+    conn = _connect()
+    try:
+        rows = conn.execute(_adapt(sql), params).fetchall()
+        return [dict(r) for r in rows]
+    finally:
+        conn.close()
+
+
+def execute(sql: str, params: tuple = ()) -> None:
+    conn = _connect()
+    try:
+        conn.execute(_adapt(sql), params)
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def insert(sql: str, params: tuple = ()) -> int:
+    """Esegue un INSERT e ritorna l'id della riga creata."""
+    conn = _connect()
+    try:
+        if config.using_postgres():
+            row = conn.execute(_adapt(sql) + " RETURNING id", params).fetchone()
+            new_id = row["id"]
+        else:
+            new_id = conn.execute(sql, params).lastrowid
+        conn.commit()
+        return int(new_id)
+    finally:
+        conn.close()
+
+
+# --------------------------------------------------------------------------- #
+# Schema                                                                       #
+# --------------------------------------------------------------------------- #
+_SCHEMA_SQLITE = """
 CREATE TABLE IF NOT EXISTS users (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    email         TEXT UNIQUE NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
     password_hash TEXT NOT NULL,
-    role          TEXT NOT NULL DEFAULT 'student',   -- owner | admin | student
-    status        TEXT NOT NULL DEFAULT 'pending',   -- pending | approved | blocked
-    created_at    REAL NOT NULL
+    role TEXT NOT NULL DEFAULT 'student',
+    status TEXT NOT NULL DEFAULT 'pending',
+    created_at REAL NOT NULL
 );
-
 CREATE TABLE IF NOT EXISTS courses (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    title       TEXT NOT NULL,
-    icon        TEXT DEFAULT '📘',
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    icon TEXT DEFAULT '📘',
     description TEXT DEFAULT '',
-    position    INTEGER NOT NULL DEFAULT 0,
-    created_at  REAL NOT NULL
+    position INTEGER NOT NULL DEFAULT 0,
+    created_at REAL NOT NULL
 );
-
 CREATE TABLE IF NOT EXISTS sections (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     course_id INTEGER NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
-    title     TEXT NOT NULL,
-    position  INTEGER NOT NULL DEFAULT 0
+    title TEXT NOT NULL,
+    position INTEGER NOT NULL DEFAULT 0
 );
-
 CREATE TABLE IF NOT EXISTS lessons (
-    id           INTEGER PRIMARY KEY AUTOINCREMENT,
-    section_id   INTEGER NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
-    title        TEXT NOT NULL,
-    position     INTEGER NOT NULL DEFAULT 0,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    section_id INTEGER NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    position INTEGER NOT NULL DEFAULT 0,
     content_json TEXT NOT NULL DEFAULT '[]'
 );
-
 CREATE TABLE IF NOT EXISTS notes (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    lesson_id   INTEGER NOT NULL REFERENCES lessons(id) ON DELETE CASCADE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    lesson_id INTEGER NOT NULL REFERENCES lessons(id) ON DELETE CASCADE,
     blocks_json TEXT NOT NULL DEFAULT '[]',
-    updated_at  REAL NOT NULL,
+    updated_at REAL NOT NULL,
+    UNIQUE(user_id, lesson_id)
+);
+"""
+
+_SCHEMA_PG = """
+CREATE TABLE IF NOT EXISTS users (
+    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'student',
+    status TEXT NOT NULL DEFAULT 'pending',
+    created_at DOUBLE PRECISION NOT NULL
+);
+CREATE TABLE IF NOT EXISTS courses (
+    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    title TEXT NOT NULL,
+    icon TEXT DEFAULT '📘',
+    description TEXT DEFAULT '',
+    position INTEGER NOT NULL DEFAULT 0,
+    created_at DOUBLE PRECISION NOT NULL
+);
+CREATE TABLE IF NOT EXISTS sections (
+    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    course_id BIGINT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    position INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS lessons (
+    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    section_id BIGINT NOT NULL REFERENCES sections(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    position INTEGER NOT NULL DEFAULT 0,
+    content_json TEXT NOT NULL DEFAULT '[]'
+);
+CREATE TABLE IF NOT EXISTS notes (
+    id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    lesson_id BIGINT NOT NULL REFERENCES lessons(id) ON DELETE CASCADE,
+    blocks_json TEXT NOT NULL DEFAULT '[]',
+    updated_at DOUBLE PRECISION NOT NULL,
     UNIQUE(user_id, lesson_id)
 );
 """
 
 
 def init_db() -> None:
+    schema = _SCHEMA_PG if config.using_postgres() else _SCHEMA_SQLITE
     conn = _connect()
     try:
-        conn.executescript(SCHEMA)
+        for statement in schema.split(";"):
+            if statement.strip():
+                conn.execute(statement)
         conn.commit()
     finally:
         conn.close()
@@ -90,17 +194,11 @@ def init_db() -> None:
 
 
 # --------------------------------------------------------------------------- #
-# Seeding: importa i corsi JSON esistenti la prima volta (così il materiale    #
-# di "Securities and Investment" c'è già ed è poi modificabile dall'app).      #
+# Seeding iniziale dai file JSON in /content                                    #
 # --------------------------------------------------------------------------- #
 def _seed_from_json_if_empty() -> None:
-    conn = _connect()
-    try:
-        n = conn.execute("SELECT COUNT(*) AS c FROM courses").fetchone()["c"]
-        if n > 0:
-            return
-    finally:
-        conn.close()
+    if (fetchone("SELECT COUNT(*) AS c FROM courses") or {}).get("c", 0) > 0:
+        return
 
     content_dir = Path(__file__).resolve().parent.parent / "content"
     index = content_dir / "courses.json"
@@ -133,91 +231,46 @@ def _seed_from_json_if_empty() -> None:
 # Users                                                                        #
 # --------------------------------------------------------------------------- #
 def count_users() -> int:
-    conn = _connect()
-    try:
-        return conn.execute("SELECT COUNT(*) AS c FROM users").fetchone()["c"]
-    finally:
-        conn.close()
+    return (fetchone("SELECT COUNT(*) AS c FROM users") or {}).get("c", 0)
 
 
 def create_user(email: str, password_hash: str, role: str, status: str) -> int:
-    conn = _connect()
-    try:
-        cur = conn.execute(
-            "INSERT INTO users (email, password_hash, role, status, created_at) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (email.lower().strip(), password_hash, role, status, time.time()),
-        )
-        conn.commit()
-        return cur.lastrowid
-    finally:
-        conn.close()
+    return insert(
+        "INSERT INTO users (email, password_hash, role, status, created_at) "
+        "VALUES (?, ?, ?, ?, ?)",
+        (email.lower().strip(), password_hash, role, status, time.time()),
+    )
 
 
 def get_user_by_email(email: str) -> dict | None:
-    conn = _connect()
-    try:
-        row = conn.execute(
-            "SELECT * FROM users WHERE email = ?", (email.lower().strip(),)
-        ).fetchone()
-        return dict(row) if row else None
-    finally:
-        conn.close()
+    return fetchone("SELECT * FROM users WHERE email = ?", (email.lower().strip(),))
 
 
 def list_users() -> list[dict]:
-    conn = _connect()
-    try:
-        rows = conn.execute("SELECT * FROM users ORDER BY created_at").fetchall()
-        return [dict(r) for r in rows]
-    finally:
-        conn.close()
+    return fetchall("SELECT * FROM users ORDER BY created_at")
 
 
 def set_user_status(user_id: int, status: str) -> None:
-    conn = _connect()
-    try:
-        conn.execute("UPDATE users SET status = ? WHERE id = ?", (status, user_id))
-        conn.commit()
-    finally:
-        conn.close()
+    execute("UPDATE users SET status = ? WHERE id = ?", (status, user_id))
 
 
 def set_user_role(user_id: int, role: str) -> None:
-    conn = _connect()
-    try:
-        conn.execute("UPDATE users SET role = ? WHERE id = ?", (role, user_id))
-        conn.commit()
-    finally:
-        conn.close()
+    execute("UPDATE users SET role = ? WHERE id = ?", (role, user_id))
 
 
 # --------------------------------------------------------------------------- #
 # Courses / Sections / Lessons                                                 #
 # --------------------------------------------------------------------------- #
 def create_course(title: str, icon: str = "📘", description: str = "", position: int = 0) -> int:
-    conn = _connect()
-    try:
-        cur = conn.execute(
-            "INSERT INTO courses (title, icon, description, position, created_at) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (title, icon, description, position, time.time()),
-        )
-        conn.commit()
-        return cur.lastrowid
-    finally:
-        conn.close()
+    return insert(
+        "INSERT INTO courses (title, icon, description, position, created_at) "
+        "VALUES (?, ?, ?, ?, ?)",
+        (title, icon, description, position, time.time()),
+    )
 
 
 def list_courses() -> list[dict]:
-    conn = _connect()
-    try:
-        rows = conn.execute(
-            "SELECT * FROM courses ORDER BY position, id"
-        ).fetchall()
-        return [dict(r) for r in rows]
-    finally:
-        conn.close()
+    return fetchall("SELECT * FROM courses ORDER BY position, id")
 
 
 def update_course(course_id: int, **fields: Any) -> None:
@@ -229,28 +282,16 @@ def delete_course(course_id: int) -> None:
 
 
 def create_section(course_id: int, title: str, position: int = 0) -> int:
-    conn = _connect()
-    try:
-        cur = conn.execute(
-            "INSERT INTO sections (course_id, title, position) VALUES (?, ?, ?)",
-            (course_id, title, position),
-        )
-        conn.commit()
-        return cur.lastrowid
-    finally:
-        conn.close()
+    return insert(
+        "INSERT INTO sections (course_id, title, position) VALUES (?, ?, ?)",
+        (course_id, title, position),
+    )
 
 
 def list_sections(course_id: int) -> list[dict]:
-    conn = _connect()
-    try:
-        rows = conn.execute(
-            "SELECT * FROM sections WHERE course_id = ? ORDER BY position, id",
-            (course_id,),
-        ).fetchall()
-        return [dict(r) for r in rows]
-    finally:
-        conn.close()
+    return fetchall(
+        "SELECT * FROM sections WHERE course_id = ? ORDER BY position, id", (course_id,)
+    )
 
 
 def update_section(section_id: int, **fields: Any) -> None:
@@ -262,43 +303,26 @@ def delete_section(section_id: int) -> None:
 
 
 def create_lesson(section_id: int, title: str, content: list | None = None, position: int = 0) -> int:
-    conn = _connect()
-    try:
-        cur = conn.execute(
-            "INSERT INTO lessons (section_id, title, position, content_json) "
-            "VALUES (?, ?, ?, ?)",
-            (section_id, title, position, json.dumps(content or [], ensure_ascii=False)),
-        )
-        conn.commit()
-        return cur.lastrowid
-    finally:
-        conn.close()
+    return insert(
+        "INSERT INTO lessons (section_id, title, position, content_json) VALUES (?, ?, ?, ?)",
+        (section_id, title, position, json.dumps(content or [], ensure_ascii=False)),
+    )
 
 
 def list_lessons(section_id: int) -> list[dict]:
-    conn = _connect()
-    try:
-        rows = conn.execute(
-            "SELECT id, section_id, title, position FROM lessons "
-            "WHERE section_id = ? ORDER BY position, id",
-            (section_id,),
-        ).fetchall()
-        return [dict(r) for r in rows]
-    finally:
-        conn.close()
+    return fetchall(
+        "SELECT id, section_id, title, position FROM lessons "
+        "WHERE section_id = ? ORDER BY position, id",
+        (section_id,),
+    )
 
 
 def get_lesson(lesson_id: int) -> dict | None:
-    conn = _connect()
-    try:
-        row = conn.execute("SELECT * FROM lessons WHERE id = ?", (lesson_id,)).fetchone()
-        if not row:
-            return None
-        lesson = dict(row)
-        lesson["content"] = json.loads(lesson.pop("content_json") or "[]")
-        return lesson
-    finally:
-        conn.close()
+    lesson = fetchone("SELECT * FROM lessons WHERE id = ?", (lesson_id,))
+    if lesson is None:
+        return None
+    lesson["content"] = json.loads(lesson.pop("content_json") or "[]")
+    return lesson
 
 
 def update_lesson(lesson_id: int, **fields: Any) -> None:
@@ -315,30 +339,21 @@ def delete_lesson(lesson_id: int) -> None:
 # Notes (per utente, per lezione)                                             #
 # --------------------------------------------------------------------------- #
 def get_note(user_id: int, lesson_id: int) -> list:
-    conn = _connect()
-    try:
-        row = conn.execute(
-            "SELECT blocks_json FROM notes WHERE user_id = ? AND lesson_id = ?",
-            (user_id, lesson_id),
-        ).fetchone()
-        return json.loads(row["blocks_json"]) if row else []
-    finally:
-        conn.close()
+    row = fetchone(
+        "SELECT blocks_json FROM notes WHERE user_id = ? AND lesson_id = ?",
+        (user_id, lesson_id),
+    )
+    return json.loads(row["blocks_json"]) if row else []
 
 
 def save_note(user_id: int, lesson_id: int, blocks: list) -> None:
-    conn = _connect()
-    try:
-        conn.execute(
-            "INSERT INTO notes (user_id, lesson_id, blocks_json, updated_at) "
-            "VALUES (?, ?, ?, ?) "
-            "ON CONFLICT(user_id, lesson_id) DO UPDATE SET "
-            "blocks_json = excluded.blocks_json, updated_at = excluded.updated_at",
-            (user_id, lesson_id, json.dumps(blocks, ensure_ascii=False), time.time()),
-        )
-        conn.commit()
-    finally:
-        conn.close()
+    execute(
+        "INSERT INTO notes (user_id, lesson_id, blocks_json, updated_at) "
+        "VALUES (?, ?, ?, ?) "
+        "ON CONFLICT(user_id, lesson_id) DO UPDATE SET "
+        "blocks_json = excluded.blocks_json, updated_at = excluded.updated_at",
+        (user_id, lesson_id, json.dumps(blocks, ensure_ascii=False), time.time()),
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -357,18 +372,8 @@ def _update_row(table: str, row_id: int, fields: dict) -> None:
     if not fields:
         return
     cols = ", ".join(f"{k} = ?" for k in fields)
-    conn = _connect()
-    try:
-        conn.execute(f"UPDATE {table} SET {cols} WHERE id = ?", (*fields.values(), row_id))
-        conn.commit()
-    finally:
-        conn.close()
+    execute(f"UPDATE {table} SET {cols} WHERE id = ?", (*fields.values(), row_id))
 
 
 def _delete_row(table: str, row_id: int) -> None:
-    conn = _connect()
-    try:
-        conn.execute(f"DELETE FROM {table} WHERE id = ?", (row_id,))
-        conn.commit()
-    finally:
-        conn.close()
+    execute(f"DELETE FROM {table} WHERE id = ?", (row_id,))
