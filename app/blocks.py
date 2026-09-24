@@ -28,20 +28,20 @@ def _markdown(block: dict, key: str) -> None:
 
 
 def _objectives(block: dict, key: str) -> None:
-    st.subheader(block.get("title", "🎯 Obiettivi della lezione"))
+    st.subheader(block.get("title", "🎯 Learning objectives"))
     for item in block.get("items", []):
         st.markdown(f"- {item}")
 
 
 def _key_terms(block: dict, key: str) -> None:
-    st.subheader(block.get("title", "📚 Concetti chiave"))
+    st.subheader(block.get("title", "📚 Key concepts"))
     for item in block.get("items", []):
         with st.expander(item.get("term", "")):
             st.markdown(item.get("definition", ""))
 
 
 def _flashcards(block: dict, key: str) -> None:
-    st.subheader(block.get("title", "🃏 Flashcard"))
+    st.subheader(block.get("title", "🃏 Flashcards"))
     cards = block.get("cards", [])
     if not cards:
         return
@@ -56,7 +56,7 @@ def _flashcards(block: dict, key: str) -> None:
     showing_back = st.session_state[flip_key]
 
     face = card.get("back") if showing_back else card.get("front", "")
-    label = "Risposta" if showing_back else "Domanda"
+    label = "Answer" if showing_back else "Question"
     st.markdown(
         f"""
         <div style="border:1px solid #e2e8f0;border-radius:12px;padding:28px;
@@ -70,16 +70,16 @@ def _flashcards(block: dict, key: str) -> None:
         unsafe_allow_html=True,
     )
 
-    st.caption(f"Carta {idx + 1} di {len(cards)}")
+    st.caption(f"Card {idx + 1} of {len(cards)}")
     col1, col2, col3 = st.columns(3)
-    if col1.button("◀ Precedente", key=f"{key}_prev", use_container_width=True):
+    if col1.button("◀ Previous", key=f"{key}_prev", use_container_width=True):
         st.session_state[idx_key] = (idx - 1) % len(cards)
         st.session_state[flip_key] = False
         st.rerun()
-    if col2.button("🔄 Gira", key=f"{key}_flipbtn", use_container_width=True):
+    if col2.button("🔄 Flip", key=f"{key}_flipbtn", use_container_width=True):
         st.session_state[flip_key] = not showing_back
         st.rerun()
-    if col3.button("Successiva ▶", key=f"{key}_next", use_container_width=True):
+    if col3.button("Next ▶", key=f"{key}_next", use_container_width=True):
         st.session_state[idx_key] = (idx + 1) % len(cards)
         st.session_state[flip_key] = False
         st.rerun()
@@ -106,7 +106,7 @@ def _quiz(block: dict, key: str) -> None:
                 key=f"{key}_q{i}",
             )
             choices.append(answer)
-        submitted = st.form_submit_button("Correggi il quiz", use_container_width=True)
+        submitted = st.form_submit_button("Check answers", use_container_width=True)
 
     if submitted:
         st.session_state[submitted_key] = True
@@ -119,17 +119,17 @@ def _quiz(block: dict, key: str) -> None:
             options = q.get("options", [])
             if chosen == correct:
                 score += 1
-                st.success(f"**{i + 1}.** Corretto ✅ — {options[correct]}")
+                st.success(f"**{i + 1}.** Correct ✅ — {options[correct]}")
             else:
-                chosen_txt = options[chosen] if chosen is not None else "_nessuna risposta_"
+                chosen_txt = options[chosen] if chosen is not None else "_no answer_"
                 correct_txt = options[correct] if correct is not None else ""
-                st.error(f"**{i + 1}.** La tua risposta: {chosen_txt} — Corretta: **{correct_txt}**")
+                st.error(f"**{i + 1}.** Your answer: {chosen_txt} — Correct: **{correct_txt}**")
             if q.get("explanation"):
                 st.caption(f"💡 {q['explanation']}")
 
         total = len(questions)
         pct = score / total * 100 if total else 0
-        st.markdown(f"### Punteggio: {score}/{total} ({pct:.0f}%)")
+        st.markdown(f"### Score: {score}/{total} ({pct:.0f}%)")
         # Salva il miglior punteggio del quiz per la barra dei progressi.
         progress = st.session_state.setdefault("progress", {"visited": set(), "quiz_scores": {}})
         best = progress.setdefault("quiz_scores", {})
@@ -137,7 +137,7 @@ def _quiz(block: dict, key: str) -> None:
 
 
 def _summary(block: dict, key: str) -> None:
-    st.subheader(block.get("title", "📝 Riepilogo"))
+    st.subheader(block.get("title", "📝 Summary"))
     st.info(block.get("content", ""))
 
 
@@ -158,6 +158,6 @@ def render_block(block: dict, key: str) -> None:
         return
     renderer = RENDERERS.get(btype)
     if renderer is None:
-        st.warning(f"Tipo di blocco sconosciuto: '{btype}'")
+        st.warning(f"Unknown block type: '{btype}'")
         return
     renderer(block, key)

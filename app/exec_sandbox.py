@@ -99,7 +99,7 @@ def run_code(code: str, timeout: int = 15) -> dict:
             stdout, stderr, timed_out = proc.stdout, proc.stderr, False
         except subprocess.TimeoutExpired as exc:
             stdout = exc.stdout or ""
-            stderr = (exc.stderr or "") + f"\n⏱️ Tempo massimo superato ({timeout}s)."
+            stderr = (exc.stderr or "") + f"\n⏱️ Time limit exceeded ({timeout}s)."
             timed_out = True
 
         images = []

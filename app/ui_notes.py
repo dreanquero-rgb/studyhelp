@@ -1,9 +1,9 @@
-"""Editor degli appunti personali (per utente, per lezione).
+"""Personal notes editor (per user, per lesson).
 
-Ogni nota è una sequenza di blocchi:
-    - text : testo/Markdown
-    - code : codice Python eseguibile (grafici e statistica inclusi)
-    - ai   : richiesta all'AI (con la chiave personale dell'utente)
+Each note is a sequence of blocks:
+    - text : text / Markdown
+    - code : runnable Python code (charts and statistics included)
+    - ai   : a request to the AI (using the user's own API key)
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ import streamlit as st
 from . import ai, db
 from .exec_sandbox import run_code
 
-_BLOCK_LABELS = {"text": "📝 Testo", "code": "🐍 Codice Python", "ai": "🤖 AI"}
+_BLOCK_LABELS = {"text": "📝 Text", "code": "🐍 Python code", "ai": "🤖 AI"}
 
 
 def _wc_key(user_id: int, lesson_id: int) -> str:
@@ -33,7 +33,7 @@ def _load(user_id: int, lesson_id: int) -> list[dict]:
 
 
 def _sync_from_widgets(blocks: list[dict]) -> None:
-    """Riporta il testo dei widget nella lista di lavoro."""
+    """Copy the widget text back into the working list."""
     for b in blocks:
         wkey = f"ntext_{b['id']}"
         if wkey in st.session_state:
@@ -48,23 +48,23 @@ def render_notes(user: dict, lesson_id: int) -> None:
     user_id = user["id"]
     blocks = _load(user_id, lesson_id)
 
-    st.markdown("### 🗒️ I miei appunti")
+    st.markdown("### 🗒️ My notes")
     st.caption(
-        "Solo tu vedi questi appunti. Per usare l'AI: clicca **➕ AI**, scrivi la domanda "
-        "nel blocco che compare e premi **✨ Genera risposta**. "
-        "(La chiave si imposta nella barra laterale → 🤖 Impostazioni AI.)"
+        "Only you can see these notes. To use AI: click **➕ AI**, type your question "
+        "in the block that appears and press **✨ Generate answer**. "
+        "(Set your key in the sidebar → 🤖 AI settings.)"
     )
 
-    # --- Barra: aggiungi blocchi + salva ---
+    # --- Toolbar: add blocks + save ---
     c1, c2, c3, c4 = st.columns([1, 1, 1, 1.4])
-    if c1.button("➕ Testo", use_container_width=True):
+    if c1.button("➕ Text", use_container_width=True):
         _sync_from_widgets(blocks)
         blocks.append({"id": uuid.uuid4().hex[:8], "type": "text", "content": ""})
         _persist(user_id, lesson_id, blocks)
         st.rerun()
-    if c2.button("➕ Codice", use_container_width=True):
+    if c2.button("➕ Code", use_container_width=True):
         _sync_from_widgets(blocks)
-        blocks.append({"id": uuid.uuid4().hex[:8], "type": "code", "content": "# scrivi qui il tuo codice Python\n"})
+        blocks.append({"id": uuid.uuid4().hex[:8], "type": "code", "content": "# write your Python code here\n"})
         _persist(user_id, lesson_id, blocks)
         st.rerun()
     if c3.button("➕ AI", use_container_width=True):
@@ -72,13 +72,13 @@ def render_notes(user: dict, lesson_id: int) -> None:
         blocks.append({"id": uuid.uuid4().hex[:8], "type": "ai", "content": ""})
         _persist(user_id, lesson_id, blocks)
         st.rerun()
-    if c4.button("💾 Salva appunti", use_container_width=True, type="primary"):
+    if c4.button("💾 Save notes", use_container_width=True, type="primary"):
         _sync_from_widgets(blocks)
         _persist(user_id, lesson_id, blocks)
-        st.toast("Appunti salvati ✅")
+        st.toast("Notes saved ✅")
 
     if not blocks:
-        st.info("Nessun blocco ancora. Usa i pulsanti qui sopra per iniziare.")
+        st.info("No blocks yet. Use the buttons above to start.")
         return
 
     for i, block in enumerate(blocks):
@@ -91,17 +91,17 @@ def _render_block(user: dict, lesson_id: int, blocks: list[dict], i: int) -> Non
     with st.container(border=True):
         head1, head2, head3, head4 = st.columns([6, 1, 1, 1])
         head1.markdown(f"**{_BLOCK_LABELS.get(block['type'], block['type'])}**")
-        if head2.button("▲", key=f"up_{bid}", help="Sposta su") and i > 0:
+        if head2.button("▲", key=f"up_{bid}", help="Move up") and i > 0:
             _sync_from_widgets(blocks)
             blocks[i - 1], blocks[i] = blocks[i], blocks[i - 1]
             _persist(user["id"], lesson_id, blocks)
             st.rerun()
-        if head3.button("▼", key=f"dn_{bid}", help="Sposta giù") and i < len(blocks) - 1:
+        if head3.button("▼", key=f"dn_{bid}", help="Move down") and i < len(blocks) - 1:
             _sync_from_widgets(blocks)
             blocks[i + 1], blocks[i] = blocks[i], blocks[i + 1]
             _persist(user["id"], lesson_id, blocks)
             st.rerun()
-        if head4.button("🗑", key=f"del_{bid}", help="Elimina blocco"):
+        if head4.button("🗑", key=f"del_{bid}", help="Delete block"):
             _sync_from_widgets(blocks)
             blocks.pop(i)
             _persist(user["id"], lesson_id, blocks)
@@ -117,28 +117,28 @@ def _render_block(user: dict, lesson_id: int, blocks: list[dict], i: int) -> Non
 
 def _render_text(block: dict) -> None:
     st.text_area(
-        "Testo (Markdown)",
+        "Text (Markdown)",
         value=block.get("content", ""),
         key=f"ntext_{block['id']}",
         height=140,
         label_visibility="collapsed",
     )
     if block.get("content", "").strip():
-        with st.expander("Anteprima"):
+        with st.expander("Preview"):
             st.markdown(block["content"])
 
 
 def _render_code(user: dict, block: dict) -> None:
     st.text_area(
-        "Codice Python",
+        "Python code",
         value=block.get("content", ""),
         key=f"ntext_{block['id']}",
         height=180,
         label_visibility="collapsed",
     )
-    if st.button("▶ Esegui", key=f"run_{block['id']}"):
+    if st.button("▶ Run", key=f"run_{block['id']}"):
         block["content"] = st.session_state.get(f"ntext_{block['id']}", block.get("content", ""))
-        with st.spinner("Esecuzione in corso..."):
+        with st.spinner("Running..."):
             st.session_state[f"out_{block['id']}"] = run_code(block["content"])
 
     result = st.session_state.get(f"out_{block['id']}")
@@ -153,34 +153,34 @@ def _render_code(user: dict, block: dict) -> None:
 
 def _render_ai(user: dict, lesson_id: int, blocks: list[dict], block: dict) -> None:
     st.text_area(
-        "Chiedi all'AI",
+        "Ask the AI",
         value=block.get("content", ""),
         key=f"ntext_{block['id']}",
         height=100,
-        placeholder="Es: spiegami la differenza tra mercato primario e secondario con un esempio",
+        placeholder="e.g. explain the difference between primary and secondary markets with an example",
         label_visibility="collapsed",
     )
     api_key = st.session_state.get("ai_key", "")
     model = st.session_state.get("ai_model", ai.DEFAULT_MODEL)
 
-    if st.button("✨ Genera risposta", key=f"gen_{block['id']}", type="primary"):
+    if st.button("✨ Generate answer", key=f"gen_{block['id']}", type="primary"):
         prompt = st.session_state.get(f"ntext_{block['id']}", "")
         block["content"] = prompt
         if not api_key:
             st.session_state[f"aiout_{block['id']}"] = {
                 "answer": None,
-                "err": "⚠️ Manca la chiave API. Aprila nella barra laterale → **🤖 Impostazioni AI**, "
-                "incolla la tua chiave (sk-ant-...) e premi Invio, poi riclicca «Genera risposta».",
+                "err": "⚠️ Missing API key. Open the sidebar → **🤖 AI settings**, paste your "
+                "key (sk-ant-...) and press Enter, then click «Generate answer» again.",
             }
         elif not prompt.strip():
             st.session_state[f"aiout_{block['id']}"] = {
                 "answer": None,
-                "err": "Scrivi prima una domanda qui sopra, poi clicca «Genera risposta».",
+                "err": "Type a question above first, then click «Generate answer».",
             }
         else:
-            # Contesto: i blocchi di testo della nota, per risposte più pertinenti.
+            # Context: the text blocks of the note, for more relevant answers.
             context = "\n\n".join(b.get("content", "") for b in blocks if b["type"] == "text")
-            with st.spinner("L'AI sta pensando..."):
+            with st.spinner("The AI is thinking..."):
                 answer, err = ai.ask(api_key, prompt, model=model, context=context)
             st.session_state[f"aiout_{block['id']}"] = {"answer": answer, "err": err}
 
@@ -190,7 +190,7 @@ def _render_ai(user: dict, lesson_id: int, blocks: list[dict], block: dict) -> N
             st.error(out["err"])
         else:
             st.markdown(out["answer"])
-            if st.button("📌 Salva la risposta come nota", key=f"pin_{block['id']}"):
+            if st.button("📌 Save answer as a note", key=f"pin_{block['id']}"):
                 _sync_from_widgets(blocks)
                 blocks.append(
                     {"id": uuid.uuid4().hex[:8], "type": "text", "content": out["answer"]}

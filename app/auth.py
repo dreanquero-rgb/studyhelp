@@ -43,11 +43,11 @@ def register(email: str, password: str) -> tuple[bool, str]:
     """Registra un nuovo utente. Ritorna (successo, messaggio)."""
     email = email.lower().strip()
     if not _EMAIL_RE.match(email):
-        return False, "Inserisci un indirizzo email valido."
+        return False, "Please enter a valid email address."
     if len(password) < 8:
-        return False, "La password deve avere almeno 8 caratteri."
+        return False, "Password must be at least 8 characters long."
     if db.get_user_by_email(email):
-        return False, "Esiste già un account con questa email."
+        return False, "An account with this email already exists."
 
     first_user = db.count_users() == 0
     role = "owner" if first_user else "student"
@@ -55,19 +55,19 @@ def register(email: str, password: str) -> tuple[bool, str]:
     db.create_user(email, hash_password(password), role, status)
 
     if first_user:
-        return True, "Account creato come OWNER (amministratore). Ora puoi accedere."
-    return True, "Account creato! In attesa di approvazione da parte dell'amministratore."
+        return True, "Account created as OWNER (administrator). You can sign in now."
+    return True, "Account created! Awaiting administrator approval."
 
 
 def authenticate(email: str, password: str) -> tuple[dict | None, str]:
     """Verifica le credenziali. Ritorna (utente, messaggio)."""
     user = db.get_user_by_email(email)
     if not user or not verify_password(password, user["password_hash"]):
-        return None, "Email o password non corretti."
+        return None, "Incorrect email or password."
     if user["status"] == "blocked":
-        return None, "Questo account è stato bloccato."
-    # 'pending' può autenticarsi ma vedrà la schermata "in attesa".
-    return user, "Accesso effettuato."
+        return None, "This account has been blocked."
+    # 'pending' users can authenticate but will see the "awaiting approval" screen.
+    return user, "Signed in."
 
 
 def is_admin(user: dict | None) -> bool:

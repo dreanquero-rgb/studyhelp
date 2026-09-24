@@ -3,7 +3,7 @@
     "id": "securities-and-investment",
     "title": "Securities and Investment",
     "icon": "📈",
-    "description": "Fondamenti sugli strumenti finanziari, i mercati e le decisioni di investimento. Ogni lezione unisce teoria, concetti chiave, flashcard, quiz ed esercizi interattivi.",
+    "description": "Fundamentals of financial instruments, markets and investment decisions. Each lesson combines theory, key concepts, flashcards, quizzes and interactive exercises.",
     "lessons": ["lesson-01"]
   }
 ]

@@ -1,18 +1,18 @@
-"""Integrazione AI (Claude) — ogni utente usa la PROPRIA chiave API.
+"""AI integration (Claude) — each user brings their OWN API key.
 
-La chiave viene inserita dall'utente nell'app e tenuta solo in sessione
-(non salvata nel database), così i costi restano a carico di chi la usa.
+The key is entered in the app and kept only in the session (never stored in the
+database), so costs stay with whoever uses the key.
 """
 
 from __future__ import annotations
 
 import anthropic
 
-# Modelli selezionabili dall'utente (id API -> etichetta).
+# Models the user can pick (API id -> label).
 MODELS = {
-    "claude-opus-5": "Claude Opus 5 — il più capace",
-    "claude-sonnet-5": "Claude Sonnet 5 — equilibrato, più economico",
-    "claude-haiku-4-5": "Claude Haiku 4.5 — veloce ed economico",
+    "claude-opus-5": "Claude Opus 5 — most capable",
+    "claude-sonnet-5": "Claude Sonnet 5 — balanced, cheaper",
+    "claude-haiku-4-5": "Claude Haiku 4.5 — fast and economical",
 }
 DEFAULT_MODEL = "claude-opus-5"
 
@@ -26,9 +26,9 @@ SYSTEM_PROMPT = (
 
 
 def ask(api_key: str, prompt: str, model: str = DEFAULT_MODEL, context: str = "") -> tuple[str | None, str | None]:
-    """Chiede a Claude. Ritorna (risposta, errore); uno dei due è None."""
+    """Ask Claude. Returns (answer, error); exactly one is None."""
     if not api_key:
-        return None, "Inserisci la tua chiave API di Anthropic nelle impostazioni AI."
+        return None, "Add your Anthropic API key in the AI settings first."
 
     user_content = prompt
     if context.strip():
@@ -43,12 +43,20 @@ def ask(api_key: str, prompt: str, model: str = DEFAULT_MODEL, context: str = ""
             messages=[{"role": "user", "content": user_content}],
         )
         text = "".join(b.text for b in response.content if b.type == "text")
-        return text.strip() or "(nessuna risposta)", None
+        return text.strip() or "(no answer)", None
     except anthropic.AuthenticationError:
-        return None, "Chiave API non valida. Controllala nelle impostazioni AI."
+        return None, "Invalid API key. Check it in the AI settings (sidebar)."
     except anthropic.RateLimitError:
-        return None, "Limite di richieste raggiunto. Riprova tra poco."
+        return None, "Rate limit reached. Please try again shortly."
+    except anthropic.APIConnectionError as exc:
+        cause = getattr(exc, "__cause__", None)
+        detail = f" ({cause})" if cause else ""
+        return None, (
+            "Could not reach the Anthropic API"
+            f"{detail}. Check that your API key is correct and that the app has "
+            "internet access, then try again."
+        )
     except anthropic.APIStatusError as exc:
-        return None, f"Errore API ({exc.status_code}): {getattr(exc, 'message', str(exc))}"
-    except Exception as exc:  # noqa: BLE001 - mostriamo un messaggio leggibile
-        return None, f"Errore imprevisto: {exc}"
+        return None, f"API error ({exc.status_code}): {getattr(exc, 'message', str(exc))}"
+    except Exception as exc:  # noqa: BLE001 - show a readable message
+        return None, f"Unexpected error: {type(exc).__name__}: {exc}"

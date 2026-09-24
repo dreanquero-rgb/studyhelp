@@ -106,6 +106,8 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash TEXT NOT NULL,
     role TEXT NOT NULL DEFAULT 'student',
     status TEXT NOT NULL DEFAULT 'pending',
+    anthropic_key TEXT NOT NULL DEFAULT '',
+    ai_model TEXT NOT NULL DEFAULT '',
     created_at REAL NOT NULL
 );
 CREATE TABLE IF NOT EXISTS courses (
@@ -146,6 +148,8 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash TEXT NOT NULL,
     role TEXT NOT NULL DEFAULT 'student',
     status TEXT NOT NULL DEFAULT 'pending',
+    anthropic_key TEXT NOT NULL DEFAULT '',
+    ai_model TEXT NOT NULL DEFAULT '',
     created_at DOUBLE PRECISION NOT NULL
 );
 CREATE TABLE IF NOT EXISTS courses (
@@ -190,7 +194,18 @@ def init_db() -> None:
         conn.commit()
     finally:
         conn.close()
+    _migrate()
     _seed_from_json_if_empty()
+
+
+def _migrate() -> None:
+    """Aggiunge colonne mancanti a tabelle già esistenti (idempotente)."""
+    for col in ("anthropic_key", "ai_model"):
+        try:
+            execute(f"ALTER TABLE users ADD COLUMN {col} TEXT NOT NULL DEFAULT ''")
+        except Exception:
+            # La colonna esiste già: nessun problema.
+            pass
 
 
 # --------------------------------------------------------------------------- #
@@ -256,6 +271,14 @@ def set_user_status(user_id: int, status: str) -> None:
 
 def set_user_role(user_id: int, role: str) -> None:
     execute("UPDATE users SET role = ? WHERE id = ?", (role, user_id))
+
+
+def set_user_ai(user_id: int, anthropic_key: str, ai_model: str) -> None:
+    """Salva (persistente) la chiave AI e il modello scelto per l'utente."""
+    execute(
+        "UPDATE users SET anthropic_key = ?, ai_model = ? WHERE id = ?",
+        (anthropic_key, ai_model, user_id),
+    )
 
 
 # --------------------------------------------------------------------------- #

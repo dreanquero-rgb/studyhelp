@@ -1,4 +1,4 @@
-"""Pagina di studio: sfoglia corsi/sezioni/lezioni, materiale + appunti."""
+"""Study page: browse courses/sections/lessons, material + notes."""
 
 from __future__ import annotations
 
@@ -12,28 +12,28 @@ from .ui_notes import render_notes
 def study_page(user: dict) -> None:
     courses = db.list_courses()
     if not courses:
-        st.title("📚 Studia")
-        st.info("Non ci sono ancora corsi. Un amministratore può crearli in **Gestisci contenuti**.")
+        st.title("📚 Study")
+        st.info("No courses yet. An admin can create them in **Manage content**.")
         return
 
-    # --- Selettori: corso -> sezione -> lezione ---
+    # --- Selectors: course -> section -> lesson ---
     course = st.selectbox(
-        "Corso", options=courses, format_func=lambda c: f"{c['icon']} {c['title']}"
+        "Course", options=courses, format_func=lambda c: f"{c['icon']} {c['title']}"
     )
     sections = db.list_sections(course["id"])
     if not sections:
         st.title(f"{course['icon']} {course['title']}")
-        st.info("Questo corso non ha ancora sezioni.")
+        st.info("This course has no sections yet.")
         return
 
     col1, col2 = st.columns(2)
-    section = col1.selectbox("Sezione", options=sections, format_func=lambda s: s["title"])
+    section = col1.selectbox("Section", options=sections, format_func=lambda s: s["title"])
     lessons = db.list_lessons(section["id"])
     if not lessons:
         st.title(f"{course['icon']} {course['title']}")
-        st.info("Questa sezione non ha ancora lezioni.")
+        st.info("This section has no lessons yet.")
         return
-    lesson_meta = col2.selectbox("Lezione", options=lessons, format_func=lambda l: l["title"])
+    lesson_meta = col2.selectbox("Lesson", options=lessons, format_func=lambda l: l["title"])
 
     lesson = db.get_lesson(lesson_meta["id"])
     st.session_state["progress"]["visited"].add(f"{course['id']}/{lesson['id']}")
@@ -41,12 +41,12 @@ def study_page(user: dict) -> None:
     st.title(lesson["title"])
     st.divider()
 
-    tab_material, tab_notes = st.tabs(["📖 Materiale", "🗒️ Appunti"])
+    tab_material, tab_notes = st.tabs(["📖 Material", "🗒️ Notes"])
 
     with tab_material:
         blocks = lesson.get("content", [])
         if not blocks:
-            st.info("Questa lezione non ha ancora materiale. Aggiungilo in **Gestisci contenuti**.")
+            st.info("This lesson has no material yet. Add it in **Manage content**.")
         for idx, block in enumerate(blocks):
             render_block(block, key=f"study_{lesson['id']}_b{idx}")
             st.write("")

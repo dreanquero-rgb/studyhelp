@@ -1,12 +1,12 @@
-"""StudyHelp — piattaforma di studio interattiva multi-utente.
+"""StudyHelp — interactive multi-user study platform.
 
-- Ogni utente accede con un account personale (il primo registrato è l'OWNER).
-- Gli account nuovi restano "in attesa" finché l'owner non li approva.
-- Corsi / sezioni / lezioni sono gestibili dall'app (owner/admin).
-- Ogni utente ha i propri appunti per lezione, con blocchi testo / codice
-  Python eseguibile / AI (con la propria chiave).
+- Every user signs in with a personal account (the first to register is the OWNER).
+- New accounts stay "pending" until the owner approves them.
+- Courses / sections / lessons are managed from the app (owner/admin).
+- Each user has their own notes per lesson, with text / runnable Python code /
+  AI blocks (using their own API key, saved to their account).
 
-Avvio locale:   streamlit run streamlit_app.py
+Run locally:   streamlit run streamlit_app.py
 """
 
 from __future__ import annotations
@@ -24,20 +24,20 @@ st.set_page_config(page_title="StudyHelp", page_icon="🎓", layout="wide")
 
 
 def _init_db_or_explain() -> None:
-    """Inizializza il database mostrando l'errore reale in caso di problemi."""
+    """Initialize the database, showing the real error if something goes wrong."""
     try:
         db.init_db()
     except Exception as exc:  # noqa: BLE001
-        st.error("❌ Impossibile connettersi al database Supabase.")
+        st.error("❌ Could not connect to the Supabase database.")
         st.code(f"{type(exc).__name__}: {exc}", language="text")
         st.markdown(
-            "**Cause più comuni:**\n"
-            "- Password errata o con le parentesi `[ ]` lasciate per sbaglio "
-            "(deve essere solo la password, es. `Ludopatia03`).\n"
-            "- Password con caratteri speciali non codificati (`@ : / # ? %`).\n"
-            "- Uso della URI *Direct connection* invece del **pooler** "
+            "**Most common causes:**\n"
+            "- Wrong password, or the `[ ]` brackets left in by mistake "
+            "(it must be just the password).\n"
+            "- Password with special characters not URL-encoded (`@ : / # ? %`).\n"
+            "- Using the *Direct connection* URI instead of the **pooler** "
             "(`...pooler.supabase.com:6543`).\n\n"
-            "Correggi il valore `db_url` nei **Secrets** dell'app e riavvia."
+            "Fix the `db_url` value in the app **Secrets** and reboot."
         )
         st.stop()
 
@@ -49,42 +49,61 @@ def init_state() -> None:
     st.session_state.setdefault("user", None)
     st.session_state.setdefault("ai_key", "")
     st.session_state.setdefault("ai_model", DEFAULT_MODEL)
+    st.session_state.setdefault("ai_loaded", False)
     st.session_state.setdefault("progress", {"visited": set(), "quiz_scores": {}})
     st.session_state.setdefault("page", "study")
 
 
-def sidebar_ai_settings() -> None:
-    with st.sidebar.expander("🤖 Impostazioni AI", expanded=False):
+def load_ai_settings_once(user: dict) -> None:
+    """After login, load the saved API key/model from the user's account once."""
+    if not st.session_state["ai_loaded"]:
+        st.session_state["ai_key"] = user.get("anthropic_key", "") or ""
+        st.session_state["ai_model"] = user.get("ai_model") or DEFAULT_MODEL
+        st.session_state["ai_loaded"] = True
+
+
+def sidebar_ai_settings(user: dict) -> None:
+    with st.sidebar.expander("🤖 AI settings", expanded=False):
         st.caption(
-            "Inserisci la TUA chiave API di Anthropic per usare l'AI nelle note. "
-            "La chiave resta solo in questa sessione, non viene salvata."
+            "Enter your OWN Anthropic API key to use AI in your notes. "
+            "It is saved to your account, so you only enter it once."
         )
-        st.session_state["ai_key"] = st.text_input(
-            "Chiave API Anthropic",
+        key_val = st.text_input(
+            "Anthropic API key",
             value=st.session_state.get("ai_key", ""),
             type="password",
             placeholder="sk-ant-...",
         )
-        st.session_state["ai_model"] = st.selectbox(
-            "Modello",
+        model_val = st.selectbox(
+            "Model",
             options=list(MODELS.keys()),
             format_func=lambda m: MODELS[m],
             index=list(MODELS.keys()).index(st.session_state.get("ai_model", DEFAULT_MODEL)),
         )
-        st.link_button("Ottieni una chiave API", "https://console.anthropic.com/settings/keys")
+        st.session_state["ai_key"] = key_val
+        st.session_state["ai_model"] = model_val
+
+        # Persist to the user's account when something changed.
+        if key_val != (user.get("anthropic_key") or "") or model_val != (user.get("ai_model") or DEFAULT_MODEL):
+            db.set_user_ai(user["id"], key_val, model_val)
+            user["anthropic_key"] = key_val
+            user["ai_model"] = model_val
+            st.caption("✅ Saved to your account.")
+
+        st.link_button("Get an API key", "https://console.anthropic.com/settings/keys")
 
 
 def sidebar_nav(user: dict) -> None:
     st.sidebar.title("🎓 StudyHelp")
     st.sidebar.write(f"👤 **{user['email']}**")
-    st.sidebar.caption(f"Ruolo: {user['role']}")
+    st.sidebar.caption(f"Role: {user['role']}")
 
-    pages = {"study": "📚 Studia"}
+    pages = {"study": "📚 Study"}
     if auth.is_admin(user):
-        pages["manage"] = "✏️ Gestisci contenuti"
-        pages["admin"] = "👥 Utenti"
+        pages["manage"] = "✏️ Manage content"
+        pages["admin"] = "👥 Users"
 
-    choice = st.sidebar.radio(
+    st.sidebar.radio(
         "Menu",
         options=list(pages.keys()),
         format_func=lambda k: pages[k],
@@ -92,15 +111,17 @@ def sidebar_nav(user: dict) -> None:
     )
 
     st.sidebar.divider()
-    sidebar_ai_settings()
+    sidebar_ai_settings(user)
 
     if auth.is_admin(user):
-        backend = "🟢 Supabase (Postgres)" if config.using_postgres() else "🟡 SQLite (locale)"
+        backend = "🟢 Supabase (Postgres)" if config.using_postgres() else "🟡 SQLite (local)"
         st.sidebar.caption(f"Database: {backend}")
 
     st.sidebar.divider()
-    if st.sidebar.button("Esci", use_container_width=True):
+    if st.sidebar.button("Sign out", use_container_width=True):
         st.session_state["user"] = None
+        st.session_state["ai_loaded"] = False
+        st.session_state["ai_key"] = ""
         st.rerun()
 
 
@@ -108,16 +129,17 @@ def main() -> None:
     init_state()
     user = st.session_state.get("user")
 
-    # Non autenticato -> schermata login/registrazione.
+    # Not authenticated -> login/register screen.
     if not user:
         login_register_screen()
         return
 
-    # Autenticato ma non ancora approvato.
+    # Authenticated but not yet approved.
     if user.get("status") != "approved":
         pending_screen(user)
         return
 
+    load_ai_settings_once(user)
     sidebar_nav(user)
     page = st.session_state.get("page", "study")
 
