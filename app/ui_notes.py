@@ -49,7 +49,11 @@ def render_notes(user: dict, lesson_id: int) -> None:
     blocks = _load(user_id, lesson_id)
 
     st.markdown("### 🗒️ I miei appunti")
-    st.caption("Solo tu vedi questi appunti. Aggiungi testo, codice Python o richieste all'AI.")
+    st.caption(
+        "Solo tu vedi questi appunti. Per usare l'AI: clicca **➕ AI**, scrivi la domanda "
+        "nel blocco che compare e premi **✨ Genera risposta**. "
+        "(La chiave si imposta nella barra laterale → 🤖 Impostazioni AI.)"
+    )
 
     # --- Barra: aggiungi blocchi + salva ---
     c1, c2, c3, c4 = st.columns([1, 1, 1, 1.4])
@@ -159,17 +163,26 @@ def _render_ai(user: dict, lesson_id: int, blocks: list[dict], block: dict) -> N
     api_key = st.session_state.get("ai_key", "")
     model = st.session_state.get("ai_model", ai.DEFAULT_MODEL)
 
-    if not api_key:
-        st.info("Aggiungi la tua chiave API in **Impostazioni AI** (barra laterale) per usare l'AI.")
-
-    if st.button("✨ Genera risposta", key=f"gen_{block['id']}", disabled=not api_key):
+    if st.button("✨ Genera risposta", key=f"gen_{block['id']}", type="primary"):
         prompt = st.session_state.get(f"ntext_{block['id']}", "")
         block["content"] = prompt
-        # Contesto: i blocchi di testo della nota, per risposte più pertinenti.
-        context = "\n\n".join(b.get("content", "") for b in blocks if b["type"] == "text")
-        with st.spinner("L'AI sta pensando..."):
-            answer, err = ai.ask(api_key, prompt, model=model, context=context)
-        st.session_state[f"aiout_{block['id']}"] = {"answer": answer, "err": err}
+        if not api_key:
+            st.session_state[f"aiout_{block['id']}"] = {
+                "answer": None,
+                "err": "⚠️ Manca la chiave API. Aprila nella barra laterale → **🤖 Impostazioni AI**, "
+                "incolla la tua chiave (sk-ant-...) e premi Invio, poi riclicca «Genera risposta».",
+            }
+        elif not prompt.strip():
+            st.session_state[f"aiout_{block['id']}"] = {
+                "answer": None,
+                "err": "Scrivi prima una domanda qui sopra, poi clicca «Genera risposta».",
+            }
+        else:
+            # Contesto: i blocchi di testo della nota, per risposte più pertinenti.
+            context = "\n\n".join(b.get("content", "") for b in blocks if b["type"] == "text")
+            with st.spinner("L'AI sta pensando..."):
+                answer, err = ai.ask(api_key, prompt, model=model, context=context)
+            st.session_state[f"aiout_{block['id']}"] = {"answer": answer, "err": err}
 
     out = st.session_state.get(f"aiout_{block['id']}")
     if out:
