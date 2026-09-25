@@ -1,0 +1,280 @@
+{
+  "id": "lesson-04",
+  "title": "Session 4 — Non-Current Assets",
+  "summary": "BBM140 Financial Reporting and Analysis — the concept and types of non-current assets, capitalise vs expense, acquisition cost, depreciation methods and disposal, revaluation and impairment, and the treatment of intangible assets and goodwill.",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Understand the concept of non-current assets and their components.",
+        "Learn about asset depreciation and the different depreciation methods.",
+        "Introduce the accounting for revaluation and impairment of non-current assets.",
+        "Understand the treatment of intangible assets and goodwill."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. What is a non-current asset?",
+      "content": "**Non-current assets** are assets that are:\n- **held for use** in the production/supply of goods or services, for rental to others, or for administrative purposes; **and**\n- expected to be **used during more than one period**.\n\n**Non-current asset vs inventory.** Non-current assets are held for the company's **own use**; **inventory** is held for **re-sale**. The classification depends on the business: a **computer** is a *non-current asset* for Marks & Spencer but *inventory* for PC World.\n\n**Non-current asset vs expense.** An **asset** is a resource controlled by the entity from which **future** economic benefits are expected to flow in future periods; an **expense** is 'used up' in a single period."
+    },
+    {
+      "type": "markdown",
+      "title": "2. Capitalise vs expense (the matching principle)",
+      "content": "Whether a cost becomes an asset or an expense follows the **matching principle**:\n\n- **Capitalise** a cost (show it as an **asset** on the Balance Sheet) when it has **future benefits** *and* can be **measured reliably** — e.g. the cost of buying a machine.\n- **Expense** a cost (do **not** capitalise) when the **benefits are immediate**, **or** when future benefits are **too uncertain or immaterial** — e.g. much R&D.\n\nCapitalising defers the cost to the periods that benefit (via depreciation); expensing charges it all now."
+    },
+    {
+      "type": "markdown",
+      "title": "3. Types of non-current asset",
+      "content": "| | **Tangible** | **Intangible** | **Financial** |\n|---|---|---|---|\n| Examples | Land, buildings, equipment, furniture, machinery | Patents, copyrights, leaseholds, software, brands, trademarks, goodwill | Long-term investments in shares, bonds, property |\n| Physical substance? | Yes | No | — |\n| 'Consumption' | Long-lived; usually **depreciated** or impaired | Long-lived; some **amortised** or impaired | Long-lived; **not usually depreciated** |\n\nTangible assets are used in operations for several periods and are **not** acquired for re-sale."
+    },
+    {
+      "type": "markdown",
+      "title": "4. Accounting for non-current assets — the key questions",
+      "content": "For each non-current asset, accounting must answer:\n\n1. What is the **acquisition cost**?\n2. What is the expected **useful (service) life**?\n3. What **pattern of depreciation** allocates the expense over the useful life?\n4. What is the **residual (salvage) value**?\n\n> **Land** is the only non-current asset that is **never depreciated / amortised** (its useful life is effectively infinite)."
+    },
+    {
+      "type": "markdown",
+      "title": "5. Acquisition cost — what to include",
+      "content": "**Acquisition (historical) cost** = the amount paid to obtain the asset **and to bring it to the location and condition necessary for its intended use**.\n\n**Purchased assets:** purchase price **plus** costs to prepare the asset for use:\n- site preparation,\n- delivery and handling,\n- installation,\n- professional fees (architects, engineers).\n\n**Self-constructed assets:**\n- direct costs of construction,\n- **financing costs** (interest on funds borrowed to finance construction).\n\n**Rule of thumb:** costs **necessary to bring the asset into use** (non-recurring) are **capitalised**; costs of **normal wear and tear / running** the asset (recurring, after it is in use) are **expensed**."
+    },
+    {
+      "type": "markdown",
+      "title": "6. Acquisition cost — worked examples",
+      "content": "**Example A — new machine TPXX1.** Purchase price £5,000 (on credit); paid in cash: transportation £1,000, insurance £850, installation £600, engineering fees £550, **petrol £90, road licence £100**.\n\n- Capitalise: 5,000 + 1,000 + 850 + 600 + 550 = **£8,000**.\n- Expense (maintenance/running): petrol £90 + road licence £100 = **£190** to the I/S.\n\n*Booking:* the £5,000 purchase raises **machinery +5,000** and **accounts payable +5,000**; the cash-paid preparation costs raise **machinery** and reduce **cash**; petrol & licence reduce **cash** and hit the **I/S**.\n\n**Example B — second-hand machine.** Purchase £2,500; transportation, insurance & installation £1,850 and £1,150; a **£500 repair** needed to make it work on installation; then a **£300 repair** after two months' production.\n- Capitalise: 2,500 + 1,850 + 1,150 + **500** (needed to bring into use) = **£6,000**.\n- Expense: the **£300** later breakdown repair (normal wear & tear).\n\n**Example C — Leeds Manufacturing work-station (1 Jan 2026).** £30,000 down payment; a 3-year £170,000 note payable at 10%; £4,000 to configure and test; £11,500 to **train employees**.\n- Capitalise: 30,000 + 170,000 + 4,000 = **£204,000**. (Interest and staff **training** are **not** capitalised.)\n\n**Example D — Conglomerated Products self-constructed facility (during 2025).** Materials £1.7m; architects £2.1m; interest at 10% on a £1.6m construction loan (= £160,000); zoning/inspection fees £52,000.\n- Asset (construction in progress): 1,700,000 + 2,100,000 + 160,000 + 52,000 = **£4,012,000**, with the **£160,000** interest capitalised."
+    },
+    {
+      "type": "markdown",
+      "title": "7. Depreciation — concept and components",
+      "content": "Assets are recorded at **historical cost**, but the cost is charged to the I/S based on the amount **necessary to generate revenues** — the **accrual/matching** of the revenues an asset generates against the expense of its usage.\n\n**Depreciation** = the **systematic and rational allocation** of the cost of a depreciable asset over its useful life.\n\n| Component | Meaning |\n|---|---|\n| **Depreciable amount** | Original cost less estimated residual value |\n| **Residual (salvage/scrap) value** | Estimated proceeds at disposal, net of selling costs |\n| **Useful life** | Period over which the asset is expected to be available for use |\n| **Depreciation (expense)** | Amount charged systematically to the I/S, against accumulated depreciation in the B/S |\n| **Accumulated depreciation** | The running total of depreciation shown in the B/S (a contra asset) |\n| **Net book value (NBV)** | Acquisition cost − accumulated depreciation |"
+    },
+    {
+      "type": "markdown",
+      "title": "8. Depreciation methods",
+      "content": "Depreciation allocates cost **rationally and systematically** over useful life; the choice is specific to each class of tangible asset (**land is never depreciated**). Two broad categories:\n\n- **Activity-level based** — productivity output / service quantity.\n- **Time based** — straight-line; accelerated / reducing (declining) balance; sum-of-the-years'-digits.\n\n**Straight-line:** an equal charge each year.\n$$\\text{Depreciation}_{\\text{p.a.}} = \\frac{\\text{Cost} - \\text{Residual value}}{\\text{Useful life}}$$\n\n**Reducing (declining) balance:** a **fixed percentage of the undepreciated amount** (NBV) at the start of each year — so charges are **higher early on** and fall over time.\n\n**Key point:** different methods give **different profit** in a single period, but **over the whole life the total charged to the I/S is the same**."
+    },
+    {
+      "type": "markdown",
+      "title": "9. Depreciation — worked example",
+      "content": "Asset cost **£8,000**, useful life **4 years**, residual value **0**.\n\n| Method | Yr 1 | Yr 2 | Yr 3 | Yr 4 | **Total** |\n|---|---|---|---|---|---|\n| Straight-line | 2,000 | 2,000 | 2,000 | 2,000 | **8,000** |\n| Reducing balance | 3,500 | 2,500 | 1,500 | 500 | **8,000** |\n\nSame **£8,000** total, but reducing balance front-loads the expense. So the **choice of method affects both profit and asset carrying value in the short term**, while being neutral over the asset's life.\n\n*Recording (Year 1):* machinery opens at 8,000; the depreciation entry raises **accumulated depreciation** and reduces **profit** — by (2,000) straight-line **or** (3,500) reducing balance."
+    },
+    {
+      "type": "markdown",
+      "title": "10. Disposal of assets",
+      "content": "On disposal:\n$$\\text{Gain (loss)} = \\text{Sale proceeds} - \\text{Net book value}$$\n\n**Example:** the £8,000 asset is sold at the **start of Year 3** for **£5,000**.\n- **Straight-line** (acc. dep. after 2 yrs = 4,000 → NBV 4,000): gain = 5,000 − 4,000 = **£1,000**.\n- **Reducing balance** (acc. dep. after 2 yrs = 6,000 → NBV 2,000): gain = 5,000 − 2,000 = **£3,000**.\n\n**Total charge to the I/S is the same either way** — depreciation *plus* the profit/loss on disposal net to sale proceeds (5,000) − cost (8,000) = **−3,000** over the periods:\n\n| Period | Item | Straight-line | Reducing balance |\n|---|---|---|---|\n| 1 | Depreciation | (2,000) | (3,500) |\n| 2 | Depreciation | (2,000) | (2,500) |\n| 3 | Profit on disposal | +1,000 | +3,000 |\n| | **Net to I/S** | **(3,000)** | **(3,000)** |\n\n*Disposal entries (straight-line):* remove machinery (8,000), cancel accumulated depreciation (+4,000), receive cash (+5,000) → net gain **£1,000** to the I/S. **In the long run the choice of method is indifferent**, but short-term it affects reported performance."
+    },
+    {
+      "type": "markdown",
+      "title": "11. Revaluation",
+      "content": "**Revaluation** is a correction (usually **upwards**) of the carrying value of a fixed asset to reflect changes in value. It may be required by tax law in some countries, but is often at the managers' discretion. Two methods: **apply an index** to historical cost and accumulated depreciation (typical for tax), or use the asset's **market value**.\n\n**Example — Company A building.** Acquired 2015 for £50,000, useful life 50 years (land excluded). At 1 Jan 2025:\n- Historical cost 50,000; accumulated depreciation 10,000 (10 yrs straight-line); **NBV = 40,000**.\n- Revalued to market value **120,000** → **revaluation gain = 120,000 − 40,000 = £80,000**.\n- New depreciation = 120,000 ÷ 40 remaining years = **£3,000** p.a.\n\n> **The £80,000 revaluation gain is an *unrealised* gain, so it is recorded within equity (a *revaluation reserve*), NOT in the Income Statement.** Once the revalued asset is sold, the revaluation gain can be transferred to retained profit, and any gain on disposal goes through the I/S."
+    },
+    {
+      "type": "markdown",
+      "title": "12. Impairment",
+      "content": "An asset is **impaired** when its **carrying amount (NBV) exceeds its recoverable amount**.\n$$\\text{Recoverable amount} = \\max\\big(\\text{fair value less costs to sell},\\; \\text{value in use}\\big)$$\nwhere *value in use* is the value obtained by **using** the asset (PV of future cash flows) and *fair value less costs to sell* is the value from **selling** it. By **prudence**, the impairment loss is recorded in the **I/S**.\n\n**Example — Company T (31 Dec 2025).** Asset cost £1,500, depreciation £500 → **carrying value £1,000**. It could be sold for £820 with £20 disposal costs (**selling value £800**); it is expected to generate cash inflows with total **NPV £870** (value in use).\n- Recoverable = max(800, 870) = **870**.\n- Carrying value 1,000 > 870 → **impairment loss = 1,000 − 870 = £130** to the I/S (reducing NBV to 870)."
+    },
+    {
+      "type": "markdown",
+      "title": "13. Intangible assets",
+      "content": "**Intangible assets** are long-term assets that **lack physical substance**. To recognise one you must be able to **identify** it, have **control** over it, and expect **probable future economic benefits** from it. They may be **purchased** or **internally generated**.\n\nExamples: patents, trademarks, copyrights, franchises, licences, fishing quotas, computer software.\n\n- **Research & Development:** **research costs must be expensed** in the P/L (early-stage, uncertain); **some development costs may be capitalised** once the firm can demonstrate it will complete the project.\n- **Computer software:** if **acquired/developed for internal use** → costs can be **capitalised**; if **developed for resale/customers** → costs should be **expensed**.\n\n*Example:* Software A (internal, long-term use) — wages £250,000 + overheads £50,000 = **£300,000 capitalised** as an intangible asset. Software B (built for a customer's order, to be sold this year) — wages £300,000 + overheads £80,000 = **£380,000 expensed** as cost of goods sold."
+    },
+    {
+      "type": "markdown",
+      "title": "14. Goodwill",
+      "content": "**Goodwill** = the **premium the acquirer pays over the fair value of the target firm's equity** (net assets). It covers hard-to-identify attributes: product quality, skilled employees, a loyal customer base, etc.\n\n**Rules for goodwill:**\n- **Cannot** be recognised if **internally generated** (existence/measurement too uncertain).\n- **Can** be recognised as an asset if **acquired through a market transaction**.\n- **Cannot be amortised** (no defined useful life).\n- An **annual impairment test must be performed**.\n- **Cannot be revalued**.\n- **Impairment cannot be reversed**.\n\n**Quick exercise — goodwill.** Company A buys the assets and liabilities of Company B for **£500,000**. B's fair values: assets **£640,000**, liabilities **£190,000** → fair value of equity = 640,000 − 190,000 = **£450,000**. **Goodwill = 500,000 − 450,000 = £50,000.**"
+    },
+    {
+      "type": "markdown",
+      "title": "15. Intangibles — quick exercises",
+      "content": "**Patent.** A company buys a patent for **£1,000,000**; legal fees on purchase **£200,000**; **£300,000** testing the product; **£150,000** advertising.\n- Capitalise costs to acquire and make ready: 1,000,000 + 200,000 + 300,000 = **£1.5m**. (Advertising is expensed.)\n\n**Trademark & useful life.** A company buys a trademark with an **unlimited legal life** but expects to use it for only **three years**.\n- **Yes — amortise it over 3 years.** Although the legal life is unlimited, the **useful life** to the business is finite (3 years), so the trademark is amortised over that period."
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {
+          "term": "Non-current asset",
+          "definition": "An asset held for use (not re-sale) in operations and expected to be used for more than one period."
+        },
+        {
+          "term": "Capitalise vs expense",
+          "definition": "Capitalise a cost (asset) when it has reliable future benefits; expense it when benefits are immediate, too uncertain or immaterial."
+        },
+        {
+          "term": "Acquisition (historical) cost",
+          "definition": "Purchase price plus all costs needed to bring the asset to its location and working condition (e.g. delivery, installation, professional fees; interest for self-constructed assets)."
+        },
+        {
+          "term": "Depreciation",
+          "definition": "Systematic, rational allocation of a depreciable asset's cost over its useful life; matches usage to the revenue it helps generate."
+        },
+        {
+          "term": "Depreciable amount / residual value",
+          "definition": "Depreciable amount = cost − residual value; residual (salvage) value = estimated net proceeds at disposal."
+        },
+        {
+          "term": "Net book value (NBV)",
+          "definition": "Acquisition cost − accumulated depreciation."
+        },
+        {
+          "term": "Straight-line vs reducing balance",
+          "definition": "Straight-line = equal annual charge; reducing balance = fixed % of opening NBV (front-loaded). Same total over life; different yearly profit."
+        },
+        {
+          "term": "Gain/loss on disposal",
+          "definition": "Sale proceeds − net book value at the date of sale."
+        },
+        {
+          "term": "Revaluation",
+          "definition": "Usually upward restatement of an asset to market value; the unrealised revaluation gain goes to a revaluation reserve in equity, not the I/S."
+        },
+        {
+          "term": "Impairment",
+          "definition": "Loss when carrying value > recoverable amount (higher of fair value less costs to sell, and value in use); charged to the I/S by prudence."
+        },
+        {
+          "term": "Intangible asset",
+          "definition": "Identifiable, controlled long-term asset lacking physical substance with probable future benefits (patents, licences, software)."
+        },
+        {
+          "term": "R&D treatment",
+          "definition": "Research is always expensed; development may be capitalised once completion and benefits are demonstrable."
+        },
+        {
+          "term": "Goodwill",
+          "definition": "Premium paid over the fair value of a target's net assets on acquisition; only recognised if acquired, never amortised, tested annually, impairment not reversed."
+        }
+      ]
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — depreciation schedules & disposal",
+      "prompt": "Build straight-line and reducing-balance schedules for the £8,000 / 4-year asset, confirm both total £8,000, then compute the gain on disposal at the start of Year 3 for £5,000 under each method. Change cost, life, rate and sale price to explore.",
+      "starter": "cost, life, residual = 8_000, 4, 0\n\n# Straight-line\nsl = (cost - residual) / life\nsl_sched = [sl] * life\n\n# Reducing balance at ~43.53% would match the slide; here we just use the slide's figures\nrb_sched = [3_500, 2_500, 1_500, 500]\n\nprint(f\"Straight-line : {sl_sched}  total={sum(sl_sched):,.0f}\")\nprint(f\"Reducing bal. : {rb_sched}  total={sum(rb_sched):,.0f}\")\n\n# Disposal at start of Year 3 for 5,000\nsale = 5_000\nnbv_sl = cost - sum(sl_sched[:2])       # after 2 years\nnbv_rb = cost - sum(rb_sched[:2])\nprint(f\"\\nStraight-line: NBV={nbv_sl:,.0f}  gain on disposal={sale-nbv_sl:,.0f}\")\nprint(f\"Reducing bal.: NBV={nbv_rb:,.0f}  gain on disposal={sale-nbv_rb:,.0f}\")\nprint(f\"Net to I/S both methods = sale - cost = {sale-cost:,.0f}\")"
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {
+          "front": "Non-current asset vs inventory?",
+          "back": "Non-current = held for own use over >1 period; inventory = held for re-sale. A computer is a non-current asset for M&S, inventory for PC World."
+        },
+        {
+          "front": "What goes into acquisition cost?",
+          "back": "Purchase price plus all costs to bring the asset to its location and working condition (delivery, installation, professional fees; interest for self-constructed). Running costs and training are expensed."
+        },
+        {
+          "front": "Which non-current asset is never depreciated?",
+          "back": "Land (effectively infinite useful life)."
+        },
+        {
+          "front": "Straight-line vs reducing balance — total over life?",
+          "back": "Identical total charge; only the yearly split differs (reducing balance is front-loaded)."
+        },
+        {
+          "front": "Gain or loss on disposal formula?",
+          "back": "Sale proceeds − net book value (cost − accumulated depreciation) at the date of sale."
+        },
+        {
+          "front": "Where does an upward revaluation gain go?",
+          "back": "To a revaluation reserve within equity (unrealised) — NOT the Income Statement."
+        },
+        {
+          "front": "Recoverable amount for impairment?",
+          "back": "The higher of (fair value less costs to sell) and (value in use). Impair if carrying value exceeds it."
+        },
+        {
+          "front": "R&D: research vs development?",
+          "back": "Research is always expensed; development may be capitalised once completion and future benefits are demonstrable."
+        },
+        {
+          "front": "Four rules for goodwill?",
+          "back": "Only if acquired (not internally generated); never amortised; annual impairment test; impairment cannot be reversed (and it cannot be revalued)."
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "A machine costs £5,000; delivery £1,000, installation £600, engineering £550 are needed to bring it into use; petrol £90 and road licence £100 are running costs. What is capitalised?",
+          "options": [
+            "£5,000",
+            "£7,150",
+            "£8,000 (with £190 expensed)",
+            "£8,190"
+          ],
+          "answer": 2,
+          "explanation": "Capitalise 5,000 + 1,000 + 600 + 550 = £8,000 (add insurance if given). Petrol and road licence are running/maintenance costs, expensed (£190)."
+        },
+        {
+          "q": "Leeds buys a work-station: £30,000 down, £170,000 note payable at 10%, £4,000 to configure/test, £11,500 staff training. Acquisition cost?",
+          "options": [
+            "£215,500",
+            "£204,000",
+            "£200,000",
+            "£34,000"
+          ],
+          "answer": 1,
+          "explanation": "Capitalise 30,000 + 170,000 + 4,000 = £204,000. Interest and employee training are NOT part of acquisition cost."
+        },
+        {
+          "q": "An £8,000 asset (4-yr life, no residual) is depreciated by reducing balance instead of straight-line. Over the whole life, the total depreciation charged is:",
+          "options": [
+            "Higher under reducing balance",
+            "Lower under reducing balance",
+            "The same (£8,000) under both",
+            "Impossible to compare"
+          ],
+          "answer": 2,
+          "explanation": "Both methods charge the full depreciable amount (£8,000) over the life; only the yearly pattern differs."
+        },
+        {
+          "q": "A building with NBV £40,000 is revalued to £120,000. How is the £80,000 gain treated?",
+          "options": [
+            "As income in the Income Statement",
+            "As an unrealised gain in a revaluation reserve within equity",
+            "As a reduction of accumulated depreciation only",
+            "As deferred revenue"
+          ],
+          "answer": 1,
+          "explanation": "An upward revaluation gain is unrealised and recorded in a revaluation reserve within equity, not the I/S."
+        },
+        {
+          "q": "An asset has carrying value £1,000, sellable for £800 (net), and value in use £870. What is the impairment loss?",
+          "options": [
+            "£200",
+            "£130",
+            "£0",
+            "£870"
+          ],
+          "answer": 1,
+          "explanation": "Recoverable = max(800, 870) = 870. Impairment = carrying 1,000 − 870 = £130 charged to the I/S."
+        },
+        {
+          "q": "Which statement about goodwill is TRUE?",
+          "options": [
+            "Internally-generated goodwill is capitalised",
+            "Acquired goodwill is amortised over 10 years",
+            "Acquired goodwill is not amortised but is tested annually for impairment",
+            "Goodwill impairment can be reversed if value recovers"
+          ],
+          "answer": 2,
+          "explanation": "Only acquired goodwill is recognised; it is not amortised, must be impairment-tested annually, cannot be revalued, and its impairment cannot be reversed."
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "Non-current assets are held for use over more than one period (not re-sale). Costs are capitalised when they bring reliable future benefits — acquisition cost includes everything needed to make the asset ready for use (and construction interest for self-built assets), while running costs and training are expensed. Depreciation systematically allocates cost over useful life (straight-line vs reducing balance give different yearly profit but the same total; land is never depreciated), and disposal gains/losses equal proceeds − NBV. Upward revaluations are unrealised gains taken to a revaluation reserve in equity, whereas impairments (carrying value above the higher of fair-value-less-costs and value-in-use) hit the I/S by prudence. Intangibles are recognised only if identifiable, controlled and reliably measurable — research is expensed while development may be capitalised — and goodwill is recognised only when acquired, never amortised, tested annually, with impairment that cannot be reversed."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Session 4: Non-Current Assets.* Worked examples: machine TPXX1, second-hand machine, Leeds Manufacturing, Conglomerated Products, Company A (revaluation), Company T (impairment), Software A/B, and the goodwill/patent/trademark exercises. Notes copied and adapted from the lecture slides and speaker notes."
+    }
+  ]
+}

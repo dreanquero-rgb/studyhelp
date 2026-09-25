@@ -11,5 +11,18 @@
         "lessons": ["lesson-01"]
       }
     ]
+  },
+  {
+    "id": "financial-reporting-and-analysis",
+    "title": "BBM140 — Financial Reporting and Analysis",
+    "icon": "📊",
+    "description": "How companies record transactions and report performance: the Balance Sheet, the Income Statement (accrual vs cash), non-current assets, and long-term liabilities. Each lesson copies the lecture notes into theory, key concepts, flashcards, quizzes and runnable exercises.",
+    "sections": [
+      {
+        "id": "sessions",
+        "title": "Sessions",
+        "lessons": ["lesson-01", "lesson-02", "lesson-04", "lesson-05"]
+      }
+    ]
   }
 ]

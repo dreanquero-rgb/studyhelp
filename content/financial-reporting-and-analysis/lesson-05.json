@@ -1,0 +1,276 @@
+{
+  "id": "lesson-05",
+  "title": "Session 5 — Liabilities: Provisions, Bonds & Leases",
+  "summary": "BBM140 Financial Reporting and Analysis — the definition of liabilities, provisions vs contingent liabilities (IAS 37), current vs non-current classification, present value, bonds (par, discount, zero-coupon) at amortised cost using the effective-interest method, and the accounting for leases.",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Revise the concept of liabilities.",
+        "Learn how to distinguish between provisions and contingent liabilities.",
+        "Discuss bond loans and their accounting treatment (amortised cost, effective interest).",
+        "Learn about lease contracts and their financial-reporting implications."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. What is a liability?",
+      "content": "Beside shareholders' equity, **liabilities** are the other source of funding for the business. Under GAAP a liability is:\n\n1. a **present obligation** arising from **past events**;\n2. a **probable future outflow** of resources from settling that obligation; and\n3. an amount whose settlement can be **measured reliably**.\n\n> If **one or more** of these criteria is **not** met, the item is a **contingent liability** (a loss contingency): it is **not recognised** on the balance sheet but is **disclosed** as an off-balance-sheet item."
+    },
+    {
+      "type": "markdown",
+      "title": "2. Contingent liabilities (off balance sheet)",
+      "content": "Examples that **cannot** be recognised on the balance sheet because they fail a criterion, but may need **disclosure**:\n\n- A **commitment to purchase** non-current assets next year (unless there is a legally binding contract).\n- A **remote but potential** liability for a defective product, where no court action has started.\n- A **guarantee** supporting another company's bank overdraft, where there is very little likelihood of being called on.\n\nThe treatment turns on the **likelihood** of the future outflow: **probable** (likely to occur), **reasonably possible** (more than remote but less than likely), or **remote** (slight) — **and** whether the amount is **reasonably estimable**."
+    },
+    {
+      "type": "markdown",
+      "title": "3. Provisions (on the balance sheet) — IAS 37",
+      "content": "Sometimes the **existence** of an obligation is certain/highly likely but the **amount** is not. By **prudence**, when future expenditure is certain or highly likely but its **amount and/or timing is uncertain**, a **provision** is created — the **best estimate** of a future expected loss of resources. Recording a provision creates a **liability** in the B/S; the I/S counterpart is an **expense**.\n\n**IAS 37** defines provisions as *liabilities of uncertain timing or amount*, recognised **when, and only when:**\n- (a) the entity has a **present obligation** from a past event;\n- (b) it is **probable** (more likely than not) that an outflow of resources will be required to settle it; and\n- (c) a **reliable estimate** can be made of the amount.\n\n**Types:** restructuring, environmental (e.g. remediation of past mining), decommissioning (e.g. dismantling an oil rig / nuclear plant), litigation and other legal claims."
+    },
+    {
+      "type": "markdown",
+      "title": "4. Provisions — worked examples",
+      "content": "**Alfa plc (2024).** A legal suit over compensation of former employees; legal advisors estimate a settlement of **£100,000**. Though not yet contractually obliged, **prudence** requires a provision for the best estimate. In **2025** the dispute settles for **£90,000**.\n\n| | Cash | Provision | Profit (I/S) | Retained profit |\n|---|---|---|---|---|\n| 2024 — recognise provision | | +100,000 | (100,000) | |\n| 2024 — transfer to retained profit | | | +100,000 | (100,000) |\n| 2025 — settle / cancel provision | (90,000) | (100,000) | +10,000 | |\n| 2025 — transfer to retained profit | | | (10,000) | +10,000 |\n\nThe £100,000 provision is set up in 2024; on settlement for £90,000 the £10,000 over-provision is released back to profit in 2025.\n\n**AstraZeneca (quick exercise).** AstraZeneca set aside **$4.5m** for a Chinese regulatory probe into suspected unpaid import taxes. If it later settles for **$4.4m**, it recognises a **provision of $4.5m** in the earlier quarter (I/S expense) and, on settlement, pays $4.4m and releases the $0.1m over-provision — exactly the Alfa pattern."
+    },
+    {
+      "type": "markdown",
+      "title": "5. Provision or contingency? — practice",
+      "content": "Classify each obligation as a **provision (recognise)**, a **contingent liability (disclose)**, or **no disclosure**:\n\n- **Throughput / take-or-pay contracts** (e.g. Chevron pipeline; Alcoa gas & electricity) — pay even if the commodity/service is not used → typically a **contingency/commitment** disclosed (a present obligation may be a provision if a loss is probable and estimable).\n- **Copyright infringement claim** where lawyers are confident of **winning** (Held Up Ltd) → outflow **not probable** → **contingency (disclose)**, no provision.\n- **Warranty with a proven track record.** If experience shows warranties are **probable** to be used, make a **provision** (expected-value estimate); if returns have **never** occurred and are remote (Andox medical equipment) → **no provision** (possibly no disclosure).\n- **Guarantee for a subsidiary in liquidation** where the company is **likely** to have to pay £500,000 → outflow **probable** and estimable → **provision**.\n\n**Best-estimate examples:**\n- **Legal claim £750,000, 30% chance of successfully defending** → 70% chance of losing (probable) → provide; best estimate ≈ the expected settlement (often the full £750,000, as it is a single most-likely outcome).\n- **Warranty portfolio:** 80% no defects, 15% small defects (cost £5m), 5% major defects (cost £9m) → expected provision = 0.80×0 + 0.15×£5m + 0.05×£9m = **£1.20m** (0.75 + 0.45)."
+    },
+    {
+      "type": "markdown",
+      "title": "6. Current vs non-current liabilities",
+      "content": "Liabilities are classified as **current** or **non-current (long-term)**.\n\n**Current liabilities** — any of:\n- expected to be **settled in the normal operating cycle**;\n- held primarily **for trading**;\n- **due within one year** of the balance-sheet date.\n\n**Non-current liabilities** — if **none** of the above apply.\n\n*Classify:* accounts payable → current; **bonds / long-term loans / mortgages** → non-current (unless due within a year); short-term borrowings → current; **current portion of long-term debt** → current; deposits, deferred revenues, capital leases, warranties → depends on timing.\n\n**Measurement:**\n- **Current liabilities** are reported at **nominal value**.\n- **Non-current liabilities** are reported at **present value**, based on the interest rate when initiated."
+    },
+    {
+      "type": "markdown",
+      "title": "7. Present value (revision)",
+      "content": "Long-term liabilities are valued using **present value** — the value **today** of cash flows to be received/paid in future periods, reflecting the **time value of money**: £1 today is worth more than £1 in the future.\n\n**Future value** of £1 today at rate r for one year: $FV = 1 \\times (1+r)$. At 10%, £1 → £1.10.\n\n**Present value** of a future cash flow $X$ received in $n$ periods at discount rate $r$:\n$$PV = \\frac{X}{(1+r)^n}$$\n\nThe factor $1/(1+r)^n$ is the **discount factor**, capturing interest rates, risk and opportunity cost.\n\n**Examples (r = 10%):**\n- £1,000 in **1 year**: $1{,}000 / 1.1 = £909.09$.\n- £1,000 in **3 years**: $1{,}000 / 1.1^3 = £751.31$.\n\n**Cash flows can only be added when at the same point in time (their PV).** Compare: (a) £1,000 in 3 years → PV £751.31 vs (b) £500 in 2 yrs + £500 in 3 yrs → $500/1.1^2 + 500/1.1^3 = £788.88$, so **(b) is preferred**.\n\n**Exercise:** PV of a loan paying £3,000 (yr 1), £2,000 (yr 2), £1,500 (yr 3) at 5%:\n$$\\frac{3{,}000}{1.05} + \\frac{2{,}000}{1.05^2} + \\frac{1{,}500}{1.05^3} = £5{,}967$$"
+    },
+    {
+      "type": "markdown",
+      "title": "8. Bonds — the basics",
+      "content": "A **bond** is a debt security: the **issuer (borrower)** owes the **bondholder (lender)** and must repay the **principal** and **interest (the coupon)** at/until **maturity**. Bonds are issued for a fixed term (usually **> 1 year**) to raise **large** amounts of financing.\n\n- A bond issue is **costly** and usually needs a financial institution to arrange it and act as intermediary.\n- It involves **many** bondholders (unknown to the company) — unlike a traditional loan with a single borrower and lender.\n\n**Key terms:**\n- **Face value (par / principal)** — the amount due at maturity.\n- **Coupon rate** — the *stated* rate; **coupon payment = coupon rate × face value**.\n- **Market (effective) interest rate** — the rate the market demands given the bond's risk; can be above or below the coupon rate.\n\n**Price relative to face value:**\n\n| Price | Condition |\n|---|---|\n| **At par** | stated rate = effective rate |\n| **At a discount** (below par) | stated rate **<** effective rate |\n| **At a premium** (above par) | stated rate **>** effective rate |"
+    },
+    {
+      "type": "markdown",
+      "title": "9. Accounting for bonds — amortised cost & effective interest",
+      "content": "A bond liability (a held-to-maturity debt instrument) is recognised in the **B/S at amortised cost**; interest is recognised in the **I/S using the effective-interest method**.\n\n$$\\text{Amortised cost}_{\\text{end}} = \\text{Amortised cost}_{\\text{begin}} + \\text{Interest expense} - \\text{Interest cash flow}$$\n\n$$\\text{Interest expense} = \\text{Amortised cost}_{\\text{begin}} \\times \\text{effective (market) rate}$$\n\nThe **cash interest paid** each period = **face value × coupon rate**. Any **difference** between interest expense and cash interest is **added to (or deducted from) the bond payable**, gradually amortising the discount/premium to face value by maturity."
+    },
+    {
+      "type": "markdown",
+      "title": "10. Bond issued at par",
+      "content": "**Example.** On 1 Jan X1 a company issues **£100** bonds (per £100 face) with a **9% annual coupon** paid at year-end; **market rate 9%**; principal repaid 31 Dec X2.\n\nSince coupon = market rate, investors pay **face value**:\n$$PV = \\frac{9}{1.09} + \\frac{109}{1.09^2} = £100$$\n\n**At par, interest expense = cash interest = £9 each year**, so the bond payable stays at £100.\n\n| | Cash | Bonds payable | Profit (I/S) | Retained profit |\n|---|---|---|---|---|\n| X1 — bond issuance | +100 | +100 | | |\n| X1 — interest expense | (9) | | (9) | |\n| X1 — transfer to retained profit | | | +9 | (9) |\n| **X1 closing** | **91** | **100** | | **(9)** |\n| X2 — interest expense | (9) | | (9) | |\n| X2 — principal repayment | (100) | (100) | | |\n| X2 — transfer to retained profit | | | +9 | (9) |\n| **X2 closing** | **(18)** | **0** | | **(18)** |"
+    },
+    {
+      "type": "markdown",
+      "title": "11. Bond issued at a discount",
+      "content": "**Example.** Same £100 bond, **9% coupon**, but the market now requires **12%**. Investors will only pay the PV of the cash flows discounted at **12%**:\n$$PV = \\frac{9}{1.12} + \\frac{109}{1.12^2} = £94.93$$\n\nThe firm receives **£94.93** (< face £100) because it is not offering the market rate. The **discount of £5.07** (= 100 − 94.93) is the PV of the interest 'shortfall'. On the B/S: Bond payable £100 *less* discount (£5.07) = **amortised cost (net bond payable) £94.93**.\n\n**Amortisation schedule** (effective rate 12%):\n\n| Period | Amortised cost (begin) | Interest expense = a×12% | Cash flow | Amortised cost (end) = a+b−c |\n|---|---|---|---|---|\n| X1 | 94.93 | 11.39 | 9 | 97.32 |\n| X2 | 97.32 | 11.68 | 109 | 0 |\n\n**Total interest expense** = 11.39 + 11.68 = **23.07**; **total cash paid** = 9 + 9 = 18; the difference **23.07 − 18 = 5.07** is the discount, recognised in the I/S over the bond's life (**matching**). Interest expense (based on amortised cost) **exceeds** the cash coupon each period, and the shortfall is added to the bond payable until it reaches face value at maturity.\n\n| | Cash | Bonds payable | Profit (I/S) | Retained profit |\n|---|---|---|---|---|\n| X1 — bond issuance | +94.93 | +94.93 | | |\n| X1 — interest expense | (9) | +2.39 | (11.39) | |\n| X1 closing | 85.93 | 97.32 | | (11.39) |\n| X2 — interest expense | (9) | +2.68 | (11.68) | |\n| X2 — principal repayment | (100) | (100) | | |\n| **X2 closing** | **(23.07)** | **0** | | **(23.07)** |"
+    },
+    {
+      "type": "markdown",
+      "title": "12. Zero-coupon bonds",
+      "content": "A **zero-coupon bond** pays **no cash interest** — only the nominal value at maturity. All the return comes from the **discount**.\n\n**Example.** A zero-coupon bond paying **£1,000 in 3 years**, issued 31 Dec 2025; market rate **10%**.\n$$PV = \\frac{1{,}000}{1.10^3} = £751.31$$\n\nAt issue: receive cash £751.31; Bond payable £1,000 *less* discount £248.69 = amortised cost **£751.31**. Interest accrues each year (added to the bond payable) with **no cash flow** until maturity:\n\n| Date | Amortised cost (begin) | Interest expense = a×10% | Cash flow | Amortised cost (end) |\n|---|---|---|---|---|\n| 31.12.2025 | 751.31 | 0 | 0 | 751.31 |\n| 31.12.2026 | 751.31 | 75.13 | 0 | 826.44 |\n| 31.12.2027 | 826.44 | 82.64 | 0 | 909.08 |\n| 31.12.2028 | 909.08 | 90.92 | 1,000 | 0 |\n\nInterest expense compounds on the growing amortised cost until it equals the £1,000 repaid at maturity."
+    },
+    {
+      "type": "markdown",
+      "title": "13. Leases — concept and rationale",
+      "content": "A **lease** is a contract between a **lessor** (legal owner of the asset) and a **lessee** (who rents it). The lessor keeps **legal ownership**; the lessee gets the **economic benefits** of the asset for an agreed period in exchange for rent. Examples: motor vehicles, aeroplanes, ships, machines, computer equipment.\n\n**Operational advantages to the lessee:**\n- **Flexibility** — avoid buying an asset needed only seasonally/temporarily; contracts can be tailored.\n- **Protection against obsolescence** (e.g. computer equipment) — but payments are higher for it.\n- **Ready-to-use** equipment is attractive when set-up would be lengthy.\n\n**Financial advantages:**\n- **Tax advantages** (in the UK, up to 100% relief on payments against tax).\n- **Improves cash flow** — payments tailored to the lessee's cash flows; up to 100% financing; avoids large upfront cash / deposits.\n\n**Disadvantages:** ready-to-use kit may be lower quality; high-quality kit may be unavailable to lease; seasonal leasing affects availability/prices; a premium is paid for obsolescence protection."
+    },
+    {
+      "type": "markdown",
+      "title": "14. Accounting for leases — finance vs operating",
+      "content": "**Finance (capital) lease** — if the agreement is for **more than 12 months**:\n- the **lessee records the leased asset** in the B/S and the corresponding **lease obligation (liability)**;\n- the I/S recognises **depreciation expense** (asset) **and interest expense** (liability, amortised).\n\n**Operating lease** — if **not** a finance lease (short term):\n- **no recognition** on the balance sheet;\n- the lessee simply accrues **rent expense** in the I/S.\n\n*(The lessor of a finance lease recognises it as a loan/receivable — the net investment ≈ the PV of the payments — and recognises finance income at a constant periodic rate of return.)*"
+    },
+    {
+      "type": "markdown",
+      "title": "15. Finance lease — worked example",
+      "content": "**Example.** A non-cancellable 3-year lease with equal year-end rent of **£21,709**. Equipment fair value **£47,000**, useful life 4 years. The annual payment includes **£2,000** of property taxes (executory cost). Implicit interest rate **15%**; no renewal option; asset reverts to the lessor.\n\n**Value the leased asset (PV of the debt component):**\n$$PV = (21{,}709 - 2{,}000) \\times 2.28323 = £45{,}000$$\nwhere 2.28323 is the 3-year annuity factor at 15%. £45,000 is **95.7%** of fair value (£47,000), so it is a finance lease.\n\n**Amortisation of the lease liability** (effective rate 15%; net rent 19,709):\n\n| Period | Amortised cost (begin) | Interest = a×15% | Cash flow | Amortised cost (end) |\n|---|---|---|---|---|\n| 1 | 45,000 | 6,750 | 19,709 | 32,041 |\n| 2 | 32,041 | 4,806 | 19,709 | 17,138 |\n| 3 | 17,138 | 2,571 | 19,709 | 0 |\n\n**Depreciation** = 45,000 (PV) ÷ 3 years (contract life) = **£15,000** p.a.\n\n**Year 1 entries:** record asset & lease payable £45,000; depreciation (15,000); pay property tax (2,000) to the I/S; the £19,709 net payment splits into **interest £6,750 (I/S)** and **capital repayment £12,959** (reducing the lease payable to 32,041).\n\n**Financial-reporting implications for the lessee:** the **asset and loan** appear on the B/S at inception; the **I/S** carries **interest + depreciation**; in the **cash-flow statement** the payment splits into interest (financing/operating outflow) and capital repayment (financing outflow)."
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {
+          "term": "Liability (GAAP)",
+          "definition": "A present obligation from past events, with a probable future outflow of resources, measurable reliably. Fail a criterion and it becomes a contingent liability."
+        },
+        {
+          "term": "Contingent liability",
+          "definition": "An obligation that fails a recognition criterion (e.g. outflow not probable, or not estimable); disclosed off balance sheet, not recognised."
+        },
+        {
+          "term": "Provision (IAS 37)",
+          "definition": "A liability of uncertain timing or amount, recognised when there is a present obligation from a past event, a probable outflow, and a reliable estimate. Best estimate of a future loss."
+        },
+        {
+          "term": "Probable / reasonably possible / remote",
+          "definition": "Likelihood scale for future events: probable = likely; reasonably possible = more than remote but less than likely; remote = slight."
+        },
+        {
+          "term": "Current vs non-current liability",
+          "definition": "Current = settled in the operating cycle, held for trading, or due within one year; otherwise non-current. Current at nominal value, non-current at present value."
+        },
+        {
+          "term": "Present value",
+          "definition": "PV = X / (1+r)^n. Cash flows can only be added at the same point in time (their PVs)."
+        },
+        {
+          "term": "Bond",
+          "definition": "A debt security obliging the issuer to pay coupons and repay principal at maturity; raises large financing from many investors."
+        },
+        {
+          "term": "Coupon vs market (effective) rate",
+          "definition": "Coupon (stated) rate sets the cash interest (coupon × face). Market rate is what investors demand; it sets the price."
+        },
+        {
+          "term": "Par / discount / premium",
+          "definition": "Par: coupon = market rate. Discount: coupon < market rate (price below face). Premium: coupon > market rate (price above face)."
+        },
+        {
+          "term": "Amortised cost / effective interest",
+          "definition": "Bond carried at amortised cost = opening + interest expense − cash interest; interest expense = opening amortised cost × effective rate."
+        },
+        {
+          "term": "Zero-coupon bond",
+          "definition": "Pays no cash interest; return is the discount. Interest accrues and compounds into the bond payable until it equals face value at maturity."
+        },
+        {
+          "term": "Finance vs operating lease",
+          "definition": "Finance lease (>12 months): asset + liability on the B/S, depreciation + interest in the I/S. Operating lease: off balance sheet, rent expense only."
+        }
+      ]
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — present value, bond discount & lease amortisation",
+      "prompt": "Reproduce the multi-cash-flow PV, price the 9%-coupon bond at a 12% market rate, and build the finance-lease amortisation schedule. Change the rates and cash flows to see par vs discount vs premium and how the schedules unwind to zero.",
+      "starter": "def pv(cfs, r):\n    return sum(cf / (1 + r) ** (t + 1) for t, cf in enumerate(cfs))\n\n# Multi-cash-flow loan PV at 5%\nprint(f\"Loan PV @5% = {pv([3_000, 2_000, 1_500], 0.05):,.0f}\")   # -> 5,967\n\n# Price a 2-year 9%-coupon, 100-face bond at a 12% market rate\ncoupon, face, mkt = 9, 100, 0.12\nprice = pv([coupon, coupon + face], mkt)\nprint(f\"Bond price @12% = {price:.2f}  (discount = {face - price:.2f})\")\n\n# Finance-lease liability amortisation: PV 45,000, rate 15%, net rent 19,709\nbal, rate, rent = 45_000, 0.15, 19_709\nfor yr in range(1, 4):\n    interest = round(bal * rate)\n    bal = bal + interest - rent\n    print(f\"Year {yr}: interest={interest:>6,}  closing balance={bal:>7,}\")"
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {
+          "front": "Three criteria for a liability?",
+          "back": "Present obligation from a past event; probable future outflow of resources; amount measurable reliably. Fail one → contingent liability."
+        },
+        {
+          "front": "Provision vs contingent liability?",
+          "back": "Provision = probable + estimable → recognised (IAS 37). Contingent = fails a criterion (e.g. only possible) → disclosed off balance sheet."
+        },
+        {
+          "front": "Warranty provision: 80% none, 15% small (£5m), 5% major (£9m). Best estimate?",
+          "back": "0.15×5m + 0.05×9m = £1.20m (expected value)."
+        },
+        {
+          "front": "How are current vs non-current liabilities measured?",
+          "back": "Current at nominal value; non-current at present value (rate at initiation)."
+        },
+        {
+          "front": "Present value formula?",
+          "back": "PV = X / (1+r)^n. Only add cash flows once they are at the same date (their PVs)."
+        },
+        {
+          "front": "Bond: par, discount or premium?",
+          "back": "Par: coupon = market rate. Discount: coupon < market. Premium: coupon > market."
+        },
+        {
+          "front": "Interest expense under the effective-interest method?",
+          "back": "Opening amortised cost × effective (market) rate. Cash interest = coupon × face; the difference adjusts the bond payable."
+        },
+        {
+          "front": "How does a zero-coupon bond's liability behave?",
+          "back": "Starts at PV, accrues compounding interest (no cash) each year, and reaches face value at maturity."
+        },
+        {
+          "front": "Finance lease vs operating lease (lessee)?",
+          "back": "Finance (>12m): asset + liability on B/S, depreciation + interest in I/S. Operating: off B/S, only rent expense."
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "A company is likely (probable) to lose a lawsuit and can estimate the amount reliably. How is this treated?",
+          "options": [
+            "Ignored until the court rules",
+            "Disclosed as a contingent liability only",
+            "Recognised as a provision (liability + I/S expense)",
+            "Recorded as deferred revenue"
+          ],
+          "answer": 2,
+          "explanation": "Present obligation + probable outflow + reliable estimate → IAS 37 requires a provision, with an expense in the I/S."
+        },
+        {
+          "q": "Warranty experience: 80% no defect, 15% small defect costing £5m, 5% major costing £9m. Best-estimate provision?",
+          "options": [
+            "£14m",
+            "£1.20m",
+            "£0.45m",
+            "£9m"
+          ],
+          "answer": 1,
+          "explanation": "Expected value = 0.15×£5m + 0.05×£9m = £0.75m + £0.45m = £1.20m."
+        },
+        {
+          "q": "A £100-face bond has a 9% coupon, but the market demands 12%. The bond will be issued:",
+          "options": [
+            "At par (£100)",
+            "At a premium (above £100)",
+            "At a discount (below £100, ≈ £94.93)",
+            "At £109"
+          ],
+          "answer": 2,
+          "explanation": "Coupon (9%) < market rate (12%), so investors pay less than face: PV at 12% ≈ £94.93 — a discount."
+        },
+        {
+          "q": "Under the effective-interest method, a discounted bond's interest expense compared with the cash coupon is:",
+          "options": [
+            "Always equal to the cash coupon",
+            "Higher than the cash coupon, with the difference added to the bond payable",
+            "Lower than the cash coupon",
+            "Zero until maturity"
+          ],
+          "answer": 1,
+          "explanation": "Interest expense = amortised cost × effective rate, which exceeds the cash coupon; the shortfall increases the bond payable toward face value."
+        },
+        {
+          "q": "A zero-coupon bond pays £1,000 in 3 years; market rate 10%. Its issue price is:",
+          "options": [
+            "£1,000",
+            "£900",
+            "£751.31",
+            "£248.69"
+          ],
+          "answer": 2,
+          "explanation": "PV = 1,000 / 1.10³ = £751.31. The £248.69 difference is the discount amortised to maturity."
+        },
+        {
+          "q": "A non-cancellable lease runs for 3 years (>12 months). For the lessee, this is:",
+          "options": [
+            "An operating lease — only rent expense",
+            "A finance lease — asset and liability on the B/S, with depreciation and interest",
+            "Not recorded at all",
+            "Recorded only in the notes"
+          ],
+          "answer": 1,
+          "explanation": "A lease for more than 12 months is a finance lease: the lessee capitalises the asset and lease liability and recognises depreciation plus interest."
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "Liabilities are present obligations from past events with a probable, reliably measurable outflow; fail a criterion and the item is a contingent liability that is only disclosed. Provisions (IAS 37) recognise obligations that are probable and estimable but uncertain in timing/amount, at best estimate (e.g. expected-value warranty provisions). Liabilities split into current (nominal value) and non-current (present value), and present value discounts future cash flows at PV = X/(1+r)^n. Bonds are carried at amortised cost with interest recognised on the effective-interest method: issued at par (coupon = market), at a discount (coupon < market) or premium (coupon > market), with zero-coupon bonds accruing all return as compounding discount. Finance leases (>12 months) put the asset and lease liability on the lessee's balance sheet with depreciation and interest in the I/S, while operating leases stay off balance sheet as rent expense."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Session 5: Liabilities (Provisions, Bonds & Leases).* Worked examples: Alfa plc, AstraZeneca, present-value exercises, bonds at par/discount, zero-coupon bonds and the finance-lease example; standard referenced: IAS 37 (provisions). Notes copied and adapted from the lecture slides and speaker notes."
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "id": "lesson-01",
+  "title": "Session 1 — Introduction to Financial Reporting & the Balance Sheet",
+  "summary": "BBM140 Financial Reporting and Analysis — what financial reporting is and why it matters, the basic accounting concepts, the components of the financial statements, and the structure, elements and limitations of the Balance Sheet.",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Understand what financial reporting is and why it is important for business activities.",
+        "Learn the basic accounting concepts and the components of a company's financial statements.",
+        "Learn the structure and components of the Balance Sheet (statement of financial position).",
+        "Learn how to record business transactions and prepare basic financial statements.",
+        "Become an *intelligent user* of accounting information: link economic events to the numbers, the rules and management's incentives."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. Being an intelligent user of accounting information",
+      "content": "Accounting **translates business events into numbers**. To read those numbers well you need to see through the headlines. A few real examples the lecture opens with:\n\n- **Stock splits & buybacks (Amphenol, SK Hynix).** A **stock split** increases the number of shares outstanding while the *aggregate* value of equity stays the same, so value per share (and EPS) falls. A **buyback** reduces the number of shares (bought back into treasury or cancelled), so per-share indicators like EPS rise. **Neither transaction adds real value** — they just rearrange how equity is split.\n- **Loan-loss provisions (Australia's Big 4 banks).** When provisions rise while arrears are flat, internal models are pricing in deterioration that hasn't yet appeared in customer behaviour. Beware **\"big bath\" accounting**: in a bad year management can make results look even worse with large impairments/provisions that **reverse in future years**, boosting later profit — effectively *banking income for the future*. The impact is temporary: in the long run accounting numbers converge to economic reality.\n- **Earnings beats that don't move the price (Nvidia).** Nvidia beat both EPS and revenue estimates yet the stock barely moved — expectations were already *priced in*, and guidance nuance and other fundamentals matter.\n\n> The recurring question: **how are these events captured in the financial statements, and do they actually create value?**"
+    },
+    {
+      "type": "markdown",
+      "title": "2. Financial reporting is the lens on the business",
+      "content": "To understand a business you must know its products, technology, knowledge base, marketing and production methods, client/supplier relations, competitive advantage and durability, the competitive environment and the legal/regulatory constraints.\n\nThese economic factors are often **qualitative** (\"market power\", \"threat of competition\") but they **show up in the numbers**:\n\n- **Market power** → higher **profit margins** (profit relative to sales).\n- **Threat of competition** → lower profit margins.\n- Rapidly changing technology / excess capacity → higher **depreciation** charges.\n\nWe read the *effect* of market power from accounting numbers, and judge the *durability* of a competitive advantage from **sequences** of accounting numbers over time."
+    },
+    {
+      "type": "markdown",
+      "title": "3. Same industry, different strategy — John Lewis vs LVMH",
+      "content": "Two retailers can succeed with very different business models:\n\n- **John Lewis (UK retailer, mass market).** Access for ordinary families, one-stop shopping, affordable competitive prices → **low profit margin** but **more sales per m² of retail space** (high asset turnover). *Focus on efficiency.*\n- **LVMH (French luxury goods).** Bespoke, exclusive customer experience, premium differentiator, niche market → **high staff-to-customer ratio**, heavy investment in intangibles (brands) → **high profit margin** but lower asset turnover. *Focus on profitability.*\n\nCombine the two drivers (margin × turnover) and the overall **Return on Assets** can end up broadly similar, even though the firms compete in completely different ways."
+    },
+    {
+      "type": "markdown",
+      "title": "4. From economic factors to concrete numbers (DuPont)",
+      "content": "How do \"market power\" or \"asset efficiency\" appear as concrete numbers? Break Return on Assets into two drivers:\n\n$$\\text{ROA} = \\underbrace{\\frac{\\text{Profit}}{\\text{Sales}}}_{\\text{Profit margin}} \\times \\underbrace{\\frac{\\text{Sales}}{\\text{Assets}}}_{\\text{Asset turnover}}$$\n\n| | **John Lewis** | **LVMH** |\n|---|---|---|\n| Profit margin (Profit/Sales) | 7.4% | 22.4% |\n| × Asset turnover (Sales/Assets) | 1.39 | 0.51 |\n| **= Return on Assets (Profit/Assets)** | **10.3%** | **11.5%** |\n\nSame destination (similar ROA), very different journeys: LVMH wins on **margin**, John Lewis wins on **efficiency**."
+    },
+    {
+      "type": "markdown",
+      "title": "5. What financial statements show, and who uses them",
+      "content": "Financial statements **draw a picture of the business**. They show:\n\n- whether there is money in the bank, and whether it will be enough to pay suppliers, employees and banks;\n- whether the firm is over- or under-paying for its expenditures;\n- whether there is enough inventory to satisfy future sales;\n- whether the firm is making sales **and** making money — or making sales and losing money.\n\n**Users** each want different things:\n\n| User | What they care about |\n|---|---|\n| **Managers** | Plan, make strategic & resource-allocation decisions, control |\n| **Investors** | Risk & return: buy/hold/sell? Will dividends be paid? |\n| **Bankers/lenders** | Will loans + interest be repaid when due? |\n| **Suppliers** | Will amounts owed be paid? Offer preferential terms? |\n| **Customers** | Going concern? Long-term contracts and warranties honoured? |\n| **Competitors** | Compare relative performance |\n| Employees, government, community | Jobs, tax, wider impact |"
+    },
+    {
+      "type": "markdown",
+      "title": "6. Sophisticated users: rules, discretion and incentives",
+      "content": "Accounting translates events into statements using **rules** — accounting standards such as **IFRS** (International Financial Reporting Standards) and national **GAAP** (US GAAP, UK GAAP). Within the rules, **managers make choices and estimates**:\n\n- depreciation method,\n- inventory valuation method,\n- estimating the % of doubtful debt.\n\n**Three keys** to being a sophisticated user:\n\n1. Understand how events affect **accounting numbers and firm value**.\n2. Understand the **rules and management's discretion**.\n3. Understand the **incentives** behind the rules and management's actions.\n\n**Demand for independence & asymmetry.** Information produced by managers alone is not believable, so accounting must be **objective and verifiable** (hence auditors). Accounting also treats good and bad news **asymmetrically**: it tends to record *uncertain bad news* but ignore *uncertain good news* — so it can miss valuable forward-looking information that lacks objective evidence."
+    },
+    {
+      "type": "markdown",
+      "title": "7. The components of financial reports",
+      "content": "A set of **Financial Reports** contains:\n\n**Financial Statements**\n- **Balance Sheet** (statement of financial position)\n- **Income Statement** (profit & loss account)\n- **Cash Flow Statement**\n- **Statement of Changes in Shareholders' Equity**\n- **Notes** to the accounts\n\n**Narrative Reports**\n- Management's letter / commentary\n- Auditors' report\n\nThis session focuses on the **Balance Sheet**."
+    },
+    {
+      "type": "markdown",
+      "title": "8. The Balance Sheet — a snapshot of financial position",
+      "content": "A **balance sheet** (statement of financial position) is a **snapshot of the financial position of a business at a particular point in time**. It lists the business's **resources (assets)** and **how those resources are financed (liabilities and equity)**.\n\n**Example — Cool Phones plc** (open a bank account to start a mobile-phone business):\n\n*Step 1 — put in £100,000 of your own money:*\n\n| Resources / Investments (Assets) | Sources / Financing |\n|---|---|\n| Cash in bank 100,000 | Own money (Equity) 100,000 |\n\n*Step 2 — buy £20,000 of inventory (phones) on credit:*\n\n| Resources / Investments (Assets) | Sources / Financing |\n|---|---|\n| Cash in bank 100,000 | Own money (Equity) 100,000 |\n| Inventory 20,000 | Credit from supplier (Liability) 20,000 |\n\n- **Assets** = investments expected to generate future payoffs.\n- **Liabilities** = claims on those payoffs by parties *other than owners* (money borrowed).\n- **Equity** = the owners' claim (money invested by owners)."
+    },
+    {
+      "type": "markdown",
+      "title": "9. The balance sheet equation",
+      "content": "The two sides always match:\n\n$$\\text{Assets} = \\text{Equity} + \\text{Liabilities}$$\n\nRearranged, the **fundamental balance sheet equation** is:\n\n$$\\text{Assets} - \\text{Liabilities} = \\text{Equity (Net Assets)}$$\n\n**Equity is a residual interest** — the owners' claim on all assets *after* meeting the business's liabilities. Total investments are financed by **own capital (equity) + borrowed capital (liabilities)**.\n\nFor the sheet to keep balancing:\n\n- If **Assets ↑**, then **Liabilities or Equity must ↑**.\n- Alternatively, if **some assets ↑**, then **other assets must ↓**.\n\n*Example — buy £15,000 of inventory for cash:* cash falls 100,000 → 85,000, inventory rises 20,000 → 35,000. Total assets 85,000 + 35,000 = 120,000 still equals 100,000 + 20,000. **One asset swapped for another; the total is unchanged.**"
+    },
+    {
+      "type": "markdown",
+      "title": "10. Presentation and formats",
+      "content": "Assets and liabilities are split into **current** and **non-current** groups.\n\n**Two formats:**\n\n- **Horizontal:** Assets on one side; Equity + Liabilities on the other (Total assets = Total equity & liabilities).\n- **Vertical:** Assets − Liabilities = Net assets, which equals Equity.\n\nA typical **vertical layout**:\n\n| | |\n|---|---|\n| NON-CURRENT ASSETS | Long-term assets (uses of funds) |\n| CURRENT ASSETS | Day-to-day assets |\n| **TOTAL ASSETS** | **XX** |\n| EQUITY | Long-term funding |\n| NON-CURRENT LIABILITIES | Long-term funding (long-term debt) |\n| CURRENT LIABILITIES | Day-to-day funding |\n| **TOTAL EQUITY & LIABILITIES** | **XX** |\n\nThe top block are **resources / uses of funds**; the bottom block are the **sources of funds**. Broadly, **long-term funding** (equity + long-term debt) should finance **long-term assets**, and **day-to-day funding** finances **day-to-day assets**."
+    },
+    {
+      "type": "markdown",
+      "title": "11. Balance sheet elements — Assets",
+      "content": "**Asset (IASB framework):** *a resource controlled by the business as a result of past events, from which future economic benefits are expected to flow to the business.* (An item of value that will generate income in the future.) The mix of assets depends on the business — manufacturing (Honda) vs retail (Tesco) vs financial (HSBC) vs service (Southern Electric).\n\n**Non-current assets** — relatively long life, intended for continuing use in the business:\n- Land\n- Property, plant & equipment (machinery, buildings)\n- Intangible assets (patents, licences, software)\n- Long-term investments (debt & equity securities)\n\n**Current assets** — cash, or assets reasonably expected to be realised in cash or consumed **within one year**:\n- Inventory (goods for trading or production)\n- Trade receivables (owed by clients from past credit sales)\n- Cash and cash equivalents\n- Short-term investments\n- Prepaid expenses (paid in advance for future costs)\n\n**When is an asset recognised?** Only when **(1) future economic benefits are probable** (sufficient evidence they will flow to the firm), **and (2) the amount can be measured reliably**."
+    },
+    {
+      "type": "markdown",
+      "title": "12. Balance sheet elements — Liabilities",
+      "content": "**Liability (IASB framework):** *a present obligation of the entity arising from past events, the settlement of which is expected to result in an outflow of resources.* (Obligations the entity must meet in the future.)\n\n**Non-current liabilities** — due after more than one year:\n- Long-term loans and bonds (maturity beyond one year)\n- Provisions — liabilities whose timing and/or amount are uncertain (e.g. settlement of a legal dispute)\n\n**Current liabilities** — due within one year:\n- Trade payables (owed to suppliers from past credit purchases)\n- Accrued expenses (unpaid expenses incurred this period: salaries, interest, taxes payable)\n- Services expected to be performed (advance payments from customers)\n- Bank overdraft (short-term bank loan)\n- Current portion of long-term debt\n\n**When is a liability recognised?** Only when **(1) there is sufficient evidence of a future transfer of benefits**, **and (2) it can be measured reliably**."
+    },
+    {
+      "type": "markdown",
+      "title": "13. Balance sheet elements — Equity",
+      "content": "**Equity (shareholders' funds):** the **residual interest** in the assets of the entity after deducting all its liabilities.\n\n**Components:**\n- **Share capital** — capital paid in by owners.\n- **Share premium** — additional capital paid in by new shareholders (above par).\n- **Treasury stock** — the company's own shares it has bought back.\n- **Retained profits** — profits made but not yet paid out as dividends.\n- **Reserves** — accumulated capital and retained profits.\n- Other reserves / non-controlling (minority) interests in a group."
+    },
+    {
+      "type": "markdown",
+      "title": "14. Worked analysis — Marks & Spencer 2025",
+      "content": "A quick, rough read of M&S's 2025 balance sheet (£ million). It helps to express items as a **% of total assets** (a *common-size* analysis):\n\n| £ Million | 2025 | % |\n|---|---|---|\n| NON-CURRENT ASSETS | 6,418 | 73% |\n| CURRENT ASSETS | 2,404 | 27% |\n| **TOTAL ASSETS** | **8,822** | **100%** |\n| EQUITY | 2,951 | 68% (of long-term funding) |\n| NON-CURRENT LIABILITIES | 3,093 | |\n| CURRENT LIABILITIES | 2,778 | 32% |\n| **TOTAL EQUITY & LIABILITIES** | **8,822** | **100%** |\n\n**What it tells us:**\n- **Long-term funding ≈ long-term assets**, and most of that long-term funding comes from **long-term debt** — is M&S favourably leveraged? Does debt help or hurt?\n- On the **day-to-day** side, current liabilities exceed current assets: M&S uses **interest-free supplier credit** to finance its current assets. Typical for a retailer that sells largely for cash but can delay paying suppliers — especially with a strong market position that lets it negotiate favourable terms.\n\n**Year-on-year (2025 vs 2024):** total assets grew ~£140m, funded mostly by **equity** (retained profits reinvested) rather than long-term liabilities, which fell. Current liabilities grew more than current assets — supplier funds were used to generate cash and invest in capital markets. The follow-up question is always: **how does this feed through to profitability and, ultimately, value for shareholders?**"
+    },
+    {
+      "type": "markdown",
+      "title": "15. Balance sheet limitations: book value vs market value",
+      "content": "Some assets are **missing** from the balance sheet. Because accounting treats good and bad news **asymmetrically**:\n\n- An expected **future loss** from a doubtful debt **must** be recorded now (in B/S and I/S).\n- Expected **future revenue** from a new contract **cannot** be recorded until goods/services are delivered.\n\nMany internally-generated intangibles (brands, know-how, customer relationships) are never capitalised, so **total assets — and book equity — are likely understated** versus true economic value.\n\n**Book value vs market value of equity (M&S):**\n\n| Book value of equity (29/03/2025) | Market value of equity (05/08/2025) |\n|---|---|\n| £2.95 billion (from the balance sheet) | £7.04 billion (London Stock Exchange) |\n\n$$\\text{Price-to-Book} = \\frac{7.04}{2.95} \\approx 2.39$$\n\nThe market values M&S's equity at ~2.4× its book value — the gap reflects value the balance sheet does not capture."
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {
+          "term": "Balance sheet (statement of financial position)",
+          "definition": "A snapshot at a point in time of a business's resources (assets) and how they are financed (liabilities + equity)."
+        },
+        {
+          "term": "Asset",
+          "definition": "A resource controlled by the business from past events, from which future economic benefits are expected to flow (IASB). Recognised only if benefits are probable and measurable reliably."
+        },
+        {
+          "term": "Liability",
+          "definition": "A present obligation from past events whose settlement is expected to cause an outflow of resources (IASB)."
+        },
+        {
+          "term": "Equity (net assets)",
+          "definition": "The residual interest in the assets after deducting all liabilities; Assets − Liabilities = Equity."
+        },
+        {
+          "term": "Balance sheet equation",
+          "definition": "Assets = Equity + Liabilities. If assets rise, liabilities or equity must rise; or one asset rises as another falls."
+        },
+        {
+          "term": "Current vs non-current",
+          "definition": "Current = realised/settled within one year (or the operating cycle); non-current = longer than one year."
+        },
+        {
+          "term": "Share premium",
+          "definition": "Capital paid in by shareholders above the nominal (par) value of the shares."
+        },
+        {
+          "term": "Treasury stock",
+          "definition": "The company's own shares that it has repurchased and holds (not cancelled)."
+        },
+        {
+          "term": "Retained profits",
+          "definition": "Profits earned but not yet distributed as dividends; part of equity."
+        },
+        {
+          "term": "Stock split vs buyback",
+          "definition": "A split raises share count (EPS falls); a buyback cuts share count (EPS rises). Neither creates real value."
+        },
+        {
+          "term": "Big bath accounting",
+          "definition": "Taking large impairments/provisions in a bad year that reverse later, boosting future profit — 'banking income for the future'."
+        },
+        {
+          "term": "Common-size analysis",
+          "definition": "Expressing balance-sheet items as a % of total assets to compare structure and size across firms/years."
+        },
+        {
+          "term": "DuPont ROA",
+          "definition": "Return on Assets = Profit margin (Profit/Sales) × Asset turnover (Sales/Assets)."
+        },
+        {
+          "term": "Price-to-Book (P/B)",
+          "definition": "Market value of equity ÷ book value of equity; the gap reflects value missing from the balance sheet."
+        },
+        {
+          "term": "IFRS / GAAP",
+          "definition": "The rule books for preparing accounts: International Financial Reporting Standards and national Generally Accepted Accounting Principles."
+        }
+      ]
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — the balance sheet equation & DuPont ROA",
+      "prompt": "Reproduce the Cool Phones transactions (check the sheet still balances) and the John Lewis vs LVMH DuPont breakdown. Change the numbers and watch how margin and turnover trade off to give ROA.",
+      "starter": "# --- Cool Phones plc: does the balance sheet balance? ---\ncash = 100_000            # own money in\ninventory = 0\nequity = 100_000\nliabilities = 0\n\n# Buy 20,000 of inventory on credit\ninventory += 20_000\nliabilities += 20_000\n\n# Buy 15,000 of inventory for cash (asset swapped for asset)\ncash -= 15_000\ninventory += 15_000\n\nassets = cash + inventory\nprint(f\"Assets = {assets:,}  |  Equity + Liabilities = {equity + liabilities:,}\")\nprint(\"Balances!\" if assets == equity + liabilities else \"Does NOT balance\")\n\n# --- DuPont: ROA = profit margin x asset turnover ---\ndef roa(margin, turnover):\n    return margin * turnover\n\nprint(f\"\\nJohn Lewis ROA = {roa(0.074, 1.39)*100:.1f}%\")\nprint(f\"LVMH       ROA = {roa(0.224, 0.51)*100:.1f}%\")"
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {
+          "front": "State the balance sheet equation (two forms).",
+          "back": "Assets = Equity + Liabilities, i.e. Assets − Liabilities = Equity (net assets). Equity is a residual claim."
+        },
+        {
+          "front": "Does a stock split or buyback create value?",
+          "back": "No. A split raises share count (EPS↓); a buyback cuts it (EPS↑). They only rearrange equity — no real value added."
+        },
+        {
+          "front": "Two conditions to recognise an asset?",
+          "back": "(1) Future economic benefits are probable; (2) the amount can be measured reliably."
+        },
+        {
+          "front": "DuPont: how is ROA decomposed?",
+          "back": "ROA = Profit margin (Profit/Sales) × Asset turnover (Sales/Assets). LVMH wins on margin; John Lewis on turnover."
+        },
+        {
+          "front": "Why can book equity understate true value?",
+          "back": "Accounting records uncertain bad news but not uncertain good news, and omits internally-generated intangibles (brands, know-how)."
+        },
+        {
+          "front": "Current vs non-current — the cut-off?",
+          "back": "One year: current assets realise within a year; current liabilities settle within a year. Otherwise non-current."
+        },
+        {
+          "front": "What is 'big bath' accounting?",
+          "back": "Overstating impairments/provisions in a bad year so they reverse later and inflate future profit."
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "A company does a 2-for-1 stock split. What happens?",
+          "options": [
+            "Total equity value and EPS both double",
+            "Share count doubles, aggregate equity is unchanged, so EPS halves",
+            "Share count doubles and real value is created",
+            "It is recorded as revenue in the income statement"
+          ],
+          "answer": 1,
+          "explanation": "A split increases the number of shares while aggregate equity is unchanged, so per-share value (and EPS) falls. No value is created."
+        },
+        {
+          "q": "Which is the correct balance sheet equation?",
+          "options": [
+            "Assets + Liabilities = Equity",
+            "Assets = Equity + Liabilities",
+            "Equity = Assets + Liabilities",
+            "Assets = Equity − Liabilities"
+          ],
+          "answer": 1,
+          "explanation": "Assets = Equity + Liabilities; equivalently Assets − Liabilities = Equity (net assets), the residual owners' claim."
+        },
+        {
+          "q": "A firm buys £15,000 of inventory for cash. What is the effect on total assets?",
+          "options": [
+            "Total assets rise by £15,000",
+            "Total assets fall by £15,000",
+            "Total assets are unchanged (one asset swapped for another)",
+            "Liabilities rise by £15,000"
+          ],
+          "answer": 2,
+          "explanation": "Cash down 15,000, inventory up 15,000 — assets are just reshuffled, so the total (and the balance) is unchanged."
+        },
+        {
+          "q": "Under DuPont, LVMH has a high profit margin but low asset turnover, while John Lewis is the reverse. This shows:",
+          "options": [
+            "LVMH must have a higher ROA",
+            "Different strategies (profitability vs efficiency) can give similar ROA",
+            "John Lewis is badly managed",
+            "Asset turnover does not affect ROA"
+          ],
+          "answer": 1,
+          "explanation": "ROA = margin × turnover. A premium/niche model and a mass-market/efficient model can reach broadly similar ROA by different routes."
+        },
+        {
+          "q": "Why might a firm's book value of equity be well below its market value?",
+          "options": [
+            "The market is always wrong",
+            "Accounting omits many internally-generated intangibles and uncertain good news",
+            "Book value includes future contracts not yet delivered",
+            "Market value ignores liabilities"
+          ],
+          "answer": 1,
+          "explanation": "Accounting is conservative — it records uncertain bad news but not uncertain good news, and rarely capitalises internally-generated intangibles, so book equity understates economic value (M&S P/B ≈ 2.39)."
+        },
+        {
+          "q": "Which item is a CURRENT liability?",
+          "options": [
+            "A 10-year bond",
+            "Trade payables due to suppliers within the year",
+            "Property, plant & equipment",
+            "Share capital"
+          ],
+          "answer": 1,
+          "explanation": "Trade payables are due within one year, so they are current liabilities. Bonds (10-yr) are non-current; PPE is an asset; share capital is equity."
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "Financial reporting turns economic events into numbers, and a sophisticated user links events to (1) accounting numbers and firm value, (2) the rules (IFRS/GAAP) and management's discretion, and (3) the incentives behind them. Qualitative advantages like market power surface as margins and turnover (DuPont ROA = margin × turnover). The Balance Sheet is a point-in-time snapshot of assets and how they are financed, governed by Assets = Equity + Liabilities, with equity as the residual. Assets and liabilities split into current and non-current and are recognised only when benefits/obligations are probable and reliably measurable. Equity comprises share capital, share premium, treasury stock, retained profits and reserves. Because accounting is conservative and omits many intangibles, book equity often sits below market value (M&S P/B ≈ 2.4)."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Session 1: Introduction to Financial Reporting and the Balance Sheet.* Examples: Amphenol, SK Hynix, Nvidia, Australia's Big 4 banks, John Lewis, LVMH and Marks & Spencer (2025 annual report). Notes copied and adapted from the lecture slides and speaker notes."
+    }
+  ]
+}
