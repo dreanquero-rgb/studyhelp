@@ -1,0 +1,241 @@
+{
+  "id": "lesson-03",
+  "title": "Lesson 3 — Recording Business Transactions",
+  "summary": "BBM140 Week 1 Tutorial — the extended accounting equation, recording transactions in a worksheet, preparing the balance sheet and income statement, profit retention, and double-entry bookkeeping (journal and T-accounts).",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Extend the accounting equation to include capital, revenues and expenses.",
+        "Record business transactions in a worksheet, keeping the equation in balance.",
+        "Prepare a simple balance sheet and income statement from the worksheet.",
+        "Explain profit retention and the link between the income statement and balance sheet.",
+        "Apply the debit/credit rules and record transactions as journal entries and T-accounts."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. The fundamental equation revisited",
+      "content": "Start from the accounting equation and expand **equity** into its parts:\n\n$$\\text{Assets} = \\text{Liabilities} + \\text{Equity}$$\n\nEquity contains the owners' capital **plus profit**:\n\n$$\\text{Assets} = \\text{Liabilities} + [\\,\\text{Capital \\& Other Equity} + \\text{Profit}\\,]$$\n\nand profit itself is **revenues minus expenses**:\n\n$$\\text{Assets} = \\text{Liabilities} + [\\,\\text{Capital \\& Other Equity} + (\\text{Revenues} - \\text{Expenses})\\,]$$\n\nBecause the equation always holds, it also holds for **changes** (Δ):\n\n$$\\Delta \\text{Assets} = \\Delta \\text{Liabilities} + \\Delta[\\,\\text{Capital \\& Other Equity} + \\text{Revenues} - \\text{Expenses}\\,]$$\n\n> **Key idea:** this relation is true for *each individual transaction*. Every transaction keeps the equation in balance."
+    },
+    {
+      "type": "markdown",
+      "title": "2. The worksheet — Paul & Mary's HotPizza",
+      "content": "We record transactions in a **worksheet** with one column per account, grouped as **Assets = Liabilities + Equity**:\n\n| | Fixed Assets | Stock | Cash & Bank | Accounts Payable | Share Capital | Retained Profit | Profit (I/S) |\n|---|---|---|---|---|---|---|---|\n\nEach transaction is written as one or more **+/−** entries across the columns, always keeping **Assets = Liabilities + Equity**.\n\n**The six transactions of Paul & Mary's HotPizza restaurant:**\n1. Paul and Mary deposit **£1,000** in a bank account to start the business.\n2. Purchase of **£250** cash of goods for stock.\n3. Purchase of restaurant equipment **on credit** for **£300**.\n4. Payment of **80%** of the equipment bill.\n5. Sale of pizzas for **£150** cash which **cost £100**.\n6. Weekly salaries of **£30** paid to Paul and Mary."
+    },
+    {
+      "type": "markdown",
+      "title": "3. Recording each transaction (the Δ view)",
+      "content": "**T1 — Deposit £1,000 to start the business**\n$$+1000\\ (\\text{Bank}) = +1000\\ (\\text{Share capital})$$\n\n**T2 — Buy £250 of goods for cash**\n$$+250\\ (\\text{Inventory}),\\ -250\\ (\\text{Bank})$$\n*An asset swap: one asset (cash) is exchanged for another (inventory).*\n\n**T3 — Buy equipment on credit, £300**\n$$+300\\ (\\text{Fixed assets}) = +300\\ (\\text{Accounts payable})$$\n\n**T4 — Pay 80% of the equipment bill (£240)**\n$$-240\\ (\\text{Bank}) = -240\\ (\\text{Accounts payable})$$\n*Part of the liability disappears from the balance sheet.*\n\n**T5 — Sell pizzas for £150 cash that cost £100**\n$$+150\\ (\\text{Bank}),\\ -100\\ (\\text{Inventory}) = +50\\ (\\text{Profit})$$\n*In the income statement: Sales 150 − Cost of sales 100 = Profit 50.*\n\n**T6 — Pay £30 weekly salaries**\n$$-30\\ (\\text{Bank}) = -30\\ (\\text{Profit})$$\n*In the income statement: Salaries expense (30), reducing profit.*"
+    },
+    {
+      "type": "markdown",
+      "title": "4. The completed worksheet",
+      "content": "| Transaction | Fixed Assets | Stock | Cash & Bank | = | Accounts Payable | + | Share Capital | Retained Profit | Profit (I/S) |\n|---|---:|---:|---:|:-:|---:|:-:|---:|---:|---:|\n| 1 Initial capital | | | +1000 | | | | +1000 | | |\n| 2 Purchase pizzas | | +250 | −250 | | | | | | |\n| 3 Purchase equipment | +300 | | | | +300 | | | | |\n| 4 Payment equipment | | | −240 | | −240 | | | | |\n| 5 Sales pizzas | | | +150 | | | | | | +150 |\n| 5 Cost of sales | | −100 | | | | | | | −100 |\n| 6 Salaries | | | −30 | | | | | | −30 |\n| **Closing balances** | **300** | **150** | **630** | | **60** | | **1000** | | **+20** |\n\nUse the columns to build the statements:\n- the **Profit (I/S)** column → the **income statement**,\n- the **Cash & Bank** column → the **cash flow statement**,\n- the **closing balances** row → the **balance sheet**."
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — build the HotPizza worksheet",
+      "prompt": "Run the worksheet engine below. It applies each transaction as a set of +/− entries and checks that **Assets = Liabilities + Equity** after every step. Then try adding a transaction of your own.",
+      "starter": "accounts = {\n    \"Fixed assets\": 0, \"Stock\": 0, \"Cash & bank\": 0,   # assets\n    \"Accounts payable\": 0,                                # liabilities\n    \"Share capital\": 0, \"Profit\": 0,                      # equity\n}\nASSETS      = [\"Fixed assets\", \"Stock\", \"Cash & bank\"]\nLIABILITIES = [\"Accounts payable\"]\nEQUITY      = [\"Share capital\", \"Profit\"]\n\ndef post(label, **entries):\n    for acc, amt in entries.items():\n        accounts[acc] += amt\n    a = sum(accounts[k] for k in ASSETS)\n    l = sum(accounts[k] for k in LIABILITIES)\n    e = sum(accounts[k] for k in EQUITY)\n    ok = \"OK\" if abs(a - (l + e)) < 1e-9 else \"!! OUT OF BALANCE\"\n    print(f\"{label:22s} A={a:7.0f}  L={l:5.0f}  E={e:6.0f}   {ok}\")\n\npost(\"1 Deposit capital\", **{\"Cash & bank\": +1000, \"Share capital\": +1000})\npost(\"2 Buy stock (cash)\", **{\"Stock\": +250, \"Cash & bank\": -250})\npost(\"3 Buy equip (credit)\", **{\"Fixed assets\": +300, \"Accounts payable\": +300})\npost(\"4 Pay 80% of bill\", **{\"Cash & bank\": -240, \"Accounts payable\": -240})\npost(\"5 Sell pizzas\", **{\"Cash & bank\": +150, \"Stock\": -100, \"Profit\": +50})\npost(\"6 Pay salaries\", **{\"Cash & bank\": -30, \"Profit\": -30})\n\nprint(\"\\nClosing balances:\")\nfor k, v in accounts.items():\n    print(f\"  {k:18s} {v:7.0f}\")\n"
+    },
+    {
+      "type": "markdown",
+      "title": "5. Profit retention — linking I/S and B/S",
+      "content": "At period end, profit is **transferred** out of the temporary *Profit for the year* account (an income-statement account) and **retained** inside equity, in the **Retained profit** account:\n\n| Equity | |\n|---|---:|\n| Retained profit | **+20** |\n| Profit for the year | **−20** |\n\nThe income statement is 'emptied' into retained earnings. The general link is:\n\n$$\\text{Ending retained profit} = \\text{Beginning retained profit} + \\text{Net profit} - \\text{Dividends}$$\n\nFor HotPizza (no opening balance, no dividend): ending retained profit = 0 + 20 − 0 = **£20**."
+    },
+    {
+      "type": "markdown",
+      "title": "6. The resulting statements",
+      "content": "**Income statement at the end of the period**\n\n| | Amount (£) |\n|---|---:|\n| Revenues | 150 |\n| Cost of sales | (100) |\n| Salaries | (30) |\n| **Profit for the year** | **20** |\n\n**Balance sheet at the end of the period**\n\n| Assets | £ | Liabilities & Equity | £ |\n|---|---:|---|---:|\n| Cash & Bank | 630 | Accounts payable | 60 |\n| Inventory | 150 | Equity | 1,020 |\n| Fixed Assets | 300 | | |\n| **Total Assets** | **1,080** | **Total L + E** | **1,080** |\n\nEquity 1,020 = share capital 1,000 + retained profit 20. The balance sheet **balances**. ✔"
+    },
+    {
+      "type": "markdown",
+      "title": "7. Double-entry bookkeeping — debit/credit rules",
+      "content": "Instead of a worksheet, accountants traditionally use **double-entry bookkeeping**: every transaction has **two effects** — a **debit** and an equal **credit**. From the fundamental equation:\n\n| | Assets | Liabilities | Equity |\n|---|---|---|---|\n| **Increase ↑** | **Debit** | Credit | Credit |\n| **Decrease ↓** | Credit | **Debit** | **Debit** |\n\nRearranging the extended equation to put all 'debit-natured' items on one side:\n\n$$\\text{Assets} + \\text{Expense} = \\text{Liabilities} + \\text{Share Capital} + \\text{Revenue}$$\n\n| | Assets / **Expense** | Liabilities | Equity / **Revenue** |\n|---|---|---|---|\n| **Increase ↑** | **Debit** | Credit | Credit |\n| **Decrease ↓** | Credit | **Debit** | **Debit** |\n\nSo an **expense** increase is a **debit**; a **revenue** increase is a **credit**. For every entry: **total debits = total credits**."
+    },
+    {
+      "type": "markdown",
+      "title": "8. The journal — HotPizza",
+      "content": "Recording the six transactions as journal entries (Dr = debit, Cr = credit):\n\n| # | Entry | Dr | Cr |\n|---|---|---:|---:|\n| 1 | Dr Cash & Banks / Cr Share capital | 1000 | 1000 |\n| 2 | Dr Inventory (purchase) / Cr Cash & Banks | 250 | 250 |\n| 3 | Dr Fixed assets / Cr Accounts payable | 300 | 300 |\n| 4 | Dr Accounts payable / Cr Cash & Banks | 240 | 240 |\n| 5 | Dr Cash & Banks / Cr Sales revenue (I/S) | 150 | 150 |\n| 5 | Dr Cost of sales (I/S) / Cr Stock | 100 | 100 |\n| 6 | Dr Salaries expense (I/S) / Cr Cash & Banks | 30 | 30 |\n\nNotice each line has equal debit and credit."
+    },
+    {
+      "type": "markdown",
+      "title": "9. T-accounts",
+      "content": "Another way to do bookkeeping is with **T-accounts** — one 'T' per account, **debit on the left, credit on the right**:\n\n```\n        Account\n   ----------------\n   Debit  |  Credit\n   (left) |  (right)\n```\n\n**The rules by account type:**\n\n| Account type | Increase | Decrease |\n|---|---|---|\n| **Assets** | Debit (left) | Credit (right) |\n| **Liabilities** | Credit (right) | Debit (left) |\n| **Owners' equity** | Credit (right) | Debit (left) |\n| **Expenses** (↓ equity) | Debit (left) | Credit (right) |\n| **Revenues** (↑ equity) | Credit (right) | Debit (left) |\n\nRevenues and expenses are **temporary** T-accounts: they collect changes in retained earnings during the period, and at period end their balances are **transferred to retained earnings**.\n\n**Example — transactions 1, 2 and 3:**\n\n```\n  Cash & Banks (A)          Share Capital (E)\n  [1] 1,000 | [2] 250                 | [1] 1,000\n\n  Inventory (A)             Fixed assets (A)\n  [2]   250 |               [3]   300 |\n\n  Acc. Payable (L)\n            | [3] 300\n```\n\n**Total debits (1,550) = Total credits (1,550).** ✔"
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — check debits = credits",
+      "prompt": "A trial balance works only if total debits equal total credits. Run the HotPizza journal below; the engine posts each Dr/Cr pair and verifies the books balance.",
+      "starter": "journal = [\n    (\"Cash & Banks\",     \"Share capital\",    1000),\n    (\"Inventory\",        \"Cash & Banks\",      250),\n    (\"Fixed assets\",     \"Accounts payable\",  300),\n    (\"Accounts payable\", \"Cash & Banks\",      240),\n    (\"Cash & Banks\",     \"Sales revenue\",     150),\n    (\"Cost of sales\",    \"Stock\",             100),\n    (\"Salaries expense\", \"Cash & Banks\",       30),\n]\n\ntotal_dr = total_cr = 0\nprint(f\"{'Dr account':18s}{'Cr account':18s}{'Amount':>8s}\")\nfor dr, cr, amt in journal:\n    total_dr += amt\n    total_cr += amt\n    print(f\"{dr:18s}{cr:18s}{amt:8.0f}\")\n\nprint(\"-\" * 44)\nprint(f\"Total debits = {total_dr}, total credits = {total_cr}\")\nprint(\"Balanced!\" if total_dr == total_cr else \"NOT balanced\")\n"
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {
+          "term": "Extended accounting equation",
+          "definition": "Assets = Liabilities + [Capital & Other Equity + (Revenues − Expenses)]. Holds for every transaction and for changes (Δ)."
+        },
+        {
+          "term": "Worksheet",
+          "definition": "A table with one column per account (grouped A = L + E) used to record each transaction as +/− entries while keeping the equation in balance."
+        },
+        {
+          "term": "Asset swap",
+          "definition": "A transaction that exchanges one asset for another (e.g. cash → inventory); total assets, liabilities and equity are unchanged."
+        },
+        {
+          "term": "Cost of sales",
+          "definition": "The cost of the inventory that was sold; recorded as an expense that reduces profit when a sale is made."
+        },
+        {
+          "term": "Profit retention",
+          "definition": "Transferring profit for the year from the income statement into retained profit (within equity) at period end."
+        },
+        {
+          "term": "Retained-earnings link",
+          "definition": "Ending retained profit = Beginning retained profit + Net profit − Dividends."
+        },
+        {
+          "term": "Double-entry bookkeeping",
+          "definition": "Each transaction is recorded with equal debits and credits, so total debits always equal total credits."
+        },
+        {
+          "term": "Debit / Credit rules",
+          "definition": "Assets & expenses increase with a debit; liabilities, equity & revenues increase with a credit."
+        },
+        {
+          "term": "Journal",
+          "definition": "A chronological list of transactions written as debit/credit entries."
+        },
+        {
+          "term": "T-account",
+          "definition": "A single account shown as a 'T': debits on the left, credits on the right; one per asset, liability, equity, revenue and expense."
+        }
+      ]
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {
+          "front": "Expand equity in the accounting equation.",
+          "back": "Assets = Liabilities + [Capital & Other Equity + (Revenues − Expenses)]."
+        },
+        {
+          "front": "Sell goods for £150 cash that cost £100 — the effect?",
+          "back": "+150 cash, −100 inventory, +50 profit (Sales 150 − Cost of sales 100)."
+        },
+        {
+          "front": "What is an asset swap?",
+          "back": "Exchanging one asset for another (e.g. cash for inventory); the equation is unchanged."
+        },
+        {
+          "front": "What is profit retention?",
+          "back": "Transferring profit for the year into retained profit within equity at period end."
+        },
+        {
+          "front": "Ending retained profit = ?",
+          "back": "Beginning retained profit + Net profit − Dividends."
+        },
+        {
+          "front": "Debit/credit: assets and expenses increase with a…?",
+          "back": "Debit. (Liabilities, equity and revenues increase with a credit.)"
+        },
+        {
+          "front": "In a T-account, which side is debit?",
+          "back": "The left side (credit on the right)."
+        },
+        {
+          "front": "Why are revenues and expenses 'temporary' accounts?",
+          "back": "They collect period changes in retained earnings and are closed to retained earnings at period end."
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "Buying £250 of inventory for cash is an example of:",
+          "options": [
+            "Increasing equity",
+            "An asset swap (cash → inventory)",
+            "Taking on a liability",
+            "Recording revenue"
+          ],
+          "answer": 1,
+          "explanation": "One asset (cash) decreases and another (inventory) increases by the same amount — an asset swap. Totals are unchanged."
+        },
+        {
+          "q": "Selling goods for £150 that cost £100 changes profit by:",
+          "options": [
+            "+150",
+            "−100",
+            "+50",
+            "0"
+          ],
+          "answer": 2,
+          "explanation": "Revenue +150 and cost of sales −100 give a profit of +50."
+        },
+        {
+          "q": "Paying 80% of a £300 equipment bill (£240):",
+          "options": [
+            "Reduces cash and reduces accounts payable by 240",
+            "Reduces cash and reduces equity by 240",
+            "Increases fixed assets by 240",
+            "Has no effect on the balance sheet"
+          ],
+          "answer": 0,
+          "explanation": "−240 cash (asset) and −240 accounts payable (liability): part of the liability is settled."
+        },
+        {
+          "q": "Under the debit/credit rules, an increase in an expense is a:",
+          "options": [
+            "Credit",
+            "Debit",
+            "Neither",
+            "Both"
+          ],
+          "answer": 1,
+          "explanation": "Expenses increase with a debit (like assets); revenues increase with a credit (like equity)."
+        },
+        {
+          "q": "At period end, profit retention means:",
+          "options": [
+            "Paying out profit as a dividend",
+            "Transferring profit for the year into retained profit within equity",
+            "Moving cash into a reserve account",
+            "Deleting the income statement"
+          ],
+          "answer": 1,
+          "explanation": "Profit for the year (a temporary I/S account) is transferred into retained profit inside equity."
+        },
+        {
+          "q": "In a T-account for a LIABILITY, an increase is recorded on the:",
+          "options": [
+            "Left (debit)",
+            "Right (credit)",
+            "Either side",
+            "It is not recorded"
+          ],
+          "answer": 1,
+          "explanation": "Liabilities (and equity and revenues) increase on the credit (right) side; assets and expenses increase on the debit (left)."
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "Expanding equity gives the extended equation Assets = Liabilities + [Capital + (Revenues − Expenses)], which holds for every transaction. Using a worksheet, we recorded Paul & Mary's HotPizza transactions as +/− entries that always keep the books in balance, then read the income statement off the profit column and the balance sheet off the closing-balance row. Profit for the year is retained into equity at period end (ending retained profit = beginning + net profit − dividends), linking the two statements. The same transactions can be captured with double-entry bookkeeping — equal debits and credits — recorded as journal entries or T-accounts, where assets and expenses increase with a debit and liabilities, equity and revenues increase with a credit, so total debits always equal total credits."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Week 1 Tutorial: Recording Business Transactions.* Bayes Business School, City St George's, University of London. Worked example: Paul & Mary's HotPizza restaurant."
+    }
+  ]
+}

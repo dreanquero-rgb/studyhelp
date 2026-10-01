@@ -1,0 +1,245 @@
+{
+  "id": "lesson-02",
+  "title": "Lesson 2 — The Balance Sheet",
+  "summary": "BBM140 Week 1 — the balance sheet equation, how a balance sheet is presented and formatted, its elements (assets, liabilities, equity) and their recognition, a real example (Marks & Spencer), and its limitations.",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Define the balance sheet and state the fundamental accounting equation.",
+        "Explain why the balance sheet always balances (uses of funds = sources of funds).",
+        "Classify items as current vs non-current, and know the horizontal and vertical formats.",
+        "Define assets, liabilities and equity (IASB definitions) and the rules for recognising them.",
+        "Read a real balance sheet (Marks & Spencer) and compute working capital and capital employed.",
+        "Explain the balance sheet's limitations, and the difference between book value and market value of equity."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. What is a balance sheet?",
+      "content": "A **balance sheet** (or *statement of financial position*) is a **snapshot of the financial position of the business at a particular point in time**.\n\nIt is a list of the business's **resources** (its **assets**) and the **financing** of those resources (its **liabilities** and **equity**).\n\n**Example — start a mobile-phone business.** Open a bank account and put in £100,000 of your own money:\n\n| Resources / Investments | Sources / Financing |\n|---|---|\n| Cash in bank 100,000 | Own money (equity) 100,000 |\n\nThe left side (what the money is **invested in**) always equals the right side (where the money **came from**)."
+    },
+    {
+      "type": "markdown",
+      "title": "2. The balance sheet equation",
+      "content": "The fundamental balance sheet equation is:\n\n$$\\textbf{Assets} = \\textbf{Equity} + \\textbf{Liabilities}$$\n\nTotal investments are financed by **own capital** (equity) **and borrowed capital** (liabilities). Rearranging:\n\n$$\\textbf{Assets} - \\textbf{Liabilities} = \\textbf{Equity (Net Assets)}$$\n\nSo **equity (shareholders' funds) is a *residual* interest** — a claim on all the assets *after* meeting the business's liabilities.\n\n**It must always balance.** If one thing changes, something else must change to keep the equation true:\n- If **Assets ↑**, then **Liabilities or Equity must ↑**.\n- Alternatively, if **some assets ↓**, then **other assets must ↑** (an asset swap).\n\n**Example — buy £20,000 of inventory on credit:**\n\n| Resources (Assets) | Financing |\n|---|---|\n| Cash in bank 100,000 | Own money (Equity) 100,000 |\n| Inventory 20,000 | Credit to supplier (Liability) 20,000 |\n\n$$100{,}000 + 20{,}000 \\;=\\; 100{,}000 + 20{,}000 \\quad\\checkmark$$"
+    },
+    {
+      "type": "markdown",
+      "title": "3. Presentation: current vs non-current; uses vs sources",
+      "content": "Assets and liabilities are each presented in **two groups: current and non-current**.\n\nRead top-to-bottom, the balance sheet has two halves:\n\n| | | |\n|---|---|---|\n| **NON-CURRENT ASSETS** | → long-term assets | **= USES of funds** |\n| **CURRENT ASSETS** | → day-to-day assets (used within the year) | (RESOURCES) |\n| **TOTAL ASSETS** | | |\n| **EQUITY** + **NON-CURRENT LIABILITIES** | → long-term funding (equity + long-term debt) | **= SOURCES of funds** |\n| **CURRENT LIABILITIES** | → day-to-day funding | |\n| **TOTAL EQUITY & LIABILITIES** | | |\n\n**Two formats:**\n- **Horizontal** — Assets on the left; Equity + Liabilities on the right (Total assets = Total equity and liabilities).\n- **Vertical** — Assets − Liabilities = **Net assets**, which equals **Equity**."
+    },
+    {
+      "type": "markdown",
+      "title": "4. Element 1 — Assets",
+      "content": "**Asset (IASB framework):** a resource **controlled** by the business as a result of **past events**, and from which **future economic benefits are expected to flow** to the business.\n\nThe specific assets a firm holds depend on what it does: manufacturing (Honda) vs retail (Tesco) vs financial (HSBC) vs service (Southern Electric).\n\n**Non-current assets** — relatively long life, intended for use on a *continuing* basis:\n- Land\n- Property, plant & equipment (machinery, buildings)\n- Intangible assets (patents, licences, software)\n- Long-term investments (debt & equity securities)\n\n**Current assets** — cash, or assets reasonably expected to be realised in cash or consumed **within one year**:\n- Inventory (goods for trading/production)\n- Trade receivables (owed by clients from past credit sales)\n- Cash & cash equivalents\n- Short-term investments\n- Prepaid expenses (paid in advance, e.g. rent paid ahead)"
+    },
+    {
+      "type": "markdown",
+      "title": "5. Asset recognition",
+      "content": "**When should an asset be recorded in the balance sheet?** Two conditions:\n1. **Probable economic benefits** — sufficient evidence that future benefits will flow to the firm, *and*\n2. **Measured with reliability** — the future benefits can be measured with sufficient reliability.\n\n**Think it through — can each be recognised as an asset?**\n- A firm pays £200K as a deposit on a custom-built machine → *yes* (a prepayment/asset).\n- A firm buys bonds worth £350K on the capital market → *yes* (a financial asset).\n- A firm acquires chemicals as raw materials for £700K → *yes* (inventory).\n- A firm sells goods to customers for £50m on credit → the *receivable* is an asset.\n- A firm leases a piece of machinery worth £150K → generally recognised as a right-of-use asset."
+    },
+    {
+      "type": "markdown",
+      "title": "6. A real balance sheet — Marks & Spencer 2025 (assets)",
+      "content": "| Assets (£m) | 29 Mar 2025 | 30 Mar 2024 |\n|---|---:|---:|\n| **Non-current assets** | | |\n| Intangible assets | 187.4 | 179.5 |\n| Property, plant & equipment | 5,408.5 | 5,190.1 |\n| Investment property | 11.2 | 11.6 |\n| Investments in JV & associates | 392.5 | 684.2 |\n| Other financial assets | 21.3 | 12.6 |\n| Trade & other receivables | 382.8 | 356.7 |\n| Other | 14.0 | 93.2 |\n| **Total non-current assets** | **6,417.7** | 6,528.9 |\n| **Current assets** | | |\n| Inventories | 843.9 | 776.9 |\n| Other financial assets | 289.5 | 12.3 |\n| Trade & other receivables | 327.5 | 302.0 |\n| Cash & cash equivalents | 864.5 | 1,022.4 |\n| Other | 78.3 | 39.7 |\n| **Total current assets** | **2,403.7** | 2,153.3 |\n| **TOTAL ASSETS** | **8,821.4** | 8,682.2 |"
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Quick exercise — current vs net non-current assets",
+      "prompt": "A company reports the year-end balances below. **How much are its current assets? How much are its *net* non-current assets** (after accumulated depreciation)? Run the code to check your answer.",
+      "starter": "# Year-end balances (£)\ncash                      = 25000\npatents                   = 7900\naccounts_receivable       = 9300\nppe                       = 98700\nprepaid_insurance         = 3600\naccumulated_depreciation  = 10000\ninventory                 = 37000\ntrademarks                = 12600\ngoodwill                  = 11000\n\n# Current assets: realised in cash / consumed within one year\ncurrent_assets = cash + accounts_receivable + prepaid_insurance + inventory\n\n# Non-current assets: long-lived. PPE is shown NET of accumulated depreciation.\nnet_non_current = (ppe - accumulated_depreciation) + patents + trademarks + goodwill\n\nprint(f\"Current assets:          £{current_assets:,.0f}\")\nprint(f\"Net non-current assets:  £{net_non_current:,.0f}\")\nprint(f\"Total assets:            £{current_assets + net_non_current:,.0f}\")\n"
+    },
+    {
+      "type": "markdown",
+      "title": "7. Element 2 — Liabilities",
+      "content": "**Liability (IASB framework):** a **present obligation** of the entity **arising from past events**, the settlement of which is expected to result in an **outflow of resources**.\n\n**Non-current liabilities** — amounts due **after more than one year**:\n- Long-term loans and bonds (maturity beyond one year)\n- Provisions (liabilities where the *timing or amount* is uncertain, e.g. settling a legal dispute)\n\n**Current liabilities** — amounts due **within one year**:\n- Trade payables (owed to suppliers from past credit purchases)\n- Accrued expenses (unpaid expenses incurred this period: salaries, interest, taxes payable)\n- Deferred income — services expected to be performed (advance payments from customers)\n- Cash overdraft (short-term bank loan)\n- Current portion of long-term debt\n\n**Recognition** mirrors assets: record a liability when there is *sufficient evidence of a transfer of benefits* and it can be *measured with sufficient reliability*."
+    },
+    {
+      "type": "markdown",
+      "title": "8. Element 3 — Equity",
+      "content": "**Equity (shareholders' funds):** the **residual interest** in the assets of the entity **after deducting all its liabilities**.\n\n**Components of equity:**\n- **Share capital** — capital paid in by owners\n- **Share premium** — additional capital paid in by new shareholders (above nominal value)\n- **Treasury stock** — the company's own shares it has bought back\n- **Retained profits** — profits made but **not yet paid out** as dividends\n- **Reserves** — accumulated capital and retained profits\n- Other reserves (e.g. hedging, foreign exchange)\n\n> For Marks & Spencer 2025, total equity was about **£2,951m**, made up of issued share capital, share premium, reserves and retained earnings, plus a small non-controlling interest."
+    },
+    {
+      "type": "markdown",
+      "title": "9. Reading the whole balance sheet & two key terms",
+      "content": "Marks & Spencer 2025 (£m), with a quick structural read:\n\n| £m | 2025 | 2024 | change | % of total (2025) |\n|---|---:|---:|---:|---:|\n| Non-current assets | 6,418 | 6,529 | (111) | 73% |\n| Current assets | 2,404 | 2,153 | +251 | 27% |\n| **Total assets** | **8,822** | **8,682** | **+140** | 100% |\n| Equity | 2,951 | 2,830 | +121 | |\n| Non-current liabilities | 3,093 | 3,336 | (243) | } 68% long-term funding |\n| Current liabilities | 2,778 | 2,516 | +262 | 32% |\n| **Total equity & liabilities** | **8,822** | **8,682** | **+140** | 100% |\n\nAbout **£140m** more total assets came in; long-term funding fell while current liabilities rose — the firm leaned more on **day-to-day funding**.\n\n**Two terms to remember:**\n- **Capital employed** = long-term funding of the business = **Equity + Debt** (roughly, equity + non-current liabilities).\n- **Working capital** = the capital that funds day-to-day operations = **Current Assets − Current Liabilities**."
+    },
+    {
+      "type": "markdown",
+      "title": "10. Balance sheet limitations",
+      "content": "The balance sheet is powerful but **incomplete**:\n\n- **Some intangible assets are missing** — internally generated brands, know-how and human capital often do not appear.\n- **Asymmetric (conservative) treatment** of expected news:\n  - An expected future **loss** from a doubtful debt *must* be recorded now (in B/S and I/S).\n  - An expected future **revenue** from a new contract *cannot* be recorded until goods/services are delivered.\n- As a result, **total assets are likely understated** relative to their true value.\n\n**Book value vs market value of equity.** Because assets can be understated, the **book value of equity** (from the balance sheet) often differs from the **market value of equity** (market capitalisation):\n\n| Marks & Spencer (29/03/2025) | Value |\n|---|---|\n| Book value of equity (balance sheet) | £2.95 bn |\n| Market value of equity (stock exchange) | £7.04 bn |\n| **Price-to-Book (P/B)** | **7.04 / 2.95 = 2.39** |\n\nA P/B above 1 means the market values the firm well **above** its book equity — partly because of assets and future value the balance sheet does not capture."
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {
+          "term": "Balance sheet",
+          "definition": "A snapshot of the financial position of a business at a point in time — its resources (assets) and their financing (liabilities + equity)."
+        },
+        {
+          "term": "Balance sheet equation",
+          "definition": "Assets = Equity + Liabilities, equivalently Assets − Liabilities = Equity (net assets). It always balances."
+        },
+        {
+          "term": "Equity as residual interest",
+          "definition": "Equity is the claim on the assets that remains after deducting all liabilities; it absorbs the upside and downside."
+        },
+        {
+          "term": "Asset (IASB)",
+          "definition": "A resource controlled by the entity as a result of past events, from which future economic benefits are expected to flow."
+        },
+        {
+          "term": "Liability (IASB)",
+          "definition": "A present obligation arising from past events whose settlement is expected to cause an outflow of resources."
+        },
+        {
+          "term": "Current vs non-current",
+          "definition": "Current = realised/settled within one year; non-current = held/owed for longer than one year."
+        },
+        {
+          "term": "Recognition criteria",
+          "definition": "Record an asset/liability when future benefits/outflows are probable AND can be measured with sufficient reliability."
+        },
+        {
+          "term": "Capital employed",
+          "definition": "Long-term funding of the business = Equity + Debt (roughly equity + non-current liabilities)."
+        },
+        {
+          "term": "Working capital",
+          "definition": "Current Assets − Current Liabilities; the capital that funds day-to-day operations."
+        },
+        {
+          "term": "Book vs market value of equity",
+          "definition": "Book value is equity on the balance sheet; market value is market capitalisation. Their ratio is the Price-to-Book (P/B)."
+        }
+      ]
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {
+          "front": "State the balance sheet equation (two forms).",
+          "back": "Assets = Equity + Liabilities; equivalently Assets − Liabilities = Equity (net assets)."
+        },
+        {
+          "front": "Why is equity a 'residual' interest?",
+          "back": "It is the claim on assets left after deducting all liabilities (Assets − Liabilities)."
+        },
+        {
+          "front": "Define an asset (IASB).",
+          "back": "A resource controlled by the entity from past events, from which future economic benefits are expected to flow."
+        },
+        {
+          "front": "Define a liability (IASB).",
+          "back": "A present obligation from past events whose settlement is expected to result in an outflow of resources."
+        },
+        {
+          "front": "Current vs non-current — the dividing line?",
+          "back": "One year: current assets/liabilities are realised/settled within a year; non-current are longer."
+        },
+        {
+          "front": "Two recognition criteria?",
+          "back": "Probable future economic benefits/outflows AND reliable measurement."
+        },
+        {
+          "front": "Working capital = ?",
+          "back": "Current Assets − Current Liabilities."
+        },
+        {
+          "front": "Capital employed = ?",
+          "back": "Equity + Debt (long-term funding ≈ equity + non-current liabilities)."
+        },
+        {
+          "front": "P/B for M&S 2025?",
+          "back": "Market £7.04bn ÷ Book £2.95bn ≈ 2.39."
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "The balance sheet equation is:",
+          "options": [
+            "Assets = Liabilities − Equity",
+            "Assets = Equity + Liabilities",
+            "Equity = Assets + Liabilities",
+            "Assets + Equity = Liabilities"
+          ],
+          "answer": 1,
+          "explanation": "Assets = Equity + Liabilities. Rearranged, Equity = Assets − Liabilities (net assets)."
+        },
+        {
+          "q": "A firm buys £20,000 of inventory on credit. The balance sheet:",
+          "options": [
+            "No longer balances",
+            "Shows +20,000 inventory and +20,000 liabilities, still balancing",
+            "Shows +20,000 inventory and −20,000 equity",
+            "Shows +20,000 inventory only"
+          ],
+          "answer": 1,
+          "explanation": "Assets rise by 20,000 (inventory) and liabilities rise by 20,000 (payable), so the equation still holds."
+        },
+        {
+          "q": "Which is a CURRENT asset?",
+          "options": [
+            "Property, plant & equipment",
+            "A patent",
+            "Trade receivables",
+            "A 10-year loan to another company"
+          ],
+          "answer": 2,
+          "explanation": "Trade receivables are expected to be collected within a year — a current asset. The others are non-current."
+        },
+        {
+          "q": "A provision for settling an uncertain legal dispute is classified as:",
+          "options": [
+            "A current asset",
+            "Equity",
+            "A liability",
+            "A contingent gain"
+          ],
+          "answer": 2,
+          "explanation": "A provision is a liability where the timing or amount is uncertain."
+        },
+        {
+          "q": "Working capital is:",
+          "options": [
+            "Equity + non-current liabilities",
+            "Total assets − total liabilities",
+            "Current assets − current liabilities",
+            "Non-current assets − non-current liabilities"
+          ],
+          "answer": 2,
+          "explanation": "Working capital = Current Assets − Current Liabilities (day-to-day funding)."
+        },
+        {
+          "q": "M&S has book equity £2.95bn and market cap £7.04bn. The P/B of 2.39 suggests:",
+          "options": [
+            "The market values the firm below its book equity",
+            "The balance sheet overstates the firm's value",
+            "The market values the firm well above book equity, partly due to unrecorded value",
+            "The firm is insolvent"
+          ],
+          "answer": 2,
+          "explanation": "P/B > 1 means market value exceeds book value — reflecting intangibles and future value the balance sheet does not fully capture."
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "The balance sheet is a point-in-time snapshot listing a firm's resources (assets) and their financing (liabilities + equity), governed by Assets = Equity + Liabilities — so equity is the residual, and the statement always balances. Items are split into current vs non-current and read as uses of funds (total assets) equal to sources of funds (equity + liabilities). Assets, liabilities and equity have precise IASB definitions and are recognised only when future benefits/outflows are probable and reliably measurable. From a real balance sheet (M&S) we compute working capital (current assets − current liabilities) and capital employed (equity + debt). Finally, the balance sheet has limits: intangibles are often missing and conservatism understates value, which is why the market value of equity usually differs from its book value (P/B)."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Session 1: Introduction and the Balance Sheet.* Bayes Business School, City St George's, University of London. Figures from the Marks & Spencer Group plc balance sheet (year ended 29 March 2025) as shown in the lecture slides."
+    }
+  ]
+}

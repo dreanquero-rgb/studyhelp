@@ -11,5 +11,18 @@
         "lessons": ["lesson-01"]
       }
     ]
+  },
+  {
+    "id": "financial-reporting-and-analysis",
+    "title": "Financial Reporting and Analysis",
+    "icon": "📊",
+    "description": "BBM140 — reading and using financial statements: the balance sheet, recording business transactions and double-entry bookkeeping. Theory, key terms, flashcards, quizzes and runnable worksheet exercises.",
+    "sections": [
+      {
+        "id": "week-1",
+        "title": "Week 1 — Introduction & the Balance Sheet",
+        "lessons": ["lesson-01", "lesson-02", "lesson-03", "lesson-04"]
+      }
+    ]
   }
 ]

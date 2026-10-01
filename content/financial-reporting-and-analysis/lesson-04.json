@@ -1,0 +1,79 @@
+{
+  "id": "lesson-04",
+  "title": "Lesson 4 — Practice: Worked Exercises",
+  "summary": "BBM140 Week 1 — practice problems with full solutions: capital from the accounting equation, a share issue, and two complete transaction-recording exercises (J&T football memorabilia shop and XTC company).",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Use the accounting equation to find missing capital/equity.",
+        "Record a share issue that funds an asset purchase.",
+        "Work two full exercises: record transactions in a worksheet and prepare the balance sheet and income statement.",
+        "Handle capitalised acquisition costs, interest, advances from customers, and depreciation."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "Warm-up 1 — How much capital?",
+      "content": "A business has a **property** worth £60,000, a **motor vehicle** worth £7,000, **inventory** worth £15,000 and **cash in the bank** of £6,000. It **owes £20,000** to suppliers, has a **bank overdraft of £2,000**, and **£3,000** is still outstanding on a **loan**. **How much capital (equity) does the business have?**\n\nUse Equity = Assets − Liabilities."
+    },
+    {
+      "type": "markdown",
+      "title": "Warm-up 1 — Solution",
+      "content": "| Assets | £ | Liabilities + Equity | £ |\n|---|---:|---|---:|\n| PPE (property + vehicle) | 67,000 | Accounts payable | 20,000 |\n| Inventory | 15,000 | Overdraft | 2,000 |\n| Cash | 6,000 | Loan | 3,000 |\n| | | **Equity** | **63,000** |\n| **Total assets** | **88,000** | **Total L + E** | **88,000** |\n\n$$\\text{Equity} = 88{,}000 - (20{,}000 + 2{,}000 + 3{,}000) = \\textbf{£63{,}000}$$"
+    },
+    {
+      "type": "markdown",
+      "title": "Warm-up 2 — A share issue",
+      "content": "Continuing from the business above (assets 88,000; liabilities 25,000; equity 63,000):\n\n> The firm **issues 6,000 new shares at £0.50 per share** and uses the money raised to **buy a piece of equipment**.\n\n**How is this transaction recorded to keep the fundamental balance sheet equation in place?**"
+    },
+    {
+      "type": "markdown",
+      "title": "Warm-up 2 — Solution",
+      "content": "Money raised = 6,000 × £0.50 = **£3,000**. Two effects:\n- **+£3,000 Equity** (share capital issued), and\n- the cash raised is immediately spent, so **+£3,000 Fixed assets (equipment)**.\n\n$$\\Delta\\text{Assets} = +3{,}000\\ (\\text{equipment}) \\quad=\\quad \\Delta\\text{Equity} = +3{,}000\\ (\\text{share capital})$$\n\nTotals become **Assets 91,000 = Liabilities 25,000 + Equity 66,000**. The equation still holds. ✔\n\n*(If the firm had kept the cash instead of buying equipment, the entry would be +3,000 cash = +3,000 share capital — same balancing idea.)*"
+    },
+    {
+      "type": "markdown",
+      "title": "Exercise A — J&T football memorabilia shop",
+      "content": "James and his brother Tom invest **£80,000 of cash** and **£20,000 of inventory** to start a football-memorabilia shop. During the year:\n\n1. (Start-up) Invest £80,000 cash + £20,000 inventory.\n2. A **shop costing £45,000** is acquired by paying **£12,500 in cash** and assuming a **10-year mortgage (loan)** for the rest, at **8%** yearly interest.\n3. Merchandise costing **£36,000** is purchased **on account** from suppliers.\n4. **Insurance** payment of **£200** for insurance coverage.\n5. **Equipment costing £16,000** is purchased for cash.\n6. Payment of **£200** to DHL for **delivering the equipment**.\n7. Payment of **£24,000** to the suppliers of merchandise in (3).\n8. Merchandise **costing £8,000** is **sold on credit for £18,000**.\n9. **Salaries of £4,000** are paid to employees.\n10. Payment of the **annual interest** on the loan.\n\n**Required:** record the transactions in a worksheet, then prepare the **balance sheet** and **income statement** at year-end.\n\n**Assumptions used in the solution:**\n- The mortgage (loan) = 45,000 − 12,500 = **£32,500**; annual interest = 8% × 32,500 = **£2,600**.\n- The **£200 DHL delivery** is a cost of bringing the equipment into use, so it is **capitalised** into Equipment (IAS 16) → equipment = £16,200.\n- The insurance of £200 is treated as an **expense** of the year."
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Exercise A — worksheet solver (J&T)",
+      "prompt": "Run the worksheet. It posts each transaction, checks the equation balances after every step, and prints the closing balances used for the statements. Try changing a number (e.g. the interest rate) and watch the profit change.",
+      "starter": "acc = {\n    \"Cash\": 0, \"Receivables\": 0, \"Stock\": 0, \"Building\": 0, \"Equipment\": 0,  # assets\n    \"Payables\": 0, \"Loan\": 0,                                                 # liabilities\n    \"Share capital\": 0, \"Profit\": 0,                                          # equity\n}\nA = [\"Cash\", \"Receivables\", \"Stock\", \"Building\", \"Equipment\"]\nL = [\"Payables\", \"Loan\"]\nE = [\"Share capital\", \"Profit\"]\n\ndef post(label, **d):\n    for k, v in d.items():\n        acc[k] += v\n    a, l, e = (sum(acc[k] for k in grp) for grp in (A, L, E))\n    print(f\"{label:26s} A={a:8.0f} L={l:7.0f} E={e:8.0f} {'OK' if abs(a-l-e)<1e-6 else 'OUT!'}\")\n\npost(\"1 Start-up\",        Cash=+80000, Stock=+20000, **{\"Share capital\": +100000})\npost(\"2 Buy shop\",        Building=+45000, Cash=-12500, Loan=+32500)\npost(\"3 Buy merchandise\", Stock=+36000, Payables=+36000)\npost(\"4 Insurance\",       Cash=-200, Profit=-200)\npost(\"5 Buy equipment\",   Equipment=+16000, Cash=-16000)\npost(\"6 Delivery (DHL)\",  Equipment=+200, Cash=-200)   # capitalised\npost(\"7 Pay suppliers\",   Cash=-24000, Payables=-24000)\npost(\"8 Sale on credit\",  Receivables=+18000, Stock=-8000, Profit=+10000)\npost(\"9 Salaries\",        Cash=-4000, Profit=-4000)\npost(\"10 Loan interest\",  Cash=-2600, Profit=-2600)    # 8% x 32,500\n\nprint(\"\\nClosing balances:\")\nfor k, v in acc.items():\n    print(f\"  {k:14s} {v:9.0f}\")\n"
+    },
+    {
+      "type": "markdown",
+      "title": "Exercise A — Solution: statements",
+      "content": "**Income statement (year 1)**\n\n| | £ |\n|---|---:|\n| Sales revenue | 18,000 |\n| Cost of sales | (8,000) |\n| **Gross profit** | **10,000** |\n| Insurance expense | (200) |\n| Salaries expense | (4,000) |\n| **Profit before interest** | **5,800** |\n| Interest expense | (2,600) |\n| **Profit for the year** | **3,200** |\n\n**Balance sheet (year-end)**\n\n| Assets | £ | Equity & Liabilities | £ |\n|---|---:|---|---:|\n| **Non-current assets** | | **Equity** | |\n| Building | 45,000 | Share capital | 100,000 |\n| Equipment | 16,200 | Retained profit | 3,200 |\n| **Current assets** | | **Non-current liabilities** | |\n| Inventory | 48,000 | Loan | 32,500 |\n| Receivables | 18,000 | **Current liabilities** | |\n| Cash | 20,500 | Accounts payable | 12,000 |\n| **Total assets** | **147,700** | **Total equity & liabilities** | **147,700** |\n\nThe balance sheet balances at **£147,700**. ✔"
+    },
+    {
+      "type": "markdown",
+      "title": "Exercise B — XTC company",
+      "content": "XTC company started trading on **1 July, year 1**. Transactions during July:\n\n- **1 Jul** — £130,000 cash contributed by owners, deposited in a bank account.\n- **3 Jul** — Withdraw £6,000 from the current account to open a **3-month savings account**.\n- **4 Jul** — Purchase **office equipment on credit for £10,000**, expected to be used over **10 years**.\n- **5 Jul** — Purchase **£20,000 of merchandise on credit**.\n- **7 Jul** — Pay a **£2,000 deposit** on a renting contract.\n- **11 Jul** — Borrow **£5,000** on a bank credit line at **8%** annual interest.\n- **14 Jul** — Receive a **£6,000 advance** from customers for future supplies.\n- **16 Jul** — Pay **£12,000** to merchandise suppliers.\n- **17 Jul** — **£6,000** of accounts payable is converted into a **note payable** due 30 August.\n- **19 Jul** — **Settle the bank loan**; pay **one month's interest**.\n- **23 Jul** — Credit sales: merchandise **£19,400** + services **£600** (cost of sales **£13,000**).\n- **24 Jul** — **Interest received** on the savings account of **£275**.\n- **26 Jul** — Pay **£1,000** monthly rent.\n- **30 Jul** — Pay **£8,000** monthly salaries.\n- **31 Jul** — Record **annual depreciation**.\n\n**Assumptions used in the solution:**\n- 'Cash & banks' combines the current and savings accounts, so the 3 Jul transfer nets to **£0**.\n- The £2,000 deposit is an **asset** (recoverable), not an expense.\n- One month's interest on the £5,000 loan = 8%/12 × 5,000 ≈ **£33**.\n- Annual depreciation on equipment = 10,000 / 10 = **£1,000** (as the task asks for the *annual* charge)."
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Exercise B — worksheet solver (XTC)",
+      "prompt": "Run the worksheet for XTC. It checks the equation after every transaction and prints closing balances. Notice the business makes a small **loss** once depreciation and interest are included.",
+      "starter": "acc = {\n    \"Cash & banks\": 0, \"Receivables\": 0, \"Stock\": 0, \"Deposit\": 0,\n    \"Equipment\": 0, \"Acc. depreciation\": 0,                      # assets (acc.depr. is negative)\n    \"Payables\": 0, \"Advances\": 0, \"Note payable\": 0, \"Loan\": 0,   # liabilities\n    \"Share capital\": 0, \"Profit\": 0,                             # equity\n}\nA = [\"Cash & banks\", \"Receivables\", \"Stock\", \"Deposit\", \"Equipment\", \"Acc. depreciation\"]\nL = [\"Payables\", \"Advances\", \"Note payable\", \"Loan\"]\nE = [\"Share capital\", \"Profit\"]\n\ndef post(label, **d):\n    for k, v in d.items():\n        acc[k] += v\n    a, l, e = (sum(acc[k] for k in grp) for grp in (A, L, E))\n    print(f\"{label:24s} A={a:9.0f} L={l:7.0f} E={e:9.0f} {'OK' if abs(a-l-e)<1e-6 else 'OUT!'}\")\n\npost(\"1 Owners' capital\",  **{\"Cash & banks\": +130000, \"Share capital\": +130000})\npost(\"3 Open savings\",     **{\"Cash & banks\": 0})          # internal transfer -> net 0\npost(\"4 Equipment (cr)\",   Equipment=+10000, Payables=+10000)\npost(\"5 Merchandise (cr)\", Stock=+20000, Payables=+20000)\npost(\"7 Rental deposit\",   **{\"Cash & banks\": -2000, \"Deposit\": +2000})\npost(\"11 Bank loan\",       **{\"Cash & banks\": +5000, \"Loan\": +5000})\npost(\"14 Customer advance\",**{\"Cash & banks\": +6000, \"Advances\": +6000})\npost(\"16 Pay suppliers\",   **{\"Cash & banks\": -12000, \"Payables\": -12000})\npost(\"17 Note payable\",    Payables=-6000, **{\"Note payable\": +6000})\npost(\"19 Settle loan\",     **{\"Cash & banks\": -5033, \"Loan\": -5000, \"Profit\": -33})\npost(\"23 Credit sales\",    Receivables=+20000, Stock=-13000, Profit=+7000)\npost(\"24 Interest income\", **{\"Cash & banks\": +275, \"Profit\": +275})\npost(\"26 Monthly rent\",    **{\"Cash & banks\": -1000, \"Profit\": -1000})\npost(\"30 Salaries\",        **{\"Cash & banks\": -8000, \"Profit\": -8000})\npost(\"31 Depreciation\",    **{\"Acc. depreciation\": -1000, \"Profit\": -1000})\n\nprint(\"\\nClosing balances:\")\nfor k, v in acc.items():\n    print(f\"  {k:18s} {v:9.0f}\")\n"
+    },
+    {
+      "type": "markdown",
+      "title": "Exercise B — Solution: statements",
+      "content": "**Income statement (July)**\n\n| | £ |\n|---|---:|\n| Sales revenue (19,400 + 600) | 20,000 |\n| Cost of sales | (13,000) |\n| **Gross profit** | **7,000** |\n| Interest income | 275 |\n| Rent expense | (1,000) |\n| Salaries expense | (8,000) |\n| Depreciation expense | (1,000) |\n| Interest expense | (33) |\n| **Profit / (loss) for the period** | **(2,758)** |\n\n**Balance sheet (31 July)**\n\n| Assets | £ | Equity & Liabilities | £ |\n|---|---:|---|---:|\n| **Non-current assets** | | **Equity** | |\n| Equipment (net of 1,000 depr.) | 9,000 | Share capital | 130,000 |\n| **Current assets** | | Retained loss | (2,758) |\n| Cash & banks | 113,242 | **Liabilities** | |\n| Receivables | 20,000 | Accounts payable | 12,000 |\n| Stock | 7,000 | Note payable | 6,000 |\n| Rental deposit | 2,000 | Advances from customers | 6,000 |\n| **Total assets** | **151,242** | **Total equity & liabilities** | **151,242** |\n\nThe balance sheet balances at **£151,242**, with equity = 130,000 − 2,758 = **£127,242**. ✔\n\n> Even though a lot of cash came in, XTC made a small **loss** in its first month once cost of sales, salaries, rent, depreciation and interest are counted — a reminder that **cash ≠ profit**."
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "These exercises put Week 1 into practice. The accounting equation (Equity = Assets − Liabilities) finds missing capital; a share issue adds equity and (when spent) an asset, keeping the equation balanced. In the two full exercises we recorded every transaction in a worksheet — capitalising directly attributable costs (DHL delivery), computing loan interest, treating a customer advance as a liability and a rental deposit as an asset, reclassifying a payable into a note payable, and charging depreciation — then prepared the balance sheet and income statement. J&T made a £3,200 profit and balanced at £147,700; XTC made a small loss of £2,758 and balanced at £151,242, showing clearly that cash is not the same as profit."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Week 1 exercises: 'J&T football memorabilia shop' and 'XTC company'.* Bayes Business School, City St George's, University of London. Solutions computed step-by-step; stated assumptions follow standard introductory treatment (IAS 16 for capitalised costs, IAS 2 for inventory)."
+    }
+  ]
+}

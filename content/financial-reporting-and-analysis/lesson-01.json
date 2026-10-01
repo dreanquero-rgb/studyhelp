@@ -1,0 +1,213 @@
+{
+  "id": "lesson-01",
+  "title": "Lesson 1 — Introduction to Financial Reporting & Analysis",
+  "summary": "BBM140 Week 1 — what financial reporting is, why it matters, who uses financial statements, the rules and management choices behind the numbers, and the reports a company produces.",
+  "blocks": [
+    {
+      "type": "objectives",
+      "title": "🎯 Learning objectives",
+      "items": [
+        "Explain what financial reporting is and why it matters for business activity.",
+        "Describe what it means to be an *intelligent user* of accounting information.",
+        "Identify the users of financial statements and what each of them needs.",
+        "Understand that reported numbers are shaped by accounting **rules** (IFRS, GAAP) and **management choices**.",
+        "List the components of a company's financial statements and narrative reports."
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "1. What is our course objective?",
+      "content": "The aim of *Financial Reporting and Analysis* is to make you an **intelligent user of accounting information**. Concretely, by the end you should:\n\n- Be comfortable **looking through** a set of financial statements — learning their language and techniques.\n- Be able to **use** financial statements to assess a company's performance.\n- Have a sense of the **limitations** of financial-statement data.\n\n> We are not training to be bookkeepers: we are training to *read*, *question* and *use* the numbers."
+    },
+    {
+      "type": "markdown",
+      "title": "2. Financial reporting is the lens on the business",
+      "content": "To understand a business we must know its products, its technology and knowledge base, its marketing and production methods, how it manages relations with clients and suppliers, its competitive advantage and environment, and its legal/regulatory constraints.\n\nDifferent businesses — even within the **same industry** — can be successful by following **different strategies** and **different business models**. The question financial reporting answers is:\n\n> **How does all of this show up in the financial numbers?**\n\nFinancial statements report numbers (assets, sales, margins, cash flows, earnings…) that **reflect the economic factors driving the business and its value**. They *draw a picture* of the business."
+    },
+    {
+      "type": "markdown",
+      "title": "3. Example — John Lewis vs LVMH",
+      "content": "A business with **market power** focuses on **profitability**; a business in a **competitive** sector typically focuses on **efficiency**. The same return can be reached by very different routes.\n\n| | **John Lewis** (UK retailer) | **LVMH** (French luxury) |\n|---|---|---|\n| Strategy | Compete on price & convenience | Premium, niche, exclusivity |\n| Profit margin (Profit / Sales) | 7.4% | 22.4% |\n| Asset turnover (Sales / Assets) | 1.39 | 0.51 |\n| **Return on Assets** (Profit / Assets) | **10.3%** | **11.5%** |\n\nThe link between the three is the **DuPont identity**:\n\n$$\\text{ROA} = \\text{Profit Margin} \\times \\text{Asset Turnover} = \\frac{\\text{Profit}}{\\text{Sales}} \\times \\frac{\\text{Sales}}{\\text{Assets}}$$\n\nJohn Lewis earns a *thin* margin but **spins its assets fast** (efficiency); LVMH earns a *fat* margin but turns assets slowly (market power). Both end up with a similar ROA.\n\n*Figures are rounded, so margin × turnover may differ from the reported ROA by about 0.1 pp.*"
+    },
+    {
+      "type": "code_exercise",
+      "title": "🧪 Try it yourself — the DuPont identity",
+      "prompt": "Run the code to see how a low-margin/high-turnover retailer and a high-margin/low-turnover luxury house reach a similar Return on Assets. Then change the numbers for a company you know.",
+      "starter": "def roa(profit_margin, asset_turnover):\n    return profit_margin * asset_turnover\n\ncompanies = {\n    \"John Lewis\": (0.074, 1.39),   # (profit margin, asset turnover)\n    \"LVMH\":       (0.224, 0.51),\n}\n\nfor name, (pm, at) in companies.items():\n    print(f\"{name:12s}  margin={pm:6.1%}  turnover={at:.2f}  ->  ROA={roa(pm, at):5.1%}\")\n"
+    },
+    {
+      "type": "markdown",
+      "title": "4. Who uses financial statements?",
+      "content": "Financial statements have **many users**, inside and outside the company, each with different questions:\n\n| User | Typical question |\n|---|---|\n| **Owners / shareholders** | Is my investment creating value? |\n| **Managers** | How is the business performing; where to act? |\n| **Lenders (banks)** | Can the firm repay its debt? |\n| **Suppliers** | Will we be paid for goods delivered on credit? |\n| **Customers** | Will this supplier still be here next year? |\n| **Competitors** | How do we compare (benchmarking)? |\n| **Employees** | Is my job secure; can the firm pay me? |\n| **Government** | How much tax is due; is regulation met? |\n| **Investment analysts** | Buy, hold or sell? |\n| **Community representatives** | Environmental and social impact? |"
+    },
+    {
+      "type": "markdown",
+      "title": "5. From events to financial statements",
+      "content": "A **sophisticated** user understands how real-world events become reported numbers:\n\n$$\\text{Events / Actions} \\;\\longrightarrow\\; \\text{Rules \\& Management choices} \\;\\longrightarrow\\; \\text{Financial Statements}$$\n\n**Rules** (who decides *how* a transaction is recorded):\n- **IFRS** — International Financial Reporting Standards\n- **US GAAP**, **UK GAAP**, etc.\n\n**Management choices** (discretion *within* the rules):\n- Depreciation method\n- Inventory valuation method\n- Estimating the % of doubtful (uncollectible) debt\n\n**Three keys** to being a sophisticated user:\n1. Understand how **events affect** accounting numbers and firm value.\n2. Understand the **rules** and management's **discretion**.\n3. Understand the **incentives** behind the rules and management's actions."
+    },
+    {
+      "type": "markdown",
+      "title": "6. Why we demand independence & conservatism",
+      "content": "- **Demand for independence** — accounting information should be **objective and verifiable**. Information produced by managers *alone* is not fully believable, because managers have incentives to look good. This is why we have **auditors**.\n- **Asymmetric treatment of good and bad news** (the *prudence / conservatism* principle):\n  - Accounting tends to **record uncertain bad news** (e.g. a likely loss).\n  - But it tends to **ignore uncertain good news** (e.g. a hoped-for future contract).\n  - In the process, accounting **misses out on forward-looking information** that might be valuable but lacks objective evidence."
+    },
+    {
+      "type": "key_terms",
+      "title": "📚 Key terms",
+      "items": [
+        {
+          "term": "Financial reporting",
+          "definition": "The process of producing statements that disclose a company's financial position and performance to users outside day-to-day management."
+        },
+        {
+          "term": "Intelligent user of accounting information",
+          "definition": "Someone who can read, question and use financial statements — understanding the rules, the management discretion, and the incentives behind the numbers."
+        },
+        {
+          "term": "DuPont identity (ROA)",
+          "definition": "Return on Assets = Profit Margin × Asset Turnover = (Profit/Sales) × (Sales/Assets). Separates profitability from efficiency."
+        },
+        {
+          "term": "Market power vs efficiency",
+          "definition": "A firm with market power earns high margins (e.g. LVMH); a firm in a competitive sector earns its return through high asset turnover/efficiency (e.g. John Lewis)."
+        },
+        {
+          "term": "IFRS / GAAP",
+          "definition": "The 'rules' that govern how transactions are recorded: International Financial Reporting Standards, and national Generally Accepted Accounting Principles (US GAAP, UK GAAP)."
+        },
+        {
+          "term": "Management choices",
+          "definition": "Discretion allowed within the rules — e.g. the depreciation method, the inventory-valuation method, or the estimated percentage of doubtful debt."
+        },
+        {
+          "term": "Conservatism (prudence)",
+          "definition": "Accounting records uncertain bad news but tends to ignore uncertain good news, so it may understate forward-looking value."
+        },
+        {
+          "term": "Demand for independence",
+          "definition": "Accounting information must be objective and verifiable; information from managers alone is not credible, hence auditing."
+        }
+      ]
+    },
+    {
+      "type": "markdown",
+      "title": "7. The financial reports a company produces",
+      "content": "A company's annual report contains two kinds of content.\n\n**Financial statements** (the numbers):\n- **Balance Sheet** (statement of financial position)\n- **Income Statement** (profit and loss account)\n- **Cash Flow Statement**\n- **Shareholders' Equity Statement**\n- **Notes** to the accounts\n\n**Narrative reports** (the words):\n- **Management's letter / report**\n- **Auditors' report**\n\nIn Week 1 we focus on the first and most fundamental financial statement: the **Balance Sheet** (next lesson)."
+    },
+    {
+      "type": "flashcards",
+      "title": "🃏 Flashcards",
+      "cards": [
+        {
+          "front": "What is the course's main objective?",
+          "back": "To become an intelligent user of accounting information — able to read, use and understand the limitations of financial statements."
+        },
+        {
+          "front": "DuPont: ROA = ?",
+          "back": "ROA = Profit Margin × Asset Turnover = (Profit/Sales) × (Sales/Assets)."
+        },
+        {
+          "front": "John Lewis vs LVMH — how do they reach a similar ROA?",
+          "back": "John Lewis: low margin, high asset turnover (efficiency). LVMH: high margin, low turnover (market power)."
+        },
+        {
+          "front": "Events → ? → Financial statements",
+          "back": "Rules (IFRS/GAAP) and Management choices (depreciation, inventory valuation, doubtful-debt %)."
+        },
+        {
+          "front": "Name three management choices.",
+          "back": "Depreciation method, inventory valuation method, estimated % of doubtful debt."
+        },
+        {
+          "front": "What is conservatism/prudence?",
+          "back": "Record uncertain bad news but ignore uncertain good news — so accounting can understate forward-looking value."
+        },
+        {
+          "front": "List the five financial statements.",
+          "back": "Balance Sheet, Income Statement, Cash Flow Statement, Shareholders' Equity Statement, Notes."
+        }
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "✅ Quiz",
+      "questions": [
+        {
+          "q": "What does it mean to be an 'intelligent user' of accounting information?",
+          "options": [
+            "To be able to prepare journal entries quickly",
+            "To read, use and understand the limitations of financial statements",
+            "To memorise all IFRS standards",
+            "To audit a company's accounts"
+          ],
+          "answer": 1,
+          "explanation": "The course trains you to read, question and use financial statements — not primarily to prepare them."
+        },
+        {
+          "q": "A retailer has a profit margin of 5% and asset turnover of 2.0. Its ROA is:",
+          "options": [
+            "2.5%",
+            "7%",
+            "10%",
+            "40%"
+          ],
+          "answer": 2,
+          "explanation": "ROA = margin × turnover = 0.05 × 2.0 = 0.10 = 10%."
+        },
+        {
+          "q": "LVMH earns a higher profit margin than John Lewis mainly because it:",
+          "options": [
+            "Turns its assets over faster",
+            "Has market power in a niche luxury market",
+            "Uses a different depreciation method",
+            "Pays less tax"
+          ],
+          "answer": 1,
+          "explanation": "Market power (premium, niche, exclusivity) supports a high margin; John Lewis instead competes on efficiency/turnover."
+        },
+        {
+          "q": "Which of these is a 'management choice' rather than a 'rule'?",
+          "options": [
+            "Adopting IFRS",
+            "Following US GAAP",
+            "Choosing the inventory-valuation method",
+            "The legal requirement to be audited"
+          ],
+          "answer": 2,
+          "explanation": "Rules are IFRS/GAAP. Within those rules, management chooses the depreciation and inventory-valuation methods and estimates doubtful debt."
+        },
+        {
+          "q": "The conservatism (prudence) principle means accounting tends to:",
+          "options": [
+            "Record uncertain good news and ignore uncertain bad news",
+            "Record uncertain bad news but ignore uncertain good news",
+            "Record both good and bad news immediately",
+            "Ignore all uncertain events"
+          ],
+          "answer": 1,
+          "explanation": "Prudence records likely losses early but waits for objective evidence before recognising gains, so forward-looking value can be understated."
+        },
+        {
+          "q": "Which is NOT one of the five financial statements?",
+          "options": [
+            "Balance Sheet",
+            "Cash Flow Statement",
+            "Auditors' report",
+            "Shareholders' Equity Statement"
+          ],
+          "answer": 2,
+          "explanation": "The auditors' report is a *narrative* report, not one of the five financial statements."
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "title": "📝 Recap",
+      "content": "Financial reporting is the lens through which a business's strategy and economics appear as numbers. The goal of the course is to make you an intelligent user — able to read financial statements, use them to assess performance (e.g. via the DuPont split of ROA into margin × turnover), and understand their limitations. Reported numbers are shaped by rules (IFRS/GAAP) and management choices (depreciation, inventory valuation, doubtful debt), so we demand independence (auditing) and apply conservatism. A company reports five financial statements — Balance Sheet, Income Statement, Cash Flow, Equity and Notes — plus narrative reports. Next we study the Balance Sheet."
+    },
+    {
+      "type": "markdown",
+      "title": "📖 Reference",
+      "content": "*BBM140 Financial Reporting and Analysis — Session 1: Introduction and the Balance Sheet.* Bayes Business School, City St George's, University of London. Illustrative company figures (John Lewis, LVMH, Marks & Spencer) are from the lecture slides."
+    }
+  ]
+}
